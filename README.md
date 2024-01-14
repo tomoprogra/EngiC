@@ -1,4 +1,4 @@
-# [EngiConnector]
+# [EngiC.(エンジコネクター)]
 
 ## ■サービス概要
 - エンジニアに特化した名刺の作成・管理できるアプリ
@@ -56,17 +56,15 @@ X(twitter)での拡散や、ボタン一つで名刺をXのツイートに画像
 * 紙ベースの名刺をカメラでスキャンして文字を起こして管理
 * 名刺の細かなカスタマイズ機能
 * テンプレートを増やす
-* 名刺印刷機能
-* 可能であればbluetoothでより簡単に交換できるようにしたい。
 
 ## ■ 機能の実装方針予定
 
 |カテゴリ|使用技術|
 |:---:|:---:|
-|フロントエンド|Next.js|
-|バックエンド|Ruby,Rails API|
+|フロントエンド|Tailwindcss, hotwire|
+|バックエンド|Ruby,Rails|
 |データベース|postgresQL|
-|認証|devise_token_auth or Firebase Authentication|
+|認証|devise|
 |環境構築|Docker,Docker-compose|
 |CI/CD|Github Action|
 |インフラ|AWS or Heroku|
