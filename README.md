@@ -61,7 +61,7 @@ X(twitter)での拡散や、ボタン一つで名刺をXのツイートに画像
 
 |カテゴリ|使用技術|
 |:---:|:---:|
-|フロントエンド|Tailwindcss, hotwire|
+|フロントエンド|Tailwindcss, react|
 |バックエンド|Ruby,Rails|
 |データベース|postgresQL|
 |認証|devise|
