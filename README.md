@@ -68,5 +68,5 @@ X(twitter)での拡散や、ボタン一つで名刺をXのツイートに画像
 |環境構築|Docker,Docker-compose|
 |CI/CD|Github Action|
 |インフラ|AWS or Heroku|
-|API|Github API,Google Cloud Vision API(紙名刺のスキャン)|
+|API|テキストより感情を読み取るAPI|
 |その他|imageMagick(画像編集),rqrcode(QRコード読み取り、生成)|
