@@ -1,5 +1,5 @@
 test:
-  adapter: postgres2
+  adapter: postgres
   encoding: utf8
   username: root
   password:
