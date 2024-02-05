@@ -3,5 +3,5 @@ test:
   encoding: unicode
   username: user
   password: password
-  host: db
+  host: 127.0.0.1
   database: test_app_test
