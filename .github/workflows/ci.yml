@@ -16,7 +16,7 @@ jobs:
         working-directory: ./
     services:
       postgres:
-        image: postgres:9.3
+        image: postgres:13
         ports:
           - 5432:5432
         env:
