@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    passwords: 'users/passwords',
-    sessions: 'users/sessions'
+    registrations: "users/registrations",
+    passwords: "users/passwords",
+    sessions: "users/sessions",
   }
-  root 'tops#index'
+  root "tops#index"
   resources :myusers
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
