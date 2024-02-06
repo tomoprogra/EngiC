@@ -50,6 +50,7 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "bullet"
   gem "debug", platforms: %i[mri windows]
   gem "pry-byebug"
   gem "pry-doc"
@@ -58,7 +59,6 @@ group :development, :test do
   gem "rubocop-faker"
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  gem "bullet"
 end
 
 group :development do
