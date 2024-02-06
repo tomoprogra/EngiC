@@ -5,12 +5,29 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+  
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'custom' %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
+    
+  <body class="flex flex-col h-screen">
+    <header>
+    
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
-  <body>
-    <%= yield %>
+    </header>
+    <main class="flex-grow">
+      <%= yield %>
+    </main>
+
+    <footer class="mt-auto">
+    <% if user_signed_in? %>
+      <%= render 'shared/footer' %>
+    <% else %>
+      <%= render 'shared/before_login_footer' %>
+    <% end %>
+    </footer>
   </body>
 </html>
