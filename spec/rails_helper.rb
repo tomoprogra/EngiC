@@ -62,4 +62,14 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  if defined?(Bullet)
+    config.before(:each) do
+      Bullet.enable = true
+      Bullet.bullet_logger = true
+      Bullet.raise = true # Bulletの警告を例外として発生させる
+    end
+  
+    config.after(:each) do
+      Bullet.end_request if Bullet.enable?
+    end
 end
