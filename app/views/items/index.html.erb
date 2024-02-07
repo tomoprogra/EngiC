@@ -1,0 +1,15 @@
+<div class="grid">
+<% @items.each_with_index do |item, index| %>
+  <turbo-frame class="item" id="item-<%= index %>">
+        <ul>
+          <li>
+            <a href="#">
+              <h2><%= item.title %></h2>
+              <p><%= item.content %></p>
+            </a>
+          </li>
+        </ul>
+  </turbo-frame>
+    <% end %>
+  </div>
+<%= render "form", mypage: @mypage, item: @item %>
