@@ -72,4 +72,5 @@ RSpec.configure do |config|
     config.after(:each) do
       Bullet.end_request if Bullet.enable?
     end
+  end
 end
