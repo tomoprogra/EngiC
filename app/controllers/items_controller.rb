@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-
   def index
     @mypage = Mypage.find(params[:mypage_id])
     @items = Item.where(mypage_id: @mypage.id)
@@ -22,8 +21,7 @@ class ItemsController < ApplicationController
 
   private
 
-  def item_params
-    params.require(:item).permit(:title, :content)
-  end
-  
+    def item_params
+      params.require(:item).permit(:title, :content)
+    end
 end
