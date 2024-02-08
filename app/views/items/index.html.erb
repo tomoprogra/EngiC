@@ -1,8 +1,6 @@
-<div id="itemsGrid" class="grid">
-<% @items.each_with_index do |item, index| %>
-<div id="item-<%= index %>" class="item">
-        <%= render @item %>
-  </div>
+<div class="grid">
+<% @items.each do |item| %>
+        <%= render 'item', item: item, mypage_id: params[:mypage_id]%>
     <% end %>
 </div>
 <%= render "form", mypage: @mypage, item: @item %>

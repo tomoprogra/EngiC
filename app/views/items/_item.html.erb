@@ -1,10 +1,13 @@
-<div id="item-<%= item.id %>" class="item muuri-item muuri-item-shown" >
+<%= turbo_frame_tag item, class: "item" do %>
 <ul>
     <li>
-      <a href="#">
+      
         <h2><%= item.title %></h2>
         <p><%= item.content %></p>
-      </a>
+        <p>
+        <%= link_to "削除", mypage_item_path(mypage_id, item), data: { turbo_method: :delete } %>
+        </p>
+      
     </li>
   </ul>
-</div>
+<% end %>

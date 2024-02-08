@@ -1,5 +1,1 @@
-<turbo-stream action="append" target="itemsGrid">
-  <template>
-    <%= render partial: "item", locals: { item: @item }, formats: :html %>
-  </template>
-</turbo-stream>
+<%= turbo_stream.append 'items', partial: 'items/item', locals: { item: @item, mypage_id: @mypage.id } %>
