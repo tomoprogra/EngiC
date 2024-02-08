@@ -1,0 +1,8 @@
+<%= form_with model: [mypage, item], local: true, data: { turbo_frame: "item" } do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+  <%= form.label :content %>
+  <%= form.text_area :content %>
+  <%= form.submit "追加", {id: "add-button"} %>
+<% end %>
+
