@@ -15,14 +15,6 @@ document.addEventListener('turbo:load', () => {
 });
 
 
-const addButton = document.getElementById('add-button');
-
-addButton.addEventListener('click', () => {
-  
-  // ここにアイテム追加の処理を記述
-  grid.refreshItems().layout();
-
-});
 
 
 //   var sortAsc = document.querySelector('.sort-asc');

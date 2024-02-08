@@ -7,15 +7,19 @@ class ItemsController < ApplicationController
 
   def create
     @mypage = Mypage.find(params[:mypage_id])
-    respond_to do |format|
       @item = @mypage.items.build(item_params)
       if @item.save
         redirect_to mypage_items_path(@mypage)
-        format.turbo_stream
+       
       else
         format.html { render :index, status: :unprocessable_entity }
       end
-    end
+    
+  end
+
+  def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
   end
 
   private
