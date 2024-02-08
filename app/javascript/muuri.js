@@ -1,18 +1,27 @@
 import Muuri from 'muuri';
 
-document.addEventListener('turbo:load', function () {
-  var grid = new Muuri('.grid', {
+// Muuriのグリッド
+let grid;
+
+document.addEventListener('turbo:load', () => {
+
+  const grid = new Muuri('.grid', {
     dragEnabled: true,
-    layoutOnInit: false,
-    sortData: {
-      id: function (item, element) {
-        return parseFloat(element.children[0].textContent);
-      }
-    }
+    layoutOnInit: false    
   });
 
-  // Muuriグリッドのアイテムをリフレッシュしてレイアウトを行う
   grid.refreshItems().layout();
+
+});
+
+
+const addButton = document.getElementById('add-button');
+
+addButton.addEventListener('click', () => {
+  
+  // ここにアイテム追加の処理を記述
+  grid.refreshItems().layout();
+
 });
 
 

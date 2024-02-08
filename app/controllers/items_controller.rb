@@ -7,12 +7,11 @@ class ItemsController < ApplicationController
 
   def create
     @mypage = Mypage.find(params[:mypage_id])
-    @item = @mypage.items.build(item_params)
-    # @items = Item.where(user_id: current_user.id)
     respond_to do |format|
+      @item = @mypage.items.build(item_params)
       if @item.save
+        redirect_to mypage_items_path(@mypage)
         format.turbo_stream
-        format.html { redirect_to mypage_items_path(@mypage) }
       else
         format.html { render :index, status: :unprocessable_entity }
       end
