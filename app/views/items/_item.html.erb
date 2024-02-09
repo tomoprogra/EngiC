@@ -2,8 +2,8 @@
 <ul>
     <li>
       
-        <h2><%= item.title %></h2>
-        <p><%= item.content %></p>
+        <h2><%= current_user.bio %></h2>
+        <p><%= image_tag current_user.avatar.url %></p>
         <p>
         <%= link_to "削除", mypage_item_path(mypage_id, item), data: { turbo_method: :delete } %>
         </p>
