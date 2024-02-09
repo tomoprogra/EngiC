@@ -1,6 +1,8 @@
 <div class="grid">
-<% @items.each do |item| %>
-        <%= render 'item', item: item, mypage_id: params[:mypage_id]%>
-    <% end %>
+  <% @items.each do |item| %>
+    <%= render 'item', item: item, mypage_id: params[:mypage_id]%>
+  <% end %>
 </div>
+<div class="mt-10">
 <%= render "form", mypage: @mypage, item: @item %>
+</div>
