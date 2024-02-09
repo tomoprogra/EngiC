@@ -5,7 +5,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-    session.delete('devise.omniauth_data')
+    session.delete("devise.omniauth_data")
     super
   end
   # POST /resource/sign_in

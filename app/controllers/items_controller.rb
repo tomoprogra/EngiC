@@ -7,19 +7,18 @@ class ItemsController < ApplicationController
 
   def create
     @mypage = Mypage.find(params[:mypage_id])
-      @item = @mypage.items.build(item_params)
-      if @item.save
-        redirect_to mypage_items_path(@mypage)
-       
-      else
-        format.html { render :index, status: :unprocessable_entity }
-      end
-    
+    @item = @mypage.items.build(item_params)
+    if @item.save
+      redirect_to mypage_items_path(@mypage)
+
+    else
+      format.html { render :index, status: :unprocessable_entity }
+    end
   end
 
   def destroy
     @item = Item.find(params[:id])
-    @item.destroy
+    @item.destroy!
   end
 
   private
