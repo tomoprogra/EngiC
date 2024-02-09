@@ -49,12 +49,12 @@
   content: "";
   filter: blur(4px);
 }
-.item.muuri-item-dragging .item-content {
-  background: blue;
+/* .item.muuri-item-dragging .item-content {
+  
 }
 .item.muuri-item-releasing .item-content {
-  background: blueViolet;
-}
+  
+} */
 
 
 

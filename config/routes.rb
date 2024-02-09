@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+  root to: "tops#index"
+
   devise_for :users, controllers: {
     registrations: "users/registrations",
     passwords: "users/passwords",
     sessions: "users/sessions",
     omniauth_callbacks: "users/omniauth_callbacks",
   }
-  root "tops#index"
+
   resources :mypages do
     resources :items
   end
