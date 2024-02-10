@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   def index
     @mypage = Mypage.find(params[:mypage_id])
-    @items = Item.where(mypage_id: @mypage.id)
+    @items = Item.where(mypage_id: @mypage.id).order(:position)
     @item = Item.new
   end
 
@@ -21,9 +21,16 @@ class ItemsController < ApplicationController
     @item.destroy!
   end
 
+  def save_order
+    params[:order].each_with_index do |item_id, index|
+      Item.find(item_id).update(position: index)
+    end
+    head :ok
+  end
+
   private
 
     def item_params
-      params.require(:item).permit(:title, :content, :qiitaname)
+      params.require(:item).permit(:title, :content, :qiitaname, order: [])
     end
 end
