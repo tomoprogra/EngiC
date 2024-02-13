@@ -25,7 +25,6 @@ document.addEventListener('turbo:load', () => {
   }).on('dragEnd', function (item, event) {
     // ドラッグ操作完了後に実行される
     const order = getItemsOrder(); // 新しい順序を取得
-    console.log(order); // コンソールに順序を表示
     saveItemsOrder(mypageId,order);
   });
 });

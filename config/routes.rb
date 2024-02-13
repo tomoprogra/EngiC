@@ -16,6 +16,12 @@ Rails.application.routes.draw do
     end
   end
 
+  devise_scope :user do
+    get "users/auth/:provider/upgrade", to: "users/omniauth_callbacks#upgrade", as: :user_omniauth_upgrade
+    resources :relationships, only: [:create, :destroy]
+    get "follows" => "relationships#follower", as: :user_follower
+    get "followers" => "relationships#followed", as: :user_followed
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
