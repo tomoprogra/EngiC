@@ -30,6 +30,7 @@ gem "cssbundling-rails"
 gem "jbuilder"
 
 gem "devise"
+gem 'devise-i18n'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -54,6 +55,7 @@ gem "omniauth-facebook"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-twitter"
 gem "redcarpet"
+gem 'omniauth-github'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "bullet"
@@ -65,6 +67,7 @@ group :development, :test do
   gem "rubocop-faker"
   gem "rubocop-rails"
   gem "rubocop-rspec"
+  gem 'dotenv-rails'
 end
 
 group :development do

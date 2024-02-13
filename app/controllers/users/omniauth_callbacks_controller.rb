@@ -1,51 +1,46 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def facebook
-    # Facebook上でメール使用を許可しているかの分岐
-    if request.env["omniauth.auth"].info.email.blank?
-      redirect_to "/users/auth/facebook?auth_type=rerequest&scope=email"
-    end
-
-    # User.from_omniauthはModel側で実装
-    user = User.from_omniauth(request.env["omniauth.auth"])
-
-    # すでにuserが登録済みかの判定
-    if user
-      # 登録済みならログイン
-      sign_in_and_redirect user, event: :authentication
-      set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
-    else
-      # 新規登録用にセッションに必要情報を格納
-      if (data = request.env["omniauth.auth"])
-        session["devise.omniauth_data"] = {
-          email: data["info"]["email"],
-          provider: data["provider"],
-          uid: data["uid"],
-        }
-      end
-      redirect_to new_user_registration_url
-    end
-  end
-
-  def failure
-    redirect_to root_path
-  end
-
+  protect_from_forgery :except => [:github, :twitter]
+  
   def twitter
-    user = User.from_omniauth(request.env["omniauth.auth"])
-    if user
-      sign_in_and_redirect user, event: :authentication
-      set_flash_message(:notice, :success, kind: "Twitter") if is_navigational_format?
+    authenticate_user_from_omniauth("twitter")
+  end
+
+  def github
+    authenticate_user_from_omniauth("github")
+  end
+
+  def upgrade
+    provider = params[:provider]
+    scope = nil # 必要に応じて設定
+  
+    # 動的にパスを生成する
+    redirect_to send("user_#{provider}_omniauth_authorize_path", scope: scope)
+  end
+  
+  private
+
+  def authenticate_user_from_omniauth(provider)
+    auth = request.env["omniauth.auth"]
+    
+    # 既にログインしている場合、新たな認証情報を紐付ける
+    if user_signed_in?
+      current_user.link_oauth_account(auth)
+      set_flash_message(:notice, :success, kind: provider.capitalize) if is_navigational_format?
+      redirect_to after_sign_in_path_for(current_user)
     else
-      if (data = request.env["omniauth.auth"])
-        session["devise.omniauth_data"] = {
-          email: data["info"]["email"],
-          provider: data["provider"],
-          uid: data["uid"],
-        }
+      # ユーザー情報を取得し、検索または作成
+      user = User.from_omniauth(auth)
+
+      if user.persisted?
+        sign_in_and_redirect user, event: :authentication
+        set_flash_message(:notice, :success, kind: provider.capitalize) if is_navigational_format?
+        session.delete("devise.#{provider}_data")
+      else
+        session["devise.#{provider}_data"] = request.env["omniauth.auth"].auth.except(:extra)
+        redirect_to new_user_registration_url
       end
-      redirect_to new_user_registration_url
     end
   end
 end

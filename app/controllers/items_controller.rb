@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   def index
     @mypage = Mypage.find(params[:mypage_id])
     @items = Item.where(mypage_id: @mypage.id).order(:position)
+    @user = @mypage.user
     @item = Item.new
   end
 

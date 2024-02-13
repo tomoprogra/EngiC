@@ -1,0 +1,12 @@
+<%= turbo_frame_tag item, class: "item" do %>
+<div class="item-content">
+  <% if item.title.present? %>
+    <h2><%= item.title %></h2>
+    <p><%= item.content %></p>
+  <% end %>
+  <% if item.qiitaname.present? %>
+    <%= link_to "qiita", "https://qiita.com/#{item.qiitaname}", target:"_blank", class:"button" %>
+    <%= markdown("[![My Qiita posts](https://qiita-badge.apiapi.app/s/#{item.qiitaname}/posts.svg)](http://qiita.com/#{item.qiitaname})") %>
+  <% end %>
+</div>
+<% end %>
