@@ -9,7 +9,6 @@ class User < ApplicationRecord
   # ユーザーがフォローしている人
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy, inverse_of: :follower
   has_many :following, through: :active_relationships, source: :followed
-
   # ユーザーをフォローしている人
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy, inverse_of: :followed
   has_many :followers, through: :passive_relationships, source: :follower

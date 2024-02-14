@@ -1,4 +1,9 @@
 class RelationshipsController < ApplicationController
+
+  def index
+    @user = current_user
+  end
+
   def create
     current_user.follow(params[:followed_id])
     redirect_to request.referer

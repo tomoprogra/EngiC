@@ -1,0 +1,15 @@
+<h3>保存している人:</h3>
+<table>
+  <thead>
+    <tr>
+      <th>名前</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.following.each do |followed_user| %>
+      <tr>
+        <td><%= followed_user.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

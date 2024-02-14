@@ -13,7 +13,11 @@
     
   <body class="flex flex-col h-screen">
     <header>
-    
+    <% if user_signed_in? %>
+      <%= render 'shared/header' %>
+    <% else %>
+      <%= render 'shared/before_login_header' %>
+    <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
@@ -23,11 +27,7 @@
     </main>
 
     <footer class="mt-auto">
-    <% if user_signed_in? %>
       <%= render 'shared/footer' %>
-    <% else %>
-      <%= render 'shared/before_login_footer' %>
-    <% end %>
     </footer>
   </body>
 </html>
