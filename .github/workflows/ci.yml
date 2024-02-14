@@ -53,6 +53,9 @@ jobs:
           bundle exec rails db:migrate RAILS_ENV=test
 
       - name: Run rspec
+        env:
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+          TWITTER_SECRET_KEY: ${{ secrets.TWITTER_SECRET_KEY }}
         run: bundle exec rspec
 
   # 処理② rubocop のルール違反がないことをチェック
