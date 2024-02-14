@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resource :mypage do
-      resources :items, only: [:index, :create, :destroy]  do 
+      resources :items, only: [:index, :create, :destroy] do
         collection do
           post :save_order
         end
