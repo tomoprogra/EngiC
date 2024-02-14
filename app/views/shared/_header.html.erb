@@ -1,0 +1,25 @@
+<div class="navbar bg-base-100">
+  <div class="flex-1">
+    <%= link_to "Engic.", root_path, class:"btn btn-ghost text-xl" %>
+  </div>
+  <div class="flex-none gap-2">
+    
+    <div class="dropdown dropdown-end">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+          <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+        </div>
+      </div>
+      <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+        <li>
+          <%= link_to 'MyPage', user_mypage_items_path(current_user) %>
+        </li>
+        <li><a>Settings</a></li>
+        <li><%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete }%>
+        </li>
+        <li><%= link_to 'connection', user_relationships_path(current_user) %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

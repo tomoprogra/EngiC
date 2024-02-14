@@ -276,7 +276,10 @@ Devise.setup do |config|
                   Settings.twitter[:twitter_api_key],
                   Settings.twitter[:twitter_api_secret],
                   callback_url: "https://127.0.0.1:3000/users/auth/twitter/callback"
-
+  config.omniauth :github,
+                  Settings.github[:github_api_key],
+                  Settings.github[:github_api_secret],
+                  scope: "user,public_repo"
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

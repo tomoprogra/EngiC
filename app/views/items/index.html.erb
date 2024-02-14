@@ -1,13 +1,12 @@
-<div class="mockup-window border bg-base-300 mx-10">
-  <div class="px-4 py-16 bg-base-200">
+<div class="felx justify-center container mx-auto">
+  
+      <div class="grid">
+        <% @items.each do |item| %>
+          <%= render 'item', item: item, user_id: @user.id%>
+        <% end %>
+      </div>
+  <div class="mt-10">
+  <%= render "form", user: @user, item: @item %>
+  </div>
+</div>
 
-<div class="grid">
-  <% @items.each do |item| %>
-    <%= render 'item', item: item, mypage_id: params[:mypage_id]%>
-  <% end %>
-</div>
-</div>
-</div>
-<div class="mt-10">
-<%= render "form", mypage: @mypage, item: @item %>
-</div>

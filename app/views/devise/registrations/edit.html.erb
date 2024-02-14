@@ -41,3 +41,13 @@
 <div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 
 <%= link_to "Back", :back %>
+
+<% if current_user.identities.any? %>
+  <p>現在リンクされている認証プロバイダー:</p>
+  <% current_user.identities.each do |identity| %>
+    <p><%= identity.provider.capitalize %></p>
+  <% end %>
+<% end %>
+
+<%= link_to "Twitterアカウントを紐付ける", user_omniauth_upgrade_path(:twitter) %>
+<%= link_to "Githubアカウントを紐付ける", user_omniauth_upgrade_path(:github) %>

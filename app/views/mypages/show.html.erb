@@ -1,29 +1,20 @@
-<div class="user-profile">
-  <h2><%= @user.name %></h2>
-</div>
-<div class="actions">
-  <button class="sort-asc">Sort (ascending)</button>
-  <button class="sort-desc">Sort (descending)</button>
-</div>
-<div class="grid">
-  <div class="item">
-    <ul>
-      <li>
-        <a href="#" contenteditable>
-          <h2>Title #1</h2>
-          <p>Text Content #1</p>
-        </a>
-      </li>
-    <ul>
-  </div>
-  <div class="item">
-    <ul>
-      <li>
-        <a href="#" contenteditable>
-          <h2>Title #1</h2>
-          <p>Text Content #1</p>
-        </a>
-      </li>
-    <ul>
+<% if current_user != @user %>
+  <% relationship = current_user.active_relationships.find_by(followed_id: @user.id) %>
+  <% if current_user.following?(@user) %>
+    <%= link_to 'フォローを解除', relationship_path(relationship), method: :delete, data: { turbo_method: :delete }, class: "btn" %>
+  <% else %>
+    <%= button_to 'フォローする', relationships_path, params: { followed_id: @user.id }, data: { turbo: false }, class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+
+<div class="felx justify-center container mx-auto">
+  <div class="mockup-window border bg-base-300">
+    <div class="px-20 py-16 bg-base-200">
+      <div class="grid">
+        <% @items.each do |item| %>
+          <%= render 'item', item: item, mypage_id: params[:mypage_id]%>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

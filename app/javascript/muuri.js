@@ -1,15 +1,15 @@
 import Muuri from 'muuri';
 
 // 現在のページのURLからmypageIdを抽出する関数
-function getMypageIdFromUrl() {
+function getUserIdFromUrl() {
   const path = window.location.pathname;
   // URLパスを '/' で分割して配列にする
   const segments = path.split('/');
   // 'mypages' の次に来る部分をmypageIdとして取得
-  const mypageIndex = segments.indexOf('mypages') + 1;
-  if (mypageIndex > 0 && segments.length > mypageIndex) {
-    const mypageId = segments[mypageIndex];
-    return mypageId;
+  const userIndex = segments.indexOf('users') + 1;
+  if (userIndex > 0 && segments.length > userIndex) {
+    const userId = segments[userIndex];
+    return userId;
   }
   return null; // mypageIdが見つからない場合はnullを返す
 }
@@ -25,14 +25,13 @@ document.addEventListener('turbo:load', () => {
   }).on('dragEnd', function (item, event) {
     // ドラッグ操作完了後に実行される
     const order = getItemsOrder(); // 新しい順序を取得
-    console.log(order); // コンソールに順序を表示
-    saveItemsOrder(mypageId,order);
+    saveItemsOrder(userId,order);
   });
 });
 
 
 // この関数を使ってmypageIdを取得
-const mypageId = getMypageIdFromUrl();
+const userId = getUserIdFromUrl();
 
 function getItemsOrder() {
   // アイテムを選択するためのセレクターを指定
@@ -48,10 +47,10 @@ function getItemsOrder() {
   return order;
 }
 
-function saveItemsOrder(mypageId, order) {
+function saveItemsOrder(userId, order) {
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-  fetch(`/mypages/${mypageId}/items/save_order`, {
+  fetch(`/users/${userId}/mypage/items/save_order`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
