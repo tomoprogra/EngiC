@@ -1,17 +1,15 @@
 class ItemsController < ApplicationController
   def index
-    @mypage = Mypage.find(params[:mypage_id])
-    @items = Item.where(mypage_id: @mypage.id).order(:position)
-    @user = @mypage.user
+    @user = current_user
+    @items = @user.mypage.items.order(:position)
     @item = Item.new
   end
 
   def create
-    @mypage = Mypage.find(params[:mypage_id])
-    @item = @mypage.items.build(item_params)
+    @user = current_user
+    @item = @user.mypage.items.build(item_params)
     if @item.save
-      redirect_to mypage_items_path(@mypage)
-
+      redirect_to user_mypage_items_path(@user)
     else
       format.html { render :index, status: :unprocessable_entity }
     end

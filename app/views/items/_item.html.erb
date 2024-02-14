@@ -1,5 +1,5 @@
 <%= turbo_frame_tag item, class: "item" do %>
-<%= link_to "削除", mypage_item_path(mypage_id, item), data: { turbo_method: :delete } %>
+<%= link_to "削除", user_mypage_item_path(current_user, item), data: { turbo_method: :delete } %>
 <div class="item-content">
   <% if item.title.present? %>
     <h2><%= item.title %></h2>
