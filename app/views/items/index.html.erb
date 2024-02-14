@@ -1,12 +1,13 @@
-<div class="felx justify-center container mx-auto">
+<div class="container mx-auto max-w-3xl">
   
-      <div class="grid">
-        <% @items.each do |item| %>
-          <%= render 'item', item: item, user_id: @user.id%>
-        <% end %>
-      </div>
+    <div class="grid ">
+      <% @items.each do |item| %>
+        <%= render 'item', item: item, user_id: @user.id%>
+      <% end %>
+    </div>
+ 
   <div class="mt-10">
-  <%= render "form", user: @user, item: @item %>
+    <%= render "form", user: @user, item: @item %>
   </div>
 </div>
 
