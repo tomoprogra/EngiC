@@ -3,6 +3,8 @@ class ItemsController < ApplicationController
     @user = current_user
     @items = @user.mypage.items.order(:position)
     @item = Item.new
+    @skill_list = @user.skills.map(&:name).join(", ")
+    @skill = Skill.new
   end
 
   def create

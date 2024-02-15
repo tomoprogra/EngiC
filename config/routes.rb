@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   }
 
   resources :users do
+    resource :skills, only: [:create, :destroy, :update]
     resource :mypage do
       resources :items, only: [:index, :create, :destroy] do
         collection do

@@ -9,6 +9,18 @@
       <%= render "users/user", user: @user %>
     </div>
     <div>
+      <div>
+        <% @user.skills.each do |skill| %>
+          <span class="badge badge-secondary mr-1"><%= skill.name %></span>
+        <% end %>
+      </div>
+      <div>
+        <%= form_with url: user_skills_path(@user), local: true do |f| %>
+          <%= label_tag "skill[name]", "タグ (カンマで区切ると複数タグ登録できます)" %>
+          <%= text_field_tag "skill[name]", @skill_list, placeholder: "例: Ruby, JavaScript", class: "form-control" %>
+          <%= f.submit "更新", class: "btn btn-outline-primary" %>
+        <% end %>
+      </div>
     </div>
     <div class="ml-10">
       <div class="grid">
@@ -22,4 +34,5 @@
     <%= render "form", user: @user, item: @item %>
   </div>
 </div>
+
 

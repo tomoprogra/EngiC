@@ -12,6 +12,8 @@ class User < ApplicationRecord
   # ユーザーをフォローしている人
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy, inverse_of: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :skill_tags, dependent: :destroy
+  has_many :skills, through: :skill_tags
   after_create :create_mypage
   mount_uploader :avatar, AvatarUploader
 
@@ -80,6 +82,23 @@ class User < ApplicationRecord
   # 指定されたユーザーをフォローしているかどうかをチェックする
   def following?(user)
     following.include?(user)
+  end
+
+  def save_tags(sent_skills)
+    current_skills = self.skills.pluck(:name)
+    old_skills = current_skills - sent_skills
+    new_skills = sent_skills - current_skills
+
+    # 古いスキルを削除
+    old_skills.each do |old_name|
+      self.skills.delete(Skill.find_by(name: old_name))
+    end
+
+    # 新しいスキルを追加
+    new_skills.each do |new_name|
+      new_skill = Skill.find_or_create_by!(name: new_name)
+      self.skills << new_skill unless self.skills.include?(new_skill)
+    end
   end
 
   private
