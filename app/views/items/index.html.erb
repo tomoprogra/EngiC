@@ -1,12 +1,25 @@
-<div class="felx justify-center container mx-auto">
-  
+<div class="container mx-auto max-w-3xl">
+  <div class="border rounded-3xl">
+    <div class="avatar mt-5 flex justify-center">
+      <div class="w-20 rounded-full">
+        <%= image_tag(@user.avatar.url, alt: "アイコン") %>
+      </div>
+    </div>
+    <div>
+      <%= render "users/user", user: @user %>
+    </div>
+    <div>
+    </div>
+    <div class="ml-10">
       <div class="grid">
         <% @items.each do |item| %>
           <%= render 'item', item: item, user_id: @user.id%>
         <% end %>
       </div>
-  <div class="mt-10">
-  <%= render "form", user: @user, item: @item %>
+    </div>
+  </div>
+  <div class="my-10">
+    <%= render "form", user: @user, item: @item %>
   </div>
 </div>
 

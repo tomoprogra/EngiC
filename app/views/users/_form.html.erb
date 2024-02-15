@@ -1,0 +1,7 @@
+<%= turbo_frame_tag user do %>
+  <%= form_with(model: user) do |form| %>
+    <%= form.text_field :name %>
+    <%= form.text_field :introduction %>
+    <%= form.submit %>
+  <% end%>
+<% end %>

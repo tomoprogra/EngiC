@@ -7,13 +7,14 @@
 }
 .grid {
   position: relative;
+  
 }
+
 .item {
   position: absolute;
   width: 200px;
   height: 200px;
-  /* line-height: 200px; */
-  margin: 5px;
+  margin: 10px;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -32,7 +33,7 @@
   width:200px;
   height:200px;
   background-color: white;
-  margin:20px;
+  margin:10px;
   padding:0;
   border-radius: 8%;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
@@ -43,6 +44,6 @@
 }
 
 .item-content:hover {
-  border-radius:0 50% 50% 0/0 0% 20% 0;
+  border-radius:8% 8% 50% 8% / 8% 8% 20% 8%;
   transform-origin: left bottom;
 }
