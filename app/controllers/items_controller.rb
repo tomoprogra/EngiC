@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
     @user = current_user
     @items = @user.mypage.items.order(:position)
     @item = Item.new
-    @skill_list = @user.skills.map(&:name).join(', ')
+    @skill_list = @user.skills.map(&:name).join(", ")
     @skill = Skill.new
   end
 
@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
 
   private
 
-  def item_params
-    params.require(:item).permit(:title, :content, :qiitaname, order: [])
-  end
+    def item_params
+      params.require(:item).permit(:title, :content, :qiitaname, order: [])
+    end
 end

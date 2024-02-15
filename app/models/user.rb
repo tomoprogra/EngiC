@@ -12,8 +12,8 @@ class User < ApplicationRecord
   # ユーザーをフォローしている人
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy, inverse_of: :followed
   has_many :followers, through: :passive_relationships, source: :follower
-  has_many :skill_tags,dependent: :destroy
-  has_many :skills,through: :skill_tags
+  has_many :skill_tags, dependent: :destroy
+  has_many :skills, through: :skill_tags
   after_create :create_mypage
   mount_uploader :avatar, AvatarUploader
 
@@ -96,7 +96,7 @@ class User < ApplicationRecord
 
     # 新しいスキルを追加
     new_skills.each do |new_name|
-      new_skill = Skill.find_or_create_by(name: new_name)
+      new_skill = Skill.find_or_create_by!(name: new_name)
       self.skills << new_skill unless self.skills.include?(new_skill)
     end
   end
