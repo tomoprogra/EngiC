@@ -1,15 +1,21 @@
 <%= turbo_frame_tag item, class: "item" do %>
   <div class="item-content relative">
-    <%= link_to user_mypage_item_path(current_user, item), data: { turbo_method: :delete }, class:"absolute top-2 right-2" do%>
+    <%= link_to user_mypage_item_path(current_user, item), data: { turbo_method: :delete }, local: true, class:"absolute top-2 right-2" do%>
     <i class="fa-solid fa-xmark"></i>
     <% end %>
-    <% if item.title.present? %>
-      <h2><%= item.title %></h2>
-      <p><%= item.content %></p>
+    <% if item.zennname.present? %>
+      <%= link_to "@#{item.zennname}", "https://zenn.dev/#{item.zennname}", target:"_blank", class:"button" %>
+      <%= markdown("![Likes](https://badgen.org/img/zenn/#{item.zennname}/likes?style=social)") %>
+      <%= markdown("![Followers](https://badgen.org/img/zenn/#{item.zennname}/followers?style=social)") %>
+      <%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %>
+      <%= image_tag "zenn.svg", class: "w-1/6" %>
     <% end %>
     <% if item.qiitaname.present? %>
-      <%= link_to "qiita", "https://qiita.com/#{item.qiitaname}", target:"_blank", class:"button" %>
-      <%= markdown("[![My Qiita posts](https://qiita-badge.apiapi.app/s/#{item.qiitaname}/posts.svg)](http://qiita.com/#{item.qiitaname})") %>
+      <%= link_to "@#{item.qiitaname}", "https://qiita.com/#{item.qiitaname}", target:"_blank", class:"button" %>
+      <%= markdown("![Contributions](https://badgen.org/img/qiita/#{item.qiitaname}/contributions?style=social)") %>
+      <%= markdown("![Followers](https://badgen.org/img/qiita/#{item.qiitaname}/followers?style=social)") %>
+      <%= markdown("![Articles](https://badgen.org/img/qiita/#{item.qiitaname}/articles?style=social)") %>
+      <%= image_tag "qiita.webp", class: "w-1/6" %>
     <% end %>
 </div>
 <% end %>

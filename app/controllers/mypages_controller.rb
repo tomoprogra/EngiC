@@ -1,7 +1,8 @@
 class MypagesController < ApplicationController
-  def show
-    @mypage = Mypage.find(params[:id])
-    @user = @mypage.user
-    @items = Item.where(mypage_id: @mypage.id).order(:position)
+  
+  def index
+    @user = User.find(params[:user_id])
+    @items = @user.mypage.items.order(:position)
+    @skill_list = @user.skills.map(&:name).join(", ")
   end
 end

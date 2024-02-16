@@ -10,10 +10,11 @@ Rails.application.routes.draw do
 
   resources :users do
     resource :skills, only: [:create, :destroy, :update]
-    resource :mypage do
-      resources :items, only: [:index, :create, :destroy] do
+    resource :mypage, only: [:show] do
+      resources :items, only: [:index, :destroy] do
         collection do
           post :save_order
+          post :create_or_update_item
         end
       end
     end
