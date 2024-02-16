@@ -2,15 +2,15 @@
   <div class="border rounded-3xl">
     <div class="avatar mt-5 flex justify-center">
       <div class="w-20 rounded-full">
-        <%= image_tag(@user.avatar.url, alt: "アイコン") %>
+        <%= image_tag(@user.avatar.present? ? @user.avatar.url : "default.png", alt: "アイコン") %>
       </div>
     </div>
     <div>
       <%= render "users/user", user: @user %>
     </div>
     <div>
-      <p>フォロー数：<%= @user.following.count %></p>
-      <P>フォロワー数：<%= @user.followers.count %></p>
+      <p><%= link_to "#{@user.following.count} フォロー", following_user_path(@user) %></p>
+      <p><%= link_to "#{@user.followers.count} フォロワー", followers_user_path(@user) %></p>
     </div>
     <div>
       <div>

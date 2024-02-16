@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   }
 
   resources :users do
+    member do
+      get :following, :followers
+    end
     resource :skills, only: [:create, :destroy, :update]
     resource :mypage, only: [:show] do
       resources :items, only: [:index, :destroy] do
@@ -19,8 +22,6 @@ Rails.application.routes.draw do
       end
     end
     resources :relationships, only: [:create, :destroy, :index]
-    get "follows" => "relationships#follower", as: :user_follower
-    get "followers" => "relationships#followed", as: :user_followed
   end
 
   devise_scope :user do
