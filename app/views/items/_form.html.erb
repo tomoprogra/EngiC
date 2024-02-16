@@ -21,20 +21,24 @@
 
   <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Tab 2" checked />
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
-    <%= form_with model: [@user, @user.mypage, item], local: false, data: { turbo_frame: "item" } do |form| %>
-      <%= form.label :title %>
-      <%= form.text_field :title %>
-      <%= form.label :content %>
-      <%= form.text_area :content %>
-      <%= form.submit "追加" %>
-    <% end %>
+    
   </div>
 
-  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Tab 3" />
+  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="記事" />
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
-    <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user), local: false, data: { turbo_frame: "item" } do |form| %>
-      <%= form.label :qiitaname %>
-      <%= form.text_field :qiitaname %>
-      <%= form.submit "追加" %>
-    <% end %></div>
+    <%= image_tag "qiita.webp", class: "w-1/12" %>
+    <%= form_with model: [user.mypage, item], url: create_or_update_item_user_mypage_items_path(user), local: false, data: { turbo_frame: "item" } do |form| %>
+      <%= form.hidden_field :field_name, value: "qiitaname" %>
+      <%= form.label :qiitaname, "@" %>
+      <%= form.text_field :qiitaname, value: item.qiitaname, placeholder: "アカウント名" %>
+      <%= form.submit"更新" %>
+    <% end %>
+    <%= image_tag "zenn.svg", class: "w-1/12" %>
+    <%= form_with model: [user.mypage, item], url: create_or_update_item_user_mypage_items_path(user), local: false, data: { turbo_frame: "item" } do |form| %>
+      <%= form.hidden_field :field_name, value: "zennname" %>
+      <%= form.label :zennname, "@" %>
+      <%= form.text_field :zennname, value: item.zennname, placeholder: "アカウント名" %>
+      <%= form.submit"更新" %>
+    <% end %>
+  </div>
 </div>

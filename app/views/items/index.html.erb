@@ -9,14 +9,18 @@
       <%= render "users/user", user: @user %>
     </div>
     <div>
+      <p>フォロー数：<%= @user.following.count %></p>
+      <P>フォロワー数：<%= @user.followers.count %></p>
+    </div>
+    <div>
       <div>
         <% @user.skills.each do |skill| %>
-          <span class="badge badge-secondary mr-1"><%= skill.name %></span>
+          <div class="badge badge-ghost"><%= skill.name %></div>
         <% end %>
       </div>
       <div>
         <%= form_with url: user_skills_path(@user), local: true do |f| %>
-          <%= label_tag "skill[name]", "タグ (カンマで区切ると複数タグ登録できます)" %>
+          <%= label_tag "skill[name]", "スキルタグ" %>
           <%= text_field_tag "skill[name]", @skill_list, placeholder: "例: Ruby, JavaScript", class: "form-control" %>
           <%= f.submit "更新", class: "btn btn-outline-primary" %>
         <% end %>
