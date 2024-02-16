@@ -8,7 +8,9 @@
     </div>
     <div class="col-4">
       <div class="d-flex justify-content-end">
+        <% if params[:controller] != "mypages" %>
         <%= link_to "編集", edit_user_path(user), class: "btn btn-sm btn-outline-primary me-2" %>
+        <% end %>
       </div>
     </div>
   </div>

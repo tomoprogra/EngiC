@@ -1,0 +1,24 @@
+<h1>Users</h1>
+
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to user.name, user_mypage_path(user) %>
+      <% unless user == current_user %>
+        <% if current_user.following?(user) %>
+          <%= button_to 'フォロー解除',
+                        user_relationship_path(user_id: user.id, id: current_user.active_relationships.find_by(followed_id: user.id)),
+                        method: :delete,
+                        data: { turbo_method: :delete },
+                        class: "btn btn-secondary" %>
+        <% else %>
+          <%= button_to 'フォローする',
+                        user_relationships_path(user_id: user.id),
+                        params: { followed_id: user.id },
+                        data: { turbo: false },
+                        class: "btn btn-primary" %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
