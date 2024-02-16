@@ -4,22 +4,29 @@
     <i class="fa-solid fa-xmark"></i>
     <% end %>
     <% if item.zennname.present? %>
-      <%= link_to "@#{item.zennname}", "https://zenn.dev/#{item.zennname}", target:"_blank", class:"button" %>
-      <%= markdown("![Likes](https://badgen.org/img/zenn/#{item.zennname}/likes?style=social)") %>
+      <%= link_to "https://zenn.dev/#{item.zennname}", target:"_blank", class:"button" do %>
+        <%= image_tag "zenn.svg", class: "w-1/4" %>
+      <% end %>
       <%= markdown("![Followers](https://badgen.org/img/zenn/#{item.zennname}/followers?style=social)") %>
       <%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %>
-      <%= image_tag "zenn.svg", class: "w-1/6" %>
+      <%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %>
     <% end %>
     <% if item.qiitaname.present? %>
-      <%= link_to "@#{item.qiitaname}", "https://qiita.com/#{item.qiitaname}", target:"_blank", class:"button" %>
+      <%= link_to  "https://qiita.com/#{item.qiitaname}", target:"_blank", class:"button" do%>
+        <%= image_tag "qiita.webp", class: "w-1/4" %>
+      <% end %>
       <%= markdown("![Contributions](https://badgen.org/img/qiita/#{item.qiitaname}/contributions?style=social)") %>
       <%= markdown("![Followers](https://badgen.org/img/qiita/#{item.qiitaname}/followers?style=social)") %>
       <%= markdown("![Articles](https://badgen.org/img/qiita/#{item.qiitaname}/articles?style=social)") %>
-      <%= image_tag "qiita.webp", class: "w-1/6" %>
     <% end %>
     <% if item.title.present? %>
       <h2><%= item.title %></h2>
       <p><%= link_to item.content, item.content, target: "_blank", rel: "noopener noreferrer" %></p>
+    <% end %>
+    <% if item.note_name.present? %>
+       <%= link_to "https://note.com/#{item.note_name}", target: "_blank", class: "button" do %>
+        <%= image_tag "note.webp", alt: "@#{item.note_name}" %>
+      <% end %>
     <% end %>
 </div>
 <% end %>

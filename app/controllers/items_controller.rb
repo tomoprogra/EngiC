@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
   private
 
     def item_params
-      params.require(:item).permit(:title, :content, :qiitaname, :zennname, order: [])
+      params.require(:item).permit(:title, :content, :qiitaname, :zennname, :note_name, order: [])
     end
 
     def set_user
