@@ -1,12 +1,22 @@
-<%= turbo_frame_tag item, class: "item" do %>
-<div class="item-content">
-  <% if item.title.present? %>
-    <h2><%= item.title %></h2>
-    <p><%= item.content %></p>
-  <% end %>
-  <% if item.qiitaname.present? %>
-    <%= link_to "qiita", "https://qiita.com/#{item.qiitaname}", target:"_blank", class:"button" %>
-    <%= markdown("[![My Qiita posts](https://qiita-badge.apiapi.app/s/#{item.qiitaname}/posts.svg)](http://qiita.com/#{item.qiitaname})") %>
-  <% end %>
+<div class="flex flex-col p-1 rounded-lg">
+  <div class="relative w-48 h-48 bg-white m-2.5 p-0 rounded-lg shadow ">
+    <% if item.zennname.present? %>
+      <%= image_tag "zenn.svg", class: "w-1/6" %>
+      <%= link_to "@#{item.zennname}", "https://zenn.dev/#{item.zennname}", target:"_blank", class:"button" %>
+      <%= markdown("![Likes](https://badgen.org/img/zenn/#{item.zennname}/likes?style=social)") %>
+      <%= markdown("![Followers](https://badgen.org/img/zenn/#{item.zennname}/followers?style=social)") %>
+      <%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %>
+    <% end %>
+    <% if item.qiitaname.present? %>
+      <%= image_tag "qiita.webp", class: "w-1/6" %>
+      <%= link_to "@#{item.qiitaname}", "https://qiita.com/#{item.qiitaname}", target:"_blank", class:"button" %>
+      <%= markdown("![Contributions](https://badgen.org/img/qiita/#{item.qiitaname}/contributions?style=social)") %>
+      <%= markdown("![Followers](https://badgen.org/img/qiita/#{item.qiitaname}/followers?style=social)") %>
+      <%= markdown("![Articles](https://badgen.org/img/qiita/#{item.qiitaname}/articles?style=social)") %>
+    <% end %>
+    <% if item.title.present? %>
+      <h2><%= item.title %></h2>
+      <p><%= link_to item.content, item.content, target: "_blank", rel: "noopener noreferrer" %></p>
+    <% end %>
+  </div>
 </div>
-<% end %>

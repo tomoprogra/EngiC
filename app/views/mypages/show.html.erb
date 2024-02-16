@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="ml-10">
-      <div class="grid">
+      <div class="flex flex-wrap gap-2">
         <% @items.each do |item| %>
           <%= render 'item', item: item, user_id: @user.id%>
         <% end %>
