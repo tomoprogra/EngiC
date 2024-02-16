@@ -13,15 +13,15 @@ class ItemsController < ApplicationController
     field_value = params[:item][field_name]
     item = @user.mypage.items.find_or_initialize_by("#{field_name}": field_value)
     item.assign_attributes(item_params)
-  
+
     if item.save
-      message = item.persisted? ? 'Item was successfully updated.' : 'New item was successfully created.'
+      message = item.persisted? ? "Item was successfully updated." : "New item was successfully created."
       redirect_to user_mypage_items_path(@user), notice: message
     else
       render :new, status: :unprocessable_entity
     end
   end
-  
+
   def destroy
     @item = Item.find(params[:id])
     @item.destroy!
@@ -34,8 +34,8 @@ class ItemsController < ApplicationController
     head :ok
   end
 
-  private  
-  
+  private
+
     def item_params
       params.require(:item).permit(:title, :content, :qiitaname, :zennname, order: [])
     end
@@ -44,8 +44,3 @@ class ItemsController < ApplicationController
       @user = current_user
     end
 end
-
-
-
-
-
