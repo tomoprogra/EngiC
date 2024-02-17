@@ -25,7 +25,7 @@
     <% end %>
     <% if item.note_name.present? %>
        <%= link_to "https://note.com/#{item.note_name}", target: "_blank", class: "button" do %>
-        <%= image_tag "note.webp", alt: "@#{item.note_name}" %>
+        <%= image_tag "note.webp", class: "w-3/5" %>
       <% end %>
     <% end %>
 </div>
