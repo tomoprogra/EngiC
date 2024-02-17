@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_user, only: [:index, :create_or_update_item, :destroy]
+  before_action :set_user, only: [:index, :destroy, :create]
 
   def index
     @items = @user.mypage.items.order(:position)
@@ -8,17 +8,13 @@ class ItemsController < ApplicationController
     @skill = Skill.new
   end
 
-  def create_or_update_item
-    field_name = params[:item][:field_name]
-    field_value = params[:item][field_name]
-    item = @user.mypage.items.find_or_initialize_by("#{field_name}": field_value)
-    item.assign_attributes(item_params)
-
-    if item.save
-      message = item.persisted? ? "Item was successfully updated." : "New item was successfully created."
-      redirect_to user_mypage_items_path(@user), notice: message
+  def create
+    @item = @user.mypage.items.build(item_params)
+    if @item.save
+      redirect_to user_mypage_items_path(@user)
     else
-      render :new, status: :unprocessable_entity
+      flash[:alert] = @item.errors.full_messages.to_sentence
+      redirect_to user_mypage_items_path(@user), status: :unprocessable_entity
     end
   end
 
@@ -37,7 +33,7 @@ class ItemsController < ApplicationController
   private
 
     def item_params
-      params.require(:item).permit(:title, :content, :qiitaname, :zennname, order: [])
+      params.require(:item).permit(:title, :content, :qiitaname, :zennname, :note_name, order: [])
     end
 
     def set_user
