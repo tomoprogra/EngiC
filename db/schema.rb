@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_16_130639) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_18_023740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_130639) do
     t.integer "position"
     t.string "zennname"
     t.string "note_name"
+    t.text "bio"
     t.index ["mypage_id"], name: "index_items_on_mypage_id"
   end
 

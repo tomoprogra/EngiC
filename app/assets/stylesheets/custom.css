@@ -37,13 +37,31 @@
   padding:0;
   border-radius: 4%;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
-  cursor:pointer;
   transition-property: border-radius;
   transition-duration:0.2s;
   transition-timing-function:ease-in-out;
+  border: 1px solid rgb(232, 231, 231);
 }
 
 .item-content:hover {
   border-radius:4% 4% 50% 4% / 4% 4% 20% 4%;
   transform-origin: left bottom;
 }
+.note_card {
+  width: 750px;
+}
+
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+.tab.active {
+  border-bottom: 2px solid rgb(196, 196, 249); /* アクティブなタブの下線 */
+}
+.tabs {
+  width: 750px;
+  float: right;
+}
+
