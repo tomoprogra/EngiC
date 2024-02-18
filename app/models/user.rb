@@ -31,13 +31,10 @@ class User < ApplicationRecord
           name: auth.info.name,
           password: Devise.friendly_token[0, 20], # ランダムなパスワードを生成
           bio: auth.info.description, # Twitterから取得したbioを設定
-          remote_avatar_url: auth.info.image # 画像のURLを設定
+          remote_avatar_url: auth.info.image, # 画像のURLを設定
         )
         user.save!
         user.create_bio_item(auth.info.description) # bio情報を含むitemを作成
-      else
-        # ユーザーが既に存在していて、bioが更新されている場合のみ更新
-        user.update_bio_if_changed(auth.info.description)
       end
       identity.user = user
       identity.save!
@@ -46,11 +43,9 @@ class User < ApplicationRecord
     user
   end
 
-  def link_oauth_account(auth)
-    identity = Identity.find_or_create_by!(provider: auth.provider, uid: auth.uid)
-    if identity.user != self
-      identity.update!(user: self)
-    end
+  # ダミーメールアドレスの生成
+  def self.dummy_email(auth)
+    "#{auth.uid}@#{auth.provider}.com"
   end
 
   # ユーザーをフォローする
@@ -92,15 +87,15 @@ class User < ApplicationRecord
   def update_bio_if_changed(new_bio)
     if self.bio != new_bio
       self.bio = new_bio
-      save! # Userのbioを更新
-      update_bio_item(new_bio) # bio情報を含むitemを更新または作成
+      save!
+      update_bio_item(new_bio)
     end
   end
 
   # bio情報を含むitemを更新または作成するメソッド
   def update_bio_item(new_bio)
     bio_item = mypage.items.where.not(bio: nil).first
-    bio_item.bio = new_bio 
+    bio_item.bio = new_bio
     bio_item.save!
   end
 
@@ -108,11 +103,4 @@ class User < ApplicationRecord
   def create_bio_item(new_bio)
     mypage.items.create(bio: new_bio)
   end
-
-  # ダミーメールアドレスの生成
-  def self.dummy_email(auth)
-    "#{auth.uid}@#{auth.provider}.com"
-  end
-
-  # mypageの作
 end

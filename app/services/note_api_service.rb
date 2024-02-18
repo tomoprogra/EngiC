@@ -1,7 +1,7 @@
 class NoteApiService
-  require 'net/http'
-  require 'uri'
-  require 'json'
+  require "net/http"
+  require "uri"
+  require "json"
 
   def self.fetch_creator_info(creator_id)
     url = URI.parse("https://note.com/api/v2/creators/#{creator_id}")

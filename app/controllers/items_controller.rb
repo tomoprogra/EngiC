@@ -35,20 +35,20 @@ class ItemsController < ApplicationController
 
     def note_api
       # note_nameがnilでないitemを全て取得
-      note_items = @user.mypage.items.where.not(note_name: [nil, ''])
+      note_items = @user.mypage.items.where.not(note_name: [nil, ""])
 
       # 複数のitemが存在する可能性があるため、必要に応じて処理を行う
       # 例: 最初のitemのnote_nameを使用
-      if note_items.any?
-        first_note_item = note_items.first
-        creator_id = first_note_item.note_name
+      return unless note_items.any?
 
-        # 外部APIから情報を取得
-        @creator_info = NoteApiService.fetch_creator_info(creator_id)
-        @note_count = @creator_info['data']['noteCount'] if @creator_info && @creator_info['data']
-        @following_count = @creator_info['data']['followingCount'] if @creator_info && @creator_info['data']
-        @follower_count = @creator_info['data']['followerCount'] if @creator_info && @creator_info['data']
-      end
+      first_note_item = note_items.first
+      creator_id = first_note_item.note_name
+
+      # 外部APIから情報を取得
+      @creator_info = NoteApiService.fetch_creator_info(creator_id)
+      @note_count = @creator_info["data"]["noteCount"] if @creator_info && @creator_info["data"]
+      @following_count = @creator_info["data"]["followingCount"] if @creator_info && @creator_info["data"]
+      @follower_count = @creator_info["data"]["followerCount"] if @creator_info && @creator_info["data"]
     end
 
     def item_params
