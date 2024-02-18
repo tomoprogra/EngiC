@@ -18,7 +18,6 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   def self.from_omniauth(auth)
-    # 認証情報からIdentityを検索または作成
     identity = Identity.find_or_initialize_by(provider: auth.provider, uid: auth.uid)
 
     if identity.persisted?
@@ -26,40 +25,25 @@ class User < ApplicationRecord
       user = identity.user
     else
       # Identityが新しい場合、メールアドレスでユーザーを検索
-      user = User.find_by(email: auth.info.email)
-
-      if user.nil?
-        # メールアドレスに該当するユーザーがいない場合、新規ユーザーを作成
-        user = User.create!(
-          email: auth.info.email || dummy_email(auth),
+      user = User.find_or_initialize_by(email: auth.info.email || dummy_email(auth))
+      if user.new_record?
+        user.assign_attributes(
           name: auth.info.name,
           password: Devise.friendly_token[0, 20], # ランダムなパスワードを生成
-          bio: auth[:info][:description],
-          remote_avatar_url: auth[:info][:image], # 画像のURLを設定
+          bio: auth.info.description, # Twitterから取得したbioを設定
+          remote_avatar_url: auth.info.image # 画像のURLを設定
         )
+        user.save!
+        user.create_bio_item(auth.info.description) # bio情報を含むitemを作成
+      else
+        # ユーザーが既に存在していて、bioが更新されている場合のみ更新
+        user.update_bio_if_changed(auth.info.description)
       end
-
-      # 新しい認証情報を既存または新規のユーザーに紐づける
       identity.user = user
       identity.save!
     end
-
-    # ユーザーの追加属性を更新（必要に応じて）
-    update_user_attributes(user, auth)
-
+    user.update_bio_if_changed(auth.info.description)
     user
-  end
-
-  def self.update_user_attributes(user, auth)
-    # 更新するユーザー属性を決定。例: 名前や画像が未設定の場合のみ更新
-    user.name = auth.info.name if user.name.blank?
-    user.remote_avatar_url = auth.info.image if user.remote_avatar_url.blank?
-    # bioやその他の属性があれば、同様の条件で更新
-    user.save! if user.changed?
-  end
-
-  def self.dummy_email(auth)
-    "#{auth[:uid]}@example.com"
   end
 
   def link_oauth_account(auth)
@@ -101,9 +85,34 @@ class User < ApplicationRecord
     end
   end
 
-  private
+  def create_mypage
+    build_mypage.save
+  end
 
-    def create_mypage
-      Mypage.create(user: self)
+  def update_bio_if_changed(new_bio)
+    if self.bio != new_bio
+      self.bio = new_bio
+      save! # Userのbioを更新
+      update_bio_item(new_bio) # bio情報を含むitemを更新または作成
     end
+  end
+
+  # bio情報を含むitemを更新または作成するメソッド
+  def update_bio_item(new_bio)
+    bio_item = mypage.items.where.not(bio: nil).first
+    bio_item.bio = new_bio 
+    bio_item.save!
+  end
+
+  # bio情報を含むitemを作成するメソッド
+  def create_bio_item(new_bio)
+    mypage.items.create(bio: new_bio)
+  end
+
+  # ダミーメールアドレスの生成
+  def self.dummy_email(auth)
+    "#{auth.uid}@#{auth.provider}.com"
+  end
+
+  # mypageの作
 end
