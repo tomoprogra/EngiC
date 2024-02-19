@@ -17,48 +17,58 @@ class User < ApplicationRecord
   after_create :create_mypage
   mount_uploader :avatar, AvatarUploader
 
-  def self.from_omniauth(auth)
-    identity = Identity.find_or_initialize_by(provider: auth.provider, uid: auth.uid)
-
-    if identity.persisted?
-      # Identityが見つかった場合、既存のユーザーを返す
-      user = identity.user
-    else
-      # Identityが新しい場合、メールアドレスでユーザーを検索
-      user = User.find_or_initialize_by(email: auth.info.email || dummy_email(auth))
-      if user.new_record?
-        user.assign_attributes(
-          name: auth.info.name,
-          password: Devise.friendly_token[0, 20], # ランダムなパスワードを生成
-          bio: auth.info.description, # Twitterから取得したbioを設定
-          remote_avatar_url: auth.info.image, # 画像のURLを設定
-        )
-        user.save!
-        user.create_bio_item(auth.info.description) # bio情報を含むitemを作成
-      end
-      identity.user = user
-      identity.save!
-    end
-    user.update_bio_if_changed(auth.info.description)
-    user
-  end
-
-  # ダミーメールアドレスの生成
   def self.dummy_email(auth)
     "#{auth.uid}@#{auth.provider}.com"
   end
 
-  # ユーザーをフォローする
+  def self.from_omniauth(auth)
+    identity = Identity.find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+    identity.token = auth.credentials.token
+    if identity.persisted?
+      user = identity.user
+    else
+      user = User.find_or_initialize_by(email: auth.info.email || dummy_email(auth))
+      if user.new_record?
+        user.assign_attributes(
+          name: auth.info.name,
+          password: Devise.friendly_token[0, 20],
+          remote_avatar_url: auth.info.image,
+        )
+        user.save!
+      end
+      identity.user = user
+      identity.save!
+    end
+    user.handle_twitter_auth(auth) if auth.provider == "twitter"
+    user
+  end
+
+  def handle_twitter_auth(auth)
+    x_item_exists = self.mypage.items.where.not(xname: nil).exists?
+    if x_item_exists
+      self.update_x_if_changed(auth.info.nickname, auth.info.description, auth.info.location)
+    else
+      self.create_x_item(auth.info.nickname, auth.info.description, auth.info.location)
+    end
+  end
+
+  def link_oauth_account(auth)
+    identity = identities.find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+    identity.token = auth.credentials.token if auth.credentials.token.present?
+    identity.save! if identity.new_record? || identity.changed?
+    return unless auth.provider == "twitter"
+
+    self.handle_twitter_auth(auth)
+  end
+
   def follow(user_id)
     active_relationships.create(followed_id: user_id)
   end
 
-  # ユーザーのフォローを解除する
   def unfollow(user_id)
     active_relationships.find_by(followed_id: user_id)&.destroy
   end
 
-  # 指定されたユーザーをフォローしているかどうかをチェックする
   def following?(user)
     following.include?(user)
   end
@@ -68,12 +78,10 @@ class User < ApplicationRecord
     old_skills = current_skills - sent_skills
     new_skills = sent_skills - current_skills
 
-    # 古いスキルを削除
     old_skills.each do |old_name|
       self.skills.delete(Skill.find_by(name: old_name))
     end
 
-    # 新しいスキルを追加
     new_skills.each do |new_name|
       new_skill = Skill.find_or_create_by!(name: new_name)
       self.skills << new_skill unless self.skills.include?(new_skill)
@@ -84,23 +92,16 @@ class User < ApplicationRecord
     build_mypage.save
   end
 
-  def update_bio_if_changed(new_bio)
-    if self.bio != new_bio
-      self.bio = new_bio
-      save!
-      update_bio_item(new_bio)
-    end
+  def create_x_item(xname, bio, location)
+    self.mypage.items.create(xname:, bio:, location:)
   end
 
-  # bio情報を含むitemを更新または作成するメソッド
-  def update_bio_item(new_bio)
-    bio_item = mypage.items.where.not(bio: nil).first
-    bio_item.bio = new_bio
-    bio_item.save!
-  end
-
-  # bio情報を含むitemを作成するメソッド
-  def create_bio_item(new_bio)
-    mypage.items.create(bio: new_bio)
+  def update_x_if_changed(new_xname, new_bio, new_location)
+    self.mypage || self.create_mypage
+    x_item = self.mypage.items.find_or_initialize_by(xname: new_xname)
+    x_item.xname = new_xname if x_item.xname != new_xname
+    x_item.bio = new_bio if x_item.bio != new_bio
+    x_item.location = new_location if x_item.location != new_location
+    x_item.save! if x_item.changed?
   end
 end

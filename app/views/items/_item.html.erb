@@ -1,12 +1,12 @@
 <%= turbo_frame_tag item, class: "item" do %>
   <div class="item-content relative">
-    <% if item.bio == nil %>
+    <% if item.xname.nil? && item.githubname.nil? %>
       <%= link_to user_mypage_item_path(current_user, item), data: { turbo_method: :delete }, local: true, class:"absolute top-0 right-0" do%>
         <i class="fa-solid fa-xmark"></i>
       <% end %>
     <% end %>
-    <% if item.bio.present? %>
-      <%= item.bio %>
+    <% if item.xname.present? %>
+      <%= item.xname %>
     <% end %>
     <% if item.zennname.present? %>
       <div class="flex justify-center">
@@ -25,6 +25,22 @@
             <div class="mb-2"><%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %></div>
         </div>
       </div> 
+    <% end %>
+    <% if item.githubname.present? %>
+      <div class="relative">
+        <div class="absolute z-10 top-10 right-4">
+          <%= link_to "https://github.com/#{item.githubname}", target: "_blank", class: "button" do %>
+            <div class="avatar">
+              <div class="w-16 rounded">
+                <%= image_tag "github.svg", alt: "github", class: "w-full bg-white" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="absolute w-auto max-w-full overflow-hidden">
+          <%= markdown("![](http://github-profile-summary-cards.vercel.app/api/cards/stats?username=#{item.githubname}&theme=default)")%>
+        </div>
+      </div>
     <% end %>
     <% if item.qiitaname.present? %>
        <div class="flex justify-center ">
