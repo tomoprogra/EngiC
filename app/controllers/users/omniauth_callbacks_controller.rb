@@ -10,15 +10,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
     authenticate_user_from_omniauth("github")
 
-    access_token = request.env['omniauth.auth']['credentials']['token']
+    access_token = request.env["omniauth.auth"]["credentials"]["token"]
     # GitHubユーザー情報エンドポイント
     url = "https://api.github.com/user"
     # HTTPartyを使用してGETリクエスト
-    response = HTTParty.get(url, 
-                             headers: {
-                               "Authorization" => "token #{access_token}",
-                               "User-Agent" => "engic." # 実際のアプリ名に置き換えてください
-                             })
+    response = HTTParty.get(url,
+                            headers: {
+                              "Authorization" => "token #{access_token}",
+                              "User-Agent" => "engic.", # 実際のアプリ名に置き換えてください
+                            })
     # レスポンスボディを解析（HTTPartyは自動的にJSONを解析してくれます）
     user_info = response.parsed_response
     # ユーザーアカウント名を取得
@@ -29,10 +29,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     item = mypage.items.where.not(githubname: nil).first
     if item
       # 既に存在するItemがあれば、contentを更新
-      item.update(githubname: username)
+      item.update!(githubname: username)
     else
       # 存在しなければ、新しいItemを作成
-      mypage.items.create(githubname: username)
+      mypage.items.create!(githubname: username)
     end
   end
 
