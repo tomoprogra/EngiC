@@ -17,30 +17,25 @@ class User < ApplicationRecord
   after_create :create_mypage
   mount_uploader :avatar, AvatarUploader
 
-  def self.from_omniauth(auth)
-    identity = Identity.find_or_initialize_by(provider: auth.provider, uid: auth.uid)
 
-    if identity.persisted?
-      # Identityが見つかった場合、既存のユーザーを返す
-      user = identity.user
-    else
-      # Identityが新しい場合、メールアドレスでユーザーを検索
-      user = User.find_or_initialize_by(email: auth.info.email || dummy_email(auth))
-      if user.new_record?
-        user.assign_attributes(
-          name: auth.info.name,
-          password: Devise.friendly_token[0, 20], # ランダムなパスワードを生成
-          bio: auth.info.description, # Twitterから取得したbioを設定
-          remote_avatar_url: auth.info.image, # 画像のURLを設定
-        )
-        user.save!
-        user.create_bio_item(auth.info.description) # bio情報を含むitemを作成
+  def link_oauth_account(auth)
+    # 認証プロバイダとUIDでIdentityを検索、または新規作成
+    identity = identities.find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+
+    # 必要な情報を更新
+    identity.token = auth.credentials.token if auth.credentials.token.present?
+    
+    # Identityを保存
+    identity.save if identity.new_record? || identity.changed?
+    if auth.provider == 'twitter'
+      username = auth.info.nickname # またはauth.info.username
+      x_item_exists = self.mypage.items.where.not(xname: nil).exists?
+      unless x_item_exists
+        self.create_x_item(username, auth.info.description, auth.info.location)
+      else
+        self.update_x_if_changed(username, auth.info.description, auth.info.location)
       end
-      identity.user = user
-      identity.save!
     end
-    user.update_bio_if_changed(auth.info.description)
-    user
   end
 
   # ダミーメールアドレスの生成
@@ -84,23 +79,68 @@ class User < ApplicationRecord
     build_mypage.save
   end
 
-  def update_bio_if_changed(new_bio)
-    if self.bio != new_bio
-      self.bio = new_bio
-      save!
-      update_bio_item(new_bio)
+  # bio情報を含むitemを作成するメソッド
+  def create_x_item(xname, bio, location)
+    self.mypage.items.create(xname: xname, bio: bio, location: location)
+  end
+
+
+  def self.from_omniauth(auth)
+    # Identityの処理はそのまま
+    identity = Identity.find_or_initialize_by(provider: auth.provider, uid: auth.uid)
+    identity.token = auth.credentials.token
+    if identity.persisted?
+      user = identity.user
+    else
+      user = User.find_or_initialize_by(email: auth.info.email || dummy_email(auth))
+      if user.new_record?
+        user.assign_attributes(
+          name: auth.info.name,
+          password: Devise.friendly_token[0, 20],
+          remote_avatar_url: auth.info.image,
+        )
+        user.save!
+      end
+      identity.user = user
+      identity.save!
+    end
+    if auth.provider == 'twitter'
+      username = auth.info.nickname # またはauth.info.username
+      x_item_exists = user.mypage.items.where.not(xname: nil).exists?
+      unless x_item_exists
+        user.create_x_item(username, auth.info.description, auth.info.location)
+      else
+        user.update_x_if_changed(username, auth.info.description, auth.info.location)
+      end
+    end
+    user
+  end
+  
+
+  def self.update_user_info(user, auth)
+    # プロバイダーごとに取得する情報を分岐
+    case auth.provider
+    when 'twitter'
+      # Twitterからはbio, username, locationを更新
+      user.twittername = auth.info.username if user.username.blank? && auth.info.username.present?
+      user.bio = auth.info.description if auth.info.description.present?
+      user.location = auth.info.location if user.location.blank? && auth.info.location.present?
+      user.save! if user.changed?
     end
   end
 
-  # bio情報を含むitemを更新または作成するメソッド
-  def update_bio_item(new_bio)
-    bio_item = mypage.items.where.not(bio: nil).first
-    bio_item.bio = new_bio
-    bio_item.save!
-  end
-
-  # bio情報を含むitemを作成するメソッド
-  def create_bio_item(new_bio)
-    mypage.items.create(bio: new_bio)
+  def update_x_if_changed(new_xname, new_bio, new_location)
+    # mypageがnilでないことを保証する
+    mypage = self.mypage || self.create_mypage
+    
+    x_item = self.mypage.items.find_or_initialize_by(xname: new_xname)
+    
+    # xname、bio、locationの変更がある場合にのみ更新
+    x_item.xname = new_xname if x_item.xname != new_xname
+    x_item.bio = new_bio if x_item.bio != new_bio
+    x_item.location = new_location if x_item.location != new_location
+  
+    # 変更があった場合のみ保存
+    x_item.save if x_item.changed?
   end
 end

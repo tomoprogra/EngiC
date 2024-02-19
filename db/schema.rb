@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_18_023740) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_19_121401) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_18_023740) do
     t.string "uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
+    t.index ["provider", "uid"], name: "index_identities_on_provider_and_uid", unique: true
     t.index ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true
     t.index ["user_id"], name: "index_identities_on_user_id"
   end
@@ -35,7 +37,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_18_023740) do
     t.string "zennname"
     t.string "note_name"
     t.text "bio"
+    t.string "xname"
+    t.string "githubname"
+    t.string "location"
+    t.index ["githubname"], name: "index_items_on_githubname", unique: true
     t.index ["mypage_id"], name: "index_items_on_mypage_id"
+    t.index ["xname"], name: "index_items_on_xname", unique: true
   end
 
   create_table "mypages", force: :cascade do |t|
