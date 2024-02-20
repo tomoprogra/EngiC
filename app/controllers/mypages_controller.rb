@@ -1,5 +1,5 @@
 class MypagesController < ApplicationController
-  require 'rqrcode'
+  require "rqrcode"
 
   def show
     @user = User.find(params[:user_id])
@@ -9,11 +9,11 @@ class MypagesController < ApplicationController
 
   def qrcode
     @user = User.find(params[:user_id])
-    
+
     if @user
       url = "https://engic.dev/#{@user.username}"
       @qr = RQRCode::QRCode.new(url)
-      
+
       respond_to do |format|
         format.html # app/views/mypages/qrcode.html.erb をレンダリング
         format.png do
@@ -21,7 +21,7 @@ class MypagesController < ApplicationController
         end
       end
     else
-      render file: 'public/404.html', status: :not_found, layout: false
+      render file: "public/404.html", status: :not_found, layout: false
     end
   end
 end

@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def update_username
     @user = current_user
     if @user.update(user_params)
-      redirect_to root_path, notice: 'Your username was successfully updated.'
+      redirect_to root_path, notice: "Your username was successfully updated."
     else
       render :edit_username
     end
