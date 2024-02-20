@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     end
     resource :skills, only: [:create, :destroy, :update]
     resource :mypage, only: [:show] do
+      collection do
+        get :qrcode
+      end
       resources :items, only: [:index, :destroy, :create] do
         collection do
           post :save_order
@@ -21,7 +24,11 @@ Rails.application.routes.draw do
       end
     end
     resources :relationships, only: [:create, :destroy, :index]
+    get "edit_username", to: "users#edit_username"
+    patch "update_username", to: "users#update_username"
   end
+
+  get "/:username", to: "users#resolve_username", as: :resolve_username
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

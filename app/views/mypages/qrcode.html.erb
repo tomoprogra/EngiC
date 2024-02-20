@@ -1,0 +1,5 @@
+<% if @qr %>
+  <%= image_tag @qr.as_png(size: 200).to_data_url, alt: "QR Code" %>
+<% else %>
+  <p>QRコードを生成できませんでした。</p>
+<% end %>

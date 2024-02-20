@@ -1,5 +1,32 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:update, :edit]
+  before_action :authenticate_user!
+
+  def resolve_username
+    # ユーザー名からユーザーを検索
+    user = User.find_by(username: params[:username])
+
+    if user
+      # ユーザーが見つかった場合、ユーザーIDに基づくページにリダイレクト
+      redirect_to user_mypage_path(user_id: user.id)
+    else
+      # ユーザーが見つからない場合、適切なエラーページにリダイレクト
+      redirect_to not_found_path
+    end
+  end
+
+  def edit_username
+    @user = current_user
+  end
+
+  def update_username
+    @user = current_user
+    if @user.update(user_params)
+      redirect_to root_path, notice: "Your username was successfully updated."
+    else
+      render :edit_username
+    end
+  end
 
   def edit
   end
@@ -31,6 +58,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :introduction)
+      params.require(:user).permit(:username, :name, :introduction)
     end
 end

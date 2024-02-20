@@ -38,6 +38,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private
 
+    def after_sign_in_path_for(resource)
+      if resource.username.blank?
+        edit_username_path
+      else
+        super
+      end
+    end
+
     def authenticate_user_from_omniauth(provider)
       auth = request.env["omniauth.auth"]
 
