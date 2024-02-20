@@ -60,4 +60,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         end
       end
     end
+
+  protected
+
+  def after_sign_in_path_for(resource)
+    if resource.username.blank?
+      edit_username_path
+    else
+      super 
+    end
+  end
 end

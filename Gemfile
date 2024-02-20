@@ -59,7 +59,7 @@ gem "omniauth-rails_csrf_protection"
 gem "omniauth-twitter"
 gem "redcarpet"
 gem "validate_url"
-gem "x"
+gem 'rqrcode'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "bullet"

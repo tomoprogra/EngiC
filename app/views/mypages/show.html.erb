@@ -37,6 +37,7 @@
   </div>
 </div>
 <% if @user.id == current_user.id %>
+<%= link_to "qr", qrcode_user_mypage_path(current_user)%>
 <%= link_to "編集", user_mypage_items_path(current_user)%>
 <% end %>
 

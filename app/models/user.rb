@@ -16,6 +16,15 @@ class User < ApplicationRecord
   has_many :skills, through: :skill_tags
   after_create :create_mypage
   mount_uploader :avatar, AvatarUploader
+  validates :username, uniqueness: true, presence: true
+  # URLに使用できる形式であることのバリデーションも追加する
+
+  def self.generate_unique_username
+    loop do
+      random_username = "user_#{SecureRandom.hex(4)}"
+      break random_username unless User.exists?(username: random_username)
+    end
+  end
 
   def self.dummy_email(auth)
     "#{auth.uid}@#{auth.provider}.com"
@@ -33,6 +42,7 @@ class User < ApplicationRecord
           name: auth.info.name,
           password: Devise.friendly_token[0, 20],
           remote_avatar_url: auth.info.image,
+          username: generate_unique_username,
         )
         user.save!
       end
