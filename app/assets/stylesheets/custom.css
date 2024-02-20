@@ -58,7 +58,7 @@
   display: block;
 }
 .tab.active {
-  border-bottom: 2px solid rgb(196, 196, 249); /* アクティブなタブの下線 */
+  border-bottom: 2px solid rgb(196, 196, 249); 
 }
 .tabs {
   width: 750px;
