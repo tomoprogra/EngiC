@@ -1,34 +1,48 @@
 <div class="container mx-auto ">
   <div class="flex mt-7 ml-14">
-    <div class="border w-80 my-auto ml-5 rounded-lg">
-      <div class="avatar mt-5 ml-5">
-        <div class="w-20 rounded-full">
-          <%= image_tag(@user.avatar.present? ? @user.avatar.url : "default.png", alt: "アイコン") %>
+    <div class="w-80 my-auto ml-5 ">
+      <div class="border rounded-lg">
+        <div class="avatar mt-5 ml-5">
+          <div class="w-20 rounded-full">
+            <%= image_tag(@user.avatar.present? ? @user.avatar.url : "default.png", alt: "アイコン") %>
+          </div>
+        </div>
+        <div class="mt-5 ml-5 flex"> 
+          <p><%= link_to "#{@user.following.count} フォロー", show_follows_user_path(@user, tab: 'following') %></p>
+          <p><%= link_to "#{@user.followers.count} フォロワー", show_follows_user_path(@user, tab: 'followers') %></p>
+        </div>
+        <div class="mt-5 ml-5">
+          <%= render "users/user", user: @user %>
+        </div>
+        <div class="mt-5 ml-5 mb-5">
+          <div>
+            <% @user.skills.each do |skill| %>
+              <div class="badge badge-ghost"><%= skill.name %></div>
+            <% end %>
+          </div>
+          <div>
+            <%= form_with url: user_skills_path(@user), local: true do |f| %>
+              <%= label_tag "skill[name]", "スキル" %>
+              <%= text_field_tag "skill[name]", @skill_list, placeholder: "例: Ruby, JavaScript, Rails", class: "form-control" %>
+              <%= f.submit "更新", class: "btn btn-outline-primary" %>
+            <% end %>
+          </div>
         </div>
       </div>
-      <div class="mt-5 ml-5"> 
-        <%= render "users/user", user: @user %>
-      </div>
-      <div class="mt-5 ml-5 flex"> 
-        <p><%= link_to "#{@user.following.count} フォロー", show_follows_user_path(@user, tab: 'following') %></p>
-        <p><%= link_to "#{@user.followers.count} フォロワー", show_follows_user_path(@user, tab: 'followers') %></p>
-      </div>
-      <div class="mt-5 ml-5 mb-5">
+      <div class="mt-4">
+        <%= button_to omniauth_authorize_path(:user, :github), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
+          <%= image_tag "github.svg", alt: "GitHub", class: "h-[18px] w-[18px]" %>
+          Link to with GitHub
+        <% end %>
+        </div>
         <div>
-          <% @user.skills.each do |skill| %>
-            <div class="badge badge-ghost"><%= skill.name %></div>
-          <% end %>
-        </div>
-        <div>
-          <%= form_with url: user_skills_path(@user), local: true do |f| %>
-            <%= label_tag "skill[name]", "スキルタグ" %>
-            <%= text_field_tag "skill[name]", @skill_list, placeholder: "例: Ruby, JavaScript", class: "form-control" %>
-            <%= f.submit "更新", class: "btn btn-outline-primary" %>
-          <% end %>
-        </div>
+        <%= button_to omniauth_authorize_path(:user, :twitter), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
+          <%= image_tag "x.svg", alt: "Twitter", class: "h-[18px] w-[18px]" %>
+          Link to  with X
+        <% end %>
       </div>
     </div>
-    <div class="note_card">
+    <div class="note_card ml-4">
       <div class="grid">
         <% @items.each do |item| %>
           <%= render 'item', item: item, user_id: @user.id%>
@@ -40,13 +54,3 @@
         <div><%= render "form", user: @user, item: @item %></div>
       </div>
 </div>
-
-
-              <%= button_to omniauth_authorize_path(:user, :github), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
-                <%= image_tag "github.svg", alt: "GitHub", class: "h-[18px] w-[18px]" %>
-                Login/Sign up with GitHub
-              <% end %>
-              <%= button_to omniauth_authorize_path(:user, :twitter), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
-                <%= image_tag "x.svg", alt: "Twitter", class: "h-[18px] w-[18px]" %>
-                Login/Sign up  with X
-              <% end %>

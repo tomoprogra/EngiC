@@ -1,16 +1,35 @@
 <%= turbo_frame_tag item, class: "item" do %>
   <div class="item-content relative">
     <% if item.xname.nil? && item.githubname.nil? %>
-      <%= link_to user_mypage_item_path(current_user, item), data: { turbo_method: :delete }, local: true, class:"absolute top-0 right-0" do%>
-        <i class="fa-solid fa-xmark"></i>
+      <%= link_to user_mypage_item_path(current_user, item), data: { turbo_method: :delete, turbo_confirm: "削除してよろしいですか？" }, local: true, class:"absolute top-0 right-1" do%>
+        <i class="fa-regular fa-circle-xmark"></i>
       <% end %>
     <% end %>
     <% if item.xname.present? %>
-      <%= item.xname %>
+      <div class="flex justify-center">
+        <div class="mt-4 ml-3">
+          <p class="text-slate-500 text-xs mb-2"><i class="fa-solid fa-location-dot mr-2"></i><%= item.location %></p>
+          <p class="text-slate-500 text-xs"><i class="fa-regular fa-message mr-2"></i><%= item.bio %></p>
+        </div>
+        <div class="mt-10 mr-3 ml-2">
+          <%= link_to "https://twitter.com/#{item.xname}", target: "_blank", class: "button" do %>
+            <div class="avatar">
+              <div class="w-12 rounded">
+                <%= image_tag "x.svg", alt: "", class: "w-full" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     <% end %>
     <% if item.zennname.present? %>
-      <div class="flex justify-center">
-        <div class="mt-9 mr-8">
+      <div class="flex justify-center space-x-6">
+        <div class="mt-6">
+            <div class="mb-2"><%= markdown("![Followers](https://badgen.org/img/zenn/#{item.zennname}/followers?style=social)")%></div>
+            <div class="mb-2"><%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %></div>
+            <div class="mb-2"><%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %></div>
+        </div>
+        <div class="mt-10 ml-3">
           <%= link_to "https://zenn.dev/#{item.zennname}", target:"_blank", class:"button" do %>
             <div class="avatar">
               <div class="w-12 rounded">
@@ -18,11 +37,6 @@
               </div>
             </div>
           <% end %>
-        </div>
-        <div class="mt-5">
-            <div class="mb-2"><%= markdown("![Followers](https://badgen.org/img/zenn/#{item.zennname}/followers?style=social)")%></div>
-            <div class="mb-2"><%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %></div>
-            <div class="mb-2"><%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %></div>
         </div>
       </div> 
     <% end %>
@@ -43,8 +57,13 @@
       </div>
     <% end %>
     <% if item.qiitaname.present? %>
-       <div class="flex justify-center ">
-        <div class="mt-9 mr-8">
+       <div class="flex justify-center space-x-6">
+        <div class="mt-7">
+          <div class="mb-2"><%= markdown("![Contributions](https://badgen.org/img/qiita/#{item.qiitaname}/contributions?style=social)") %></div>
+          <div class="mb-2"><%= markdown("![Followers](https://badgen.org/img/qiita/#{item.qiitaname}/followers?style=social)") %></div>
+          <div class="mb-2"><%= markdown("![Articles](https://badgen.org/img/qiita/#{item.qiitaname}/articles?style=social)") %></div>
+        </div>
+        <div class="mt-10 ml-3">
           <%= link_to "https://qiita.com/#{item.qiitaname}", target: "_blank", class: "button" do %>
             <div class="avatar">
               <div class="w-12 rounded">
@@ -53,20 +72,31 @@
             </div>
           <% end %>
         </div>
-        <div class="mt-5">
-          <div class="mb-2"><%= markdown("![Contributions](https://badgen.org/img/qiita/#{item.qiitaname}/contributions?style=social)") %></div>
-          <div class="mb-2"><%= markdown("![Followers](https://badgen.org/img/qiita/#{item.qiitaname}/followers?style=social)") %></div>
-          <div class="mb-2"><%= markdown("![Articles](https://badgen.org/img/qiita/#{item.qiitaname}/articles?style=social)") %></div>
-        </div>
       </div>
     <% end %>
-    <% if item.title.present? %>
+    <% if item.content.present? %>
       <h2><%= item.title %></h2>
       <p><%= link_to item.content, item.content, target: "_blank", rel: "noopener noreferrer" %></p>
+      <% if item.imageurl.present? %>
+        <div class="avatar">
+          <div class="w-16 rounded">
+            <%= image_tag item.imageurl.url %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
     <% if item.note_name.present? %>
-      <div class="flex justify-center">
-        <div class="mt-7">
+      <div class="flex justify-center space-x-8">
+        <div class="mt-8">
+          <% if @note_count %>
+            <p class="text-slate-500 text-xs mb-2"><i class="fa-regular fa-note-sticky mr-2"></i>記事:<%= @note_count %></p>
+            <p class="text-slate-500 text-xs mb-2">フォロー:<%= @following_count %></p>
+            <p class="text-slate-500 text-xs">フォロワー: <%= @follower_count %></p>
+          <% else %>
+            <p>Note Count is not available.</p>
+          <% end %>
+        </div>
+        <div class="mt-7 mr-4">
           <%= link_to "https://note.com/#{item.note_name}", target: "_blank", class: "button" do %>
             <div class="avatar">
               <div class="w-16 rounded">
@@ -75,15 +105,6 @@
             </div>
           <% end %>
         </div>
-      <div>
-        <% if @note_count %>
-          <p>記事数: <%= @note_count %></p>
-          <p>フォロー:<%= @following_count %></p>
-          <p>フォロワー: <%= @follower_count %></p>
-        <% else %>
-          <p>Note Count is not available.</p>
-        <% end %>
-      </div>
       </div>
     <% end %>
   </div>

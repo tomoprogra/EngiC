@@ -1,7 +1,7 @@
 <div class="tabs border-b">
-  <div class="tab" data-tab-target="#content1">タブ1</div>
-  <div class="tab" data-tab-target="#content2">タブ2</div>
-  <div class="tab" data-tab-target="#content3">タブ3</div>
+  <div class="tab" data-tab-target="#content1">記事</div>
+  <div class="tab" data-tab-target="#content2">URLコンテンツ</div>
+  <div class="tab" data-tab-target="#content3">実装予定</div>
 </div>
 <div id="content1" class="tab-content">
   <%= image_tag "qiita.webp", class: "w-1/12" %>
@@ -24,15 +24,17 @@
       <% end %>
 </div>
 <div id="content2" class="tab-content">
-  <%= form_with model: [@user, @user.mypage, item], local: false, data: { turbo_frame: "item" } do |form| %>
+  <%= form_with model: [@user, @user.mypage, item], html: { multipart: true }, local: false, data: { turbo_frame: "item" } do |form| %>
         <%= form.label :title %>
         <%= form.text_field :title %>
         <%= form.label :content, "URL" %>
         <%= form.url_field :content, placeholder: "https://example.com" %>
+        <%= form.label :imageurl %>
+        <%= form.file_field :imageurl, class:"file-input file-input-bordered file-input-xs w-full max-w-xs" %>
         <%= form.submit "追加" %>
       <% end %>
 </div>
-<div id="content3" class="tab-content">コンテンツ3</div>
+<div id="content3" class="tab-content">実装中</div>
 </div>
 <script>
 document.addEventListener('turbo:load', () => {

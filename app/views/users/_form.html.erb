@@ -1,7 +1,7 @@
 <%= turbo_frame_tag user do %>
   <%= form_with(model: user) do |form| %>
-    <%= form.text_field :name %>
-    <%= form.text_field :introduction %>
+    <%= form.text_field :name, placeholder: "Type here", class: "input input-bordered input-sm w-full max-w-xs" %>
+    <%= form.text_field :introduction, placeholder: "Type here", class: "input input-bordered input-sm w-full max-w-xs" %>
     <%= form.submit %>
-  <% end%>
+  <% end %>
 <% end %>

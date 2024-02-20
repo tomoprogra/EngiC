@@ -1,4 +1,4 @@
-class AvatarUploader < CarrierWave::Uploader::Base
+class ImageUrlUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
@@ -12,14 +12,14 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
-  # アップロードされた画像をWebP形式に変換
+
   process convert: 'webp'
 
   # 保存形式を指定
   def filename
     super.chomp(File.extname(super)) + '.webp' if original_filename.present?
   end
-
+  
   def extension_whitelist
     %w[jpg jpeg gif png webp]
   end

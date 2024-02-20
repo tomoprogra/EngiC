@@ -7,3 +7,4 @@
   <%= f.submit "Save" %>
 <% end %>
       
+<%= link_to 'アカウントを削除', user_path(current_user), data: {turbo_method: :delete, turbo_confirm: '本当にアカウントを削除してもよろしいですか？' } %>
