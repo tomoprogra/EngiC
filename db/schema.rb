@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_13_125229) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_20_025850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_13_125229) do
     t.string "uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
+    t.index ["provider", "uid"], name: "index_identities_on_provider_and_uid", unique: true
     t.index ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true
     t.index ["user_id"], name: "index_identities_on_user_id"
   end
@@ -32,7 +34,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_13_125229) do
     t.integer "mypage_id"
     t.string "qiitaname"
     t.integer "position"
+    t.string "zennname"
+    t.string "note_name"
+    t.text "bio"
+    t.string "xname"
+    t.string "githubname"
+    t.string "location"
+    t.index ["githubname"], name: "index_items_on_githubname", unique: true
     t.index ["mypage_id"], name: "index_items_on_mypage_id"
+    t.index ["xname"], name: "index_items_on_xname", unique: true
   end
 
   create_table "mypages", force: :cascade do |t|
@@ -50,6 +60,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_13_125229) do
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   end
 
+  create_table "skill_tags", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "skill_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_skill_tags_on_skill_id"
+    t.index ["user_id", "skill_id"], name: "index_skill_tags_on_user_id_and_skill_id", unique: true
+    t.index ["user_id"], name: "index_skill_tags_on_user_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_skills_on_name", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -64,10 +91,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_13_125229) do
     t.string "provider"
     t.string "avatar"
     t.text "bio"
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "identities", "users"
   add_foreign_key "mypages", "users"
+  add_foreign_key "skill_tags", "skills"
+  add_foreign_key "skill_tags", "users"
 end

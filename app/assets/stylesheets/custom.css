@@ -7,13 +7,14 @@
 }
 .grid {
   position: relative;
+  
 }
+
 .item {
   position: absolute;
-  width: 200px;
-  height: 200px;
-  /* line-height: 200px; */
-  margin: 5px;
+  width: 230px;
+  height: 154px;
+  margin: 4px;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -29,20 +30,38 @@
 }
 .item-content {
   position: relative;
-  width:200px;
-  height:200px;
+  width:230px;
+  height:154px;
   background-color: white;
-  margin:20px;
+  margin:10px;
   padding:0;
-  border-radius: 8%;
-  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
-  cursor:pointer;
+  border-radius: 2%;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   transition-property: border-radius;
   transition-duration:0.2s;
   transition-timing-function:ease-in-out;
+  border: 1px solid rgb(232, 231, 231);
 }
 
 .item-content:hover {
-  border-radius:0 50% 50% 0/0 0% 20% 0;
+  border-radius:2% 2% 50% 2% / 2% 2% 20% 2%;
   transform-origin: left bottom;
 }
+.note_card {
+  width: 750px;
+}
+
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+.tab.active {
+  border-bottom: 2px solid rgb(196, 196, 249); /* アクティブなタブの下線 */
+}
+.tabs {
+  width: 750px;
+  float: right;
+}
+

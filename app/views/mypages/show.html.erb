@@ -1,20 +1,43 @@
 <% if current_user != @user %>
   <% relationship = current_user.active_relationships.find_by(followed_id: @user.id) %>
   <% if current_user.following?(@user) %>
-    <%= link_to 'フォローを解除', relationship_path(relationship), method: :delete, data: { turbo_method: :delete }, class: "btn" %>
+    <%= link_to 'フォローを解除', user_relationship_path(user_id: @user.id, id: relationship.id), data: { turbo_method: :delete }, class: "btn" %>
   <% else %>
-    <%= button_to 'フォローする', relationships_path, params: { followed_id: @user.id }, data: { turbo: false }, class: "btn btn-primary" %>
+    <%= button_to 'フォローする', user_relationships_path(@user), params: { followed_id: @user.id }, data: { turbo: false }, class: "btn btn-primary" %>
   <% end %>
 <% end %>
-
-<div class="felx justify-center container mx-auto">
-  <div class="mockup-window border bg-base-300">
-    <div class="px-20 py-16 bg-base-200">
-      <div class="grid">
+<div class="container mx-auto max-w-3xl">
+  <div class="border rounded-3xl">
+    <div class="avatar mt-5 flex justify-center">
+      <div class="w-20 rounded-full">
+        <%= image_tag(@user.avatar.present? ? @user.avatar.url : "default.png", alt: "アイコン") %>
+      </div>
+    </div>
+    <div>
+      <%= render "users/user", user: @user %>
+    </div>
+    <div>
+      <p><%= link_to "#{@user.following.count} フォロー", following_user_path(@user) %></p>
+      <p><%= link_to "#{@user.followers.count} フォロワー", followers_user_path(@user) %></p>
+    </div>
+    <div>
+      <div>
+        <% @user.skills.each do |skill| %>
+          <div class="badge badge-ghost"><%= skill.name %></div>
+        <% end %>
+      </div>
+    </div>
+    <div class="ml-10">
+      <div class="flex flex-wrap gap-2">
         <% @items.each do |item| %>
-          <%= render 'item', item: item, mypage_id: params[:mypage_id]%>
+          <%= render 'item', item: item, user_id: @user.id%>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+<% if @user.id == current_user.id %>
+<%= link_to "qr", qrcode_user_mypage_path(current_user)%>
+<%= link_to "編集", user_mypage_items_path(current_user)%>
+<% end %>
+

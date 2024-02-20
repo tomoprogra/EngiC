@@ -51,12 +51,15 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 gem "carrierwave"
 gem "config"
+gem "httparty"
 gem "omniauth"
 gem "omniauth-facebook"
 gem "omniauth-github"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-twitter"
 gem "redcarpet"
+gem "rqrcode"
+gem "validate_url"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "bullet"

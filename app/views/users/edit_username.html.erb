@@ -1,0 +1,9 @@
+<h2>Set Your Username</h2>
+
+<%= form_for(@user, url: user_update_username_path) do |f| %>
+  <%= f.label :username %><br>
+  <%= f.text_field :username %><br>
+
+  <%= f.submit "Save" %>
+<% end %>
+      
