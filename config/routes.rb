@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :following, :followers
+      get :show_follows
     end
     resource :skills, only: [:create, :destroy, :update]
     resource :mypage, only: [:show] do

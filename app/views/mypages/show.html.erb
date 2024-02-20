@@ -17,8 +17,8 @@
       <%= render "users/user", user: @user %>
     </div>
     <div>
-      <p><%= link_to "#{@user.following.count} フォロー", following_user_path(@user) %></p>
-      <p><%= link_to "#{@user.followers.count} フォロワー", followers_user_path(@user) %></p>
+      <p><%= link_to "#{@user.following.count} フォロー", show_follows_user_path(@user, tab: 'following') %></p>
+      <p><%= link_to "#{@user.followers.count} フォロワー", show_follows_user_path(@user, tab: 'followers') %></p>
     </div>
     <div>
       <div>
