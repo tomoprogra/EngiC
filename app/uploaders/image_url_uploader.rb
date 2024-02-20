@@ -13,19 +13,19 @@ class ImageUrlUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  process convert: 'webp'
+  process convert: "webp"
 
   # 保存形式を指定
   def filename
-    super.chomp(File.extname(super)) + '.webp' if original_filename.present?
+    "#{super.chomp(File.extname(super))}.webp" if original_filename.present?
   end
-  
+
   def extension_whitelist
     %w[jpg jpeg gif png webp]
   end
 
   def content_type_whitelist
-    /image\//
+    %r{image/}
   end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)

@@ -15,9 +15,9 @@ class UsersController < ApplicationController
 
   def destroy
     if @user.destroy
-      redirect_to root_url, notice: 'アカウントが正常に削除されました。'
+      redirect_to root_url, notice: "アカウントが正常に削除されました。"
     else
-      redirect_to root_url, alert: 'アカウントの削除に失敗しました。'
+      redirect_to root_url, alert: "アカウントの削除に失敗しました。"
     end
   end
 
