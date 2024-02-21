@@ -1,18 +1,13 @@
 <%= turbo_frame_tag user do %>
-  <div class="row py-2 border-top">
-    <div class="col-4 my-auto">
-      <%= user.name %>
+  <div class="ml-2 border-b">
+    <div class="font-medium">
+        <%= user.name %>
     </div>
-    <div class="col-4 my-auto">
-      <%= user.introduction %>
-    </div>
-    <div class="col-4">
-      <div class="d-flex justify-content-end">
-        <% if params[:controller] != "mypages" %>
-        <%= link_to "編集", edit_user_path(user), class: "btn btn-sm btn-outline-primary me-2" %>
-        <% end %>
-      </div>
+    <div class="flex justify-between">
+      <p class="text-slate-500 text-sm"><%= simple_format(user.introduction, {}, wrapper_tag: "span") %></p>
+      <% if params[:controller] != "mypages" %>
+        <%= link_to "", edit_user_path(user), class: "fa-regular fa-pen-to-square " %>
+      <% end %>
     </div>
   </div>
 <% end %>
-
