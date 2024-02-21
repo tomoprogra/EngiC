@@ -8,6 +8,15 @@
               <%= image_tag(@user.avatar.present? ? @user.avatar.url : "default.png", alt: "アイコン") %>
             </div>
           </div>
+        <%= form_for @user, html: { multipart: true } do |f| %>
+          <div class="field">
+            <%= f.label :avatar, "ファイルを選択", id: "fileSelect", class: "btn-class" %>
+            <%= f.file_field :avatar, id: "fileElem", style: "display:none;", accept: "image/*", multiple: true %>
+          </div>
+          <div class="actions">
+            <%= f.submit "アップロード", class: "btn-class" %>
+          </div>
+        <% end %>
           <div class="mt-5 flex items-center border-b space-x-4 ml-2 text-slate-500 text-sm"> 
             <p><%= link_to "#{@user.following.count} フォロー", show_follows_user_path(@user, tab: 'following') %></p>
             <p><%= link_to "#{@user.followers.count} フォロワー", show_follows_user_path(@user, tab: 'followers') %></p>
@@ -74,3 +83,15 @@
       <div><%= render "form", user: @user, item: @item %></div>
     </div>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const fileSelect = document.getElementById("fileSelect");
+    const fileElem = document.getElementById("fileElem");
+
+    fileSelect.addEventListener("click", (e) => {
+      if (fileElem) {
+        fileElem.click();
+      }
+    }, false);
+  });
+</script>
