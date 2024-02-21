@@ -52,6 +52,7 @@ gem "bootsnap", require: false
 gem "carrierwave"
 gem "config"
 gem "httparty"
+gem "mini_magick"
 gem "omniauth"
 gem "omniauth-facebook"
 gem "omniauth-github"

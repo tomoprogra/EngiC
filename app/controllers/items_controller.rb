@@ -34,17 +34,13 @@ class ItemsController < ApplicationController
   private
 
     def note_api
-      # note_nameがnilでないitemを全て取得
       note_items = @user.mypage.items.where.not(note_name: [nil, ""])
 
-      # 複数のitemが存在する可能性があるため、必要に応じて処理を行う
-      # 例: 最初のitemのnote_nameを使用
       return unless note_items.any?
 
       first_note_item = note_items.first
       creator_id = first_note_item.note_name
 
-      # 外部APIから情報を取得
       @creator_info = NoteApiService.fetch_creator_info(creator_id)
       @note_count = @creator_info["data"]["noteCount"] if @creator_info && @creator_info["data"]
       @following_count = @creator_info["data"]["followingCount"] if @creator_info && @creator_info["data"]
@@ -52,7 +48,7 @@ class ItemsController < ApplicationController
     end
 
     def item_params
-      params.require(:item).permit(:title, :content, :qiitaname, :zennname, :note_name, order: [])
+      params.require(:item).permit(:title, :content, :qiitaname, :zennname, :note_name, :imageurl, order: [])
     end
 
     def set_user

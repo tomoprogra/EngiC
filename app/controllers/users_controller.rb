@@ -1,17 +1,23 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:update, :edit]
+  before_action :set_user, only: [:update, :edit, :destroy]
   before_action :authenticate_user!
 
-  def resolve_username
-    # ユーザー名からユーザーを検索
-    user = User.find_by(username: params[:username])
+  def edit
+  end
 
-    if user
-      # ユーザーが見つかった場合、ユーザーIDに基づくページにリダイレクト
-      redirect_to user_mypage_path(user_id: user.id)
+  def update
+    if @user.update(user_params)
+      flash.now.notice = "ユーザーを更新しました。"
     else
-      # ユーザーが見つからない場合、適切なエラーページにリダイレクト
-      redirect_to not_found_path
+      redirect_to user_mypage_items_path(@user), status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @user.destroy
+      redirect_to root_url, notice: "アカウントが正常に削除されました。"
+    else
+      redirect_to root_url, alert: "アカウントの削除に失敗しました。"
     end
   end
 
@@ -28,14 +34,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-    if @user.update(user_params)
-      flash.now.notice = "ユーザーを更新しました。"
+  def resolve_username
+    user = User.find_by(username: params[:username])
+    if user
+      redirect_to user_mypage_path(user_id: user.id)
     else
-      redirect_to user_mypage_items_path(@user), status: :unprocessable_entity
+      redirect_to root_path
     end
   end
 
