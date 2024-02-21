@@ -1,40 +1,84 @@
-<div class="tabs border-b">
-  <div class="tab" data-tab-target="#content1">記事</div>
-  <div class="tab" data-tab-target="#content2">URLコンテンツ</div>
-  <div class="tab" data-tab-target="#content3">実装予定</div>
-</div>
-<div id="content1" class="tab-content">
-  <%= image_tag "qiita.webp", class: "w-1/12" %>
-      <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" } do |form| %>
-        <%= form.label :qiitaname, "@" %>
-        <%= form.text_field :qiitaname, value: item.qiitaname, placeholder: "アカウント名" %>
-        <%= form.submit"追加" %>
+<div class="mx-5">
+  <div class="tabs border-b">
+    <div class="tab" data-tab-target="#content1">記事</div>
+    <div class="tab" data-tab-target="#content2">URLコンテンツ</div>
+    <div class="tab" data-tab-target="#content3">実装予定</div>
+  </div>
+  <div id="content1" class="tab-content">
+    <div class="mt-16 ml-3">
+      <div class="flex items-center mt-3">
+        <div class="avatar">
+          <div class="w-12 rounded">
+            <%= image_tag "qiita.webp", class: "w-1/12" %>
+          </div>
+        </div>
+        <div class="ml-3">
+          <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs" do |form| %>
+            <%= form.label :qiitaname, "@" %>
+            <%= form.text_field :qiitaname, value: item.qiitaname, placeholder: "アカウント名", class:"text-sm mt-1" %>
+            <%= form.button type: 'submit', class: 'btn-class' do %>
+              <i class="fa-solid fa-plus"></i>
+            <% end %>
+          <% end %>
+        </div>  
+      </div>
+      <div class="flex items-center mt-3">
+        <div class="avatar">
+          <div class="w-12 rounded">  
+            <%= image_tag "zenn.svg", class: "w-1/12" %>
+          </div>
+        </div>
+        <div class="ml-3">
+          <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs" do |form| %>
+            <%= form.label :zennname, "@"  %>
+            <%= form.text_field :zennname, value: item.zennname, placeholder: "アカウント名" ,class:"text-sm mt-1"%>
+            <%= form.button type: 'submit', class: 'btn-class' do %>
+              <i class="fa-solid fa-plus"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="flex items-center mt-3">
+        <div class="avatar">
+          <div class="w-12 rounded">  
+            <%= image_tag "note.webp", class: "w-1/6" %>
+          </div>
+        </div>
+        <div class="ml-3">  
+          <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs" do |form| %>
+            <%= form.label :note_name, "@" %>
+            <%= form.text_field :note_name, value: item.note_name, placeholder: "アカウント名" ,class:"text-sm mt-1"%>
+            <%= form.button type: 'submit', class: 'btn-class' do %>
+              <i class="fa-solid fa-plus"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="content2" class="tab-content">
+    <div class="mt-16">
+      <%= form_with model: [@user, @user.mypage, item], html: { multipart: true }, local: false, data: { turbo_frame: "item" } do |form| %>
+        <div class="mb-4">
+          <label for="title" class="fa-regular fa-comments" aria-label="title"></label>
+          <%= form.text_field :title, placeholder: "コメント", class: "input input-bordered input-sm w-full max-w-xs ml-2" %>
+        </div>
+        <div class="mb-4">
+          <label for="content" class="fa-solid fa-link" aria-label="content"></label>
+          <%= form.url_field :content, placeholder: "https://example.com", class: "input input-bordered input-sm w-full max-w-xs ml-2", required: true %>
+        </div>
+        <div class="mb-4">
+           <label for="imagerul" class="fa-regular fa-image" aria-label="imageurl"></label>
+          <%= form.file_field :imageurl, class: "file-input file-input-bordered file-input-xs w-full max-w-xs ml-2"%>
+          <%= form.button type: 'submit', class: 'btn-class ml-3' do %>
+            <i class="fa-solid fa-plus"></i>
+          <% end %>
+        </div>
       <% end %>
-      <%= image_tag "zenn.svg", class: "w-1/12" %>
-      <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" } do |form| %>
-        <%= form.label :zennname, "@" %>
-        <%= form.text_field :zennname, value: item.zennname, placeholder: "アカウント名" %>
-        <%= form.submit"追加" %>
-      <% end %>
-      <%= image_tag "note.webp", class: "w-1/6" %>
-      <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" } do |form| %>
-        <%= form.label :note_name, "@" %>
-        <%= form.text_field :note_name, value: item.note_name, placeholder: "アカウント名" %>
-        <%= form.submit"追加" %>
-      <% end %>
-</div>
-<div id="content2" class="tab-content">
-  <%= form_with model: [@user, @user.mypage, item], html: { multipart: true }, local: false, data: { turbo_frame: "item" } do |form| %>
-        <%= form.label :title %>
-        <%= form.text_field :title %>
-        <%= form.label :content, "URL" %>
-        <%= form.url_field :content, placeholder: "https://example.com" %>
-        <%= form.label :imageurl %>
-        <%= form.file_field :imageurl, class:"file-input file-input-bordered file-input-xs w-full max-w-xs" %>
-        <%= form.submit "追加" %>
-      <% end %>
-</div>
-<div id="content3" class="tab-content">実装中</div>
+    </div>
+  </div>
+  <div id="content3" class="tab-content">実装中</div>
+  </div>
 </div>
 <script>
 document.addEventListener('turbo:load', () => {
