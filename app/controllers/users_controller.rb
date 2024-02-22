@@ -10,9 +10,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-  
-    else
+    unless @user.update(user_params)
       redirect_to user_mypage_items_path(@user), status: :unprocessable_entity
     end
   end
