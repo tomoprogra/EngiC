@@ -1,0 +1,7 @@
+<div class='ms-auto'>
+  <% if current_user.following?(user) %>
+    <%= render 'users/unfollow', { user: user, relationship: relationship } %>
+  <% else %>
+    <%= render 'users/follow', { user: user, relationship: relationship } %>
+  <% end %>
+</div>

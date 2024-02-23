@@ -37,12 +37,7 @@
         </div>
         <div class="mt-1">
           <% if current_user != @user %>
-            <% relationship = current_user.active_relationships.find_by(followed_id: @user.id) %>
-            <% if current_user.following?(@user) %>
-              <%= link_to 'フォローを解除', user_relationship_path(user_id: @user.id, id: relationship.id), data: { turbo_method: :delete }, class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black" %>
-            <% else %>
-              <%= button_to 'フォローする', user_relationships_path(@user), params: { followed_id: @user.id }, data: { turbo: false }, class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black" %>
-            <% end %>
+            <%= render 'users/follow_buttons', { user: @user, relationship: @relationship } %>
           <% end %>
         </div>
       </div>
