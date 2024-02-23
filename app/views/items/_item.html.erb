@@ -85,12 +85,10 @@
               <p class="ml-2"><%= item.title %></p>
             </div>
           </div>
-          <div class="avatar top-7 right-4 absolute">
-            <div class="w-14 rounded" >
-              <%= image_tag(item.imageurl.present? ? item.imageurl.url : "image-default.svg", alt: "イメージ") %>
+          <div class="avatar top-7 right-4 right-3 absolute w-16 h-16 rounded overflow-hidden">
+              <%= image_tag(item.imageurl.present? ? item.imageurl.url : "image-default.svg", alt: "イメージ", style: "width: 100%; height: 100%; object-fit: contain;") %>
             </div>
           </div>
-        </div>
         <div class="absolute bottom-2 left-2 w-52" >
           <p class="text-slate-500 text-xs truncate">
             <i class="fa-solid fa-link"></i>

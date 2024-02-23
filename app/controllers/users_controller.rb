@@ -5,10 +5,12 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def index
+    @users = User.includes([:skills]).all
+  end
+
   def update
-    if @user.update(user_params)
-      flash.now.notice = "ユーザーを更新しました。"
-    else
+    unless @user.update(user_params)
       redirect_to user_mypage_items_path(@user), status: :unprocessable_entity
     end
   end
