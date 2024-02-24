@@ -10,9 +10,11 @@
     <%= stylesheet_link_tag 'custom' %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   </head>
     
   <body class="flex flex-col h-screen">
+  <div class="background">
     <header>
     <% if user_signed_in? %>
       <%= render 'shared/header' %>
@@ -25,7 +27,7 @@
     <main class="flex-grow">
       <%= yield %>
     </main>
-
+  </div>
     <footer class="mt-auto">
       <%= render 'shared/footer' %>
     </footer>
