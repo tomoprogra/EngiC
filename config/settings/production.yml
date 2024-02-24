@@ -1,6 +1,6 @@
 twitter:
-  twitter_api_key: TWITTER_API_KEY
-  twitter_secret_key: TWITTER_SECRET_KEY
+  twitter_api_key: <%= ENV['TWITTER_API_KEY'] %>
+  twitter_secret_key: <%= ENV['TWITTER_SECRET_KEY'] %>
 github:
-  github_api_key: GITHUB_API_KEY
-  github_secret_key: GITHUB_SECRET_KEY
+  github_api_key: <%= ENV['GITHUB_API_KEY'] %>
+  github_secret_key: <%= ENV['GITHUB_SECRET_KEY'] %>
