@@ -6,4 +6,14 @@ module.exports = {
     './app/javascript/**/*.js'
   ],
   plugins: [require("daisyui")],
+  theme: {
+    extend: {
+      height: {
+        '144': '36rem', 
+      },
+      width: {
+        '144': '36rem', 
+      },
+    }
+  }
 }

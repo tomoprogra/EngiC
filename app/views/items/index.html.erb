@@ -1,7 +1,7 @@
 <div class="container mx-auto ">
   <div class="flex mt-3 ml-14">
     <div class="w-80 ml-5">
-      <div class="overflow-hidden border rounded py-3 relative" style="max-height:480px;">
+      <div class="overflow-hidden bg-white rounded py-3 relative" style="max-height:480px;">
         <div class="mx-4">
           <div class="avatar mt-4 ml-2">
             <div class="w-20 rounded-full">
@@ -38,12 +38,12 @@
         <div class="mt-4">
           <% linked_providers = current_user.identities.pluck(:provider) %>
           <% if linked_providers.include?('github') %>
-            <div class="inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black">
+            <div class="inline-flex h-10 items-center justify-center gap-2 w-full rounded  bg-white p-2 text-sm font-medium text-black">
               <%= image_tag "github.svg", alt: "GitHub", class: "h-[18px] w-[18px]" %>
               GitHub Link済み
             </div>
           <% else %>
-            <%= button_to omniauth_authorize_path(:user, :github), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
+            <%= button_to omniauth_authorize_path(:user, :github), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
               <%= image_tag "github.svg", alt: "GitHub", class: "h-[18px] w-[18px]" %>
               Link to with GitHub
             <% end %>
@@ -51,18 +51,18 @@
         </div>
         <div class="mt-1">
           <% if linked_providers.include?('twitter') %>
-            <div class="inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black">
+            <div class="inline-flex h-10 items-center justify-center gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black">
               <%= image_tag "x.svg", alt: "Twitter", class: "h-[18px] w-[18px]" %>
               Twitter Link済み
             </div>
           <% else %>
-            <%= button_to omniauth_authorize_path(:user, :twitter), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
+            <%= button_to omniauth_authorize_path(:user, :twitter), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
               <%= image_tag "x.svg", alt: "Twitter", class: "h-[18px] w-[18px]" %>
               Link to with X
             <% end %>
           <% end %>
           <div>
-            <%= link_to "マイページに戻る", user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black mt-5"%>
+            <%= link_to "マイページに戻る", user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black mt-5"%>
           </div>
         </div>
       </div>

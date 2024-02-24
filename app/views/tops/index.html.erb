@@ -1,4 +1,67 @@
-<div class="btn" onclick="my_modal_1.showModal()">open modal</div>
+<section class="dark:bg-gray-800 dark:text-gray-100">
+	<div class="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-around">
+		<div class="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-144 xl:h-112 2xl:h-128 3xl:h-144">
+			<%= image_tag "top.svg", alt:"", class:"object-contain h-72 sm:h-80 lg:h-144 xl:h-112 2xl:h-128 3xl:h-144"%>
+		</div>
+		<div class="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
+			<span class="dark:text-violet-400">プロフィールでエンジニアとつながる</span>
+			  <h1 class="text-5xl font-bold leadi sm:text-6xl">EngiC.
+			  <p class="mt-6 mb-8 text-lg sm:mb-12">Engineer Conector</p>
+			  </h1>
+			<div class="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
+				<div class="btns px-8 py-3 text-lg font-semibold bg-white rounded cursor-pointer dark:border-gray-100" onclick="my_modal_1.showModal()">Engic.を始める</div>
+      </div>
+		</div>
+	</div>
+  <div>
+    <div class="my-10">
+      <div class="fade">
+        <div class="flex justify-center items-center mt-20" >
+          <%= image_tag "profile.svg",class:"object-contain h-32 sm:h-40 lg:h-48 xl:h-64 2xl:h-52" %>
+          <p class="mt-6 text-lg">エンジニアのプロフィールが作れる</p>
+        </div>
+      </div>
+      <div class="fade">
+          <div><p class="flex justify-center items-center text-md">連携先一覧</p></div>
+        <div class="flex justify-center items-center px-40 py-10 bg-white rounded-lg mx-auto w-144">
+          <i class="devicon-github-original-wordmark colored text-6xl"></i>
+          <i class="devicon-twitter-original colored text-6xl ml-4"></i>
+          <%= image_tag "qiita.webp", class:"h-16 ml-4" %>
+          <%= image_tag "zenn.svg", class:"h-16 ml-4" %>
+          <%= image_tag "note.webp", class:"h-16" %>
+        </div>
+      </div>
+      <div class="fade flex justify-center items-center mt-28" >
+        <%= image_tag "search.svg",class:"object-contain h-32 sm:h-40 lg:h-52 xl:h-72 2xl:h-52" %>
+        <p class="mt-6 text-lg">スキルで探せる</p>
+      </div>
+      <div class="fade flex justify-center items-center" >
+        <div class="grid grid-cols-4 gap-4 place-items-center w-144 p-5 bg-white rounded-lg text-6xl">
+          <i class="devicon-javascript-plain"></i>
+          <i class="devicon-nextjs-original-wordmark"></i>
+          <i class="devicon-react-original-wordmark"></i>
+          <i class="devicon-rails-plain-wordmark"></i>
+          <i class="devicon-ruby-plain-wordmark"></i>
+          <i class="devicon-docker-plain-wordmark"></i>
+          <i class="devicon-amazonwebservices-plain-wordmark"></i>
+          <i class="devicon-vim-plain"></i>
+          <i class="devicon-vuejs-plain"></i>
+          <i class="devicon-typescript-plain"></i>
+          <i class="devicon-python-plain-wordmark"></i>
+        </div>
+      </div>
+      <div class="fade">
+        <div class="flex flex-col justify-center items-center mt-28" >
+          <%= image_tag "qr_code.svg",class:"object-contain h-32 sm:h-40 lg:h-48 xl:h-64 2xl:h-52" %>
+          <p class="mt-6 mb-8 text-lg sm:mb-12">QRコードで見つける</p>
+        </div>
+      </div>
+      <div class="fade justify-center items-cente flex my-20 px-10">
+        <div class="btns px-8 py-3 text-lg font-semibold bg-white px-20 rounded cursor-pointer dark:border-gray-100" onclick="my_modal_1.showModal()">Engic.を始める</div>
+      </div>
+    </.div> 
+  </div> 
+</section>
 <dialog id="my_modal_1" class="modal">
   <div id="login-popup" tabindex="-1"
       class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-black/50">
@@ -6,7 +69,7 @@
       <div class="relative rounded-lg shadow bg-white">
         <div class="modal-action">
           <form method="dialog">
-            <button type="btn"
+            <button type="btns"
                 class="absolute top-3 right-2.5 p-1.5 text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 inline-flex items-center popup-close">
                 <%= image_tag "xmark-solid.svg", aria_hidden: true, class: "w-5 h-5", fill: "#c6c7c7" %>
                 <span class="sr-only">Close</span>
@@ -23,7 +86,6 @@
               </p>
           </div>
           <div class="flex flex-col gap-2 mt-7">
-              <%# ソーシャルログインのボタン %>
               <%= button_to omniauth_authorize_path(:user, :github), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
                 <%= image_tag "github.svg", alt: "GitHub", class: "h-[18px] w-[18px]" %>
                 Login/Sign up with GitHub
@@ -32,10 +94,26 @@
                 <%= image_tag "x.svg", alt: "Twitter", class: "h-[18px] w-[18px]" %>
                 Login/Sign up  with X
               <% end %>
-              <%# GitHub以外のソーシャルログインボタンも同様に追加 %>
           </div>
         </div>
       </div>
     </div>
   </div>
 </dialog>
+<script type="text/javascript">
+document.addEventListener('turbo:load', function() {
+  const targets = document.getElementsByClassName('fade');
+  for(let i = targets.length; i--;){
+    let observer = new IntersectionObserver((entries, observer) => {
+      for(let j = entries.length; j--;){
+        if (entries[j].isIntersecting) {
+          entries[j].target.classList.add('active');
+        } else{
+          entries[j].target.classList.remove('active');
+        }
+      }
+    });
+    observer.observe(targets[i]);
+  }
+});
+</script>
