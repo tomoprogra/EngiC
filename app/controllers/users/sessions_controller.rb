@@ -8,7 +8,12 @@ class Users::SessionsController < Devise::SessionsController
     session.delete("devise.omniauth_data")
     super
   end
+
   # POST /resource/sign_in
+  def create
+    super
+    redirect_to root_path
+  end
 
   # DELETE /resource/sign_out
 
