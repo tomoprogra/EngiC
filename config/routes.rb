@@ -29,12 +29,10 @@ Rails.application.routes.draw do
     patch "update_username", to: "users#update_username"
   end
 
-  get 'privacy_policy', to: 'tops#privacy_policy'
-  get 'terms_of_use', to: 'tops#terms_of_use'
-  
+  get "privacy_policy", to: "tops#privacy_policy"
+  get "terms_of_use", to: "tops#terms_of_use"
+
   get "/:username", to: "users#resolve_username", as: :resolve_username
 
-  
   get "up" => "rails/health#show", as: :rails_health_check
-
 end
