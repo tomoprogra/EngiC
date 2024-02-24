@@ -1,5 +1,5 @@
 class SkillsController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: [:create, :destroy, :update]
 
   def create
     skill_list = params[:skill][:name].split(",").map(&:strip)

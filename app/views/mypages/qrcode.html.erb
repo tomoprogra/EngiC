@@ -1,5 +1,10 @@
-<% if @qr %>
-  <%= image_tag @qr.as_png(size: 200).to_data_url, alt: "QR Code" %>
-<% else %>
-  <p>QRコードを生成できませんでした。</p>
-<% end %>
+<div class="container mx-auto flex flex-col justify-center items-center h-screen mt-10">
+  <% if @qr %>
+    <%= image_tag @qr.as_png(size: 200).to_data_url, alt: "QR Code" %>
+  <% else %>
+    <p>QRコードを生成できませんでした。</p>
+  <% end %>
+  <div>
+    <%= link_to "マイページに戻る", user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black mt-5"%>
+  </div>
+</div>

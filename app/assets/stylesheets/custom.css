@@ -13,8 +13,8 @@
 .item {
   position: absolute;
   width: 230px;
-  height: 154px;
-  margin: 4px;
+  height: 135px;
+  margin: 5px;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -31,16 +31,15 @@
 .item-content {
   position: relative;
   width:230px;
-  height:154px;
+  height:135px;
   background-color: white;
-  margin:10px;
+  margin:0px;
   padding:0;
   border-radius: 2%;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   transition-property: border-radius;
   transition-duration:0.2s;
   transition-timing-function:ease-in-out;
-  border: 1px solid rgb(232, 231, 231);
 }
 
 .item-content:hover {
@@ -58,10 +57,39 @@
   display: block;
 }
 .tab.active {
-  border-bottom: 2px solid rgb(196, 196, 249); /* アクティブなタブの下線 */
+  border-bottom: 2px solid rgb(196, 196, 249); 
 }
 .tabs {
   width: 750px;
   float: right;
 }
+.clamp-4 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+.clamp-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.clamp-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+.background {
+  background-color: rgb(243, 243, 243); /* 背景画像を設定 */
+}
 
+.fade {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: opacity 1.5s, transform 1s;
+}.fade.active {
+	opacity: 1;
+	transform: translateY(0px);
+}

@@ -1,0 +1,151 @@
+<div class="container md:w-4/5 w-11/12 mx-auto h-screen" >
+  <div class="flex flex-col justify-center relative">
+    <div class="tabs2 border-b">
+      <div class="tab" data-tab-target="#following">フォロー</div>
+      <div class="tab" data-tab-target="#followers">フォロワー</div>
+    </div>
+    <div id="following" class="tab-content">
+      <table class="table bg-white">
+        <thead>
+          <tr>
+            <th class="w-1/3">名前</th>
+            <th class="p-1">自己紹介</th>
+            <th class="p-1">スキル</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @following.each do |user| %>
+            <tr>
+              <td class="p-1">
+                <div class="flex items-center gap-2">
+                  <div class="avatar">
+                    <div class="mask mask-squircle w-8 h-8 md:w-12 md:h-12">
+                      <%= image_tag user.avatar.present? ? user.avatar.url : "default.png" %>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-bold">
+                      <div>
+                        <p><%= link_to user.name, user_mypage_path(user) %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="text-left p-1 text-sm md:text-base"> 
+                <%= user.introduction %>
+              </td>
+              <td class="text-left p-1 text-sm md:text-base"> 
+                <% user.skills.each do |skill| %>
+                <div class="badge badge-ghost"><%= skill.name %></div>
+              <% end %>
+              </td>
+              <td class="text-right pl-2">
+                <% unless user == current_user %>
+                <% if current_user != user %>
+                  <%= render 'users/follow_buttons', { user: user, relationship: current_user.active_relationships.find_by(followed_id: user.id) } %>
+                <% end %>
+              <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div id="followers" class="tab-content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="w-1/3">名前</th>
+            <th class="p-1">自己紹介</th>
+            <th class="p-1">スキル</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @followers.each do |user| %>
+            <tr>
+              <td class="p-1">
+                <div class="flex items-center gap-2">
+                  <div class="avatar">
+                    <div class="mask mask-squircle w-8 h-8 md:w-12 md:h-12">
+                      <%= image_tag user.avatar.present? ? user.avatar.url : "default.png" %>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-bold">
+                      <div>
+                        <p><%= link_to user.name, user_mypage_path(user) %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="text-left p-1 text-sm md:text-base"> 
+                <%= user.introduction %>
+              </td>
+              <td class="text-left p-1 text-sm md:text-base"> 
+                <% user.skills.each do |skill| %>
+                <div class="badge badge-ghost"><%= skill.name %></div>
+              <% end %>
+              </td>
+              <td class="text-right pl-2">
+                <% unless user == current_user %>
+                <% if current_user != user %>
+                  <%= render 'users/follow_buttons', { user: user, relationship: current_user.active_relationships.find_by(followed_id: user.id) } %>
+                <% end %>
+              <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-36 mx-auto w-20">
+      <%= link_to '戻る', request.referer.present? ? request.referer : root_path, class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black mt-5" %>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener('turbo:load', () => {
+  // URLからクエリパラメータを取得
+  const urlParams = new URLSearchParams(window.location.search);
+  const tabParam = urlParams.get('tab'); // 'followers' または 'following'
+
+  // クエリパラメータに応じて対応するタブとタブコンテンツを選択
+  let activeTab, activeContent;
+  if (tabParam) {
+    activeTab = document.querySelector(`.tab[data-tab-target="#${tabParam}"]`);
+    activeContent = document.querySelector(`#${tabParam}`);
+  }
+
+  // クエリパラメータが指定されていない場合、または指定されたタブが見つからない場合のデフォルト
+  if (!activeTab || !activeContent) {
+    // ここでデフォルトのタブを選択する
+    activeTab = document.querySelector('.tab');
+    activeContent = document.querySelector('.tab-content');
+  }
+
+  // 選択されたタブとタブコンテンツをアクティブにする
+  if (activeTab && activeContent) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+    activeTab.classList.add('active');
+    activeContent.classList.add('active');
+  }
+
+  // タブのクリックイベントハンドラー
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+      const targetContent = document.querySelector(tab.getAttribute('data-tab-target'));
+      tab.classList.add('active');
+      if (targetContent) {
+        targetContent.classList.add('active');
+      }
+    });
+  });
+});
+</script>

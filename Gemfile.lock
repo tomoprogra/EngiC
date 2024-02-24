@@ -471,6 +471,7 @@ DEPENDENCIES
   httparty
   jbuilder
   jsbundling-rails
+  mini_magick
   omniauth
   omniauth-facebook
   omniauth-github

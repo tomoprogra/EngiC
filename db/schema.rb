@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_20_025850) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_20_114648) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_20_025850) do
     t.string "xname"
     t.string "githubname"
     t.string "location"
+    t.string "imageurl"
     t.index ["githubname"], name: "index_items_on_githubname", unique: true
     t.index ["mypage_id"], name: "index_items_on_mypage_id"
     t.index ["xname"], name: "index_items_on_xname", unique: true

@@ -1,34 +1,73 @@
 <div class="container mx-auto ">
-  <div class="flex mt-7 ml-14">
-    <div class="border w-80 my-auto ml-5 rounded-lg">
-      <div class="avatar mt-5 ml-5">
-        <div class="w-20 rounded-full">
-          <%= image_tag(@user.avatar.present? ? @user.avatar.url : "default.png", alt: "アイコン") %>
+  <div class="flex mt-3 ml-14">
+    <div class="w-80 ml-5">
+      <div class="overflow-hidden bg-white rounded py-3 relative" style="max-height:480px;">
+        <div class="mx-4">
+          <div class="avatar mt-4 ml-2">
+            <div class="w-20 rounded-full">
+              <%= image_tag(@user.avatar.present? ? @user.avatar.url : "default.png", alt: "アイコン") %>
+            </div>
+          </div>
+          <div class="mt-5 flex items-center border-b space-x-4 ml-2 text-slate-500 text-sm"> 
+            <p><%= link_to "#{@user.following.count} フォロー", show_follows_user_path(@user, tab: 'following') %></p>
+            <p><%= link_to "#{@user.followers.count} フォロワー", show_follows_user_path(@user, tab: 'followers') %></p>
+          </div>
+          <div class="mt-5">
+            <%= render "users/user", user: @user %>
+          </div>
+          <div class="mt-5 mb-4 ">
+          <div class="clamp-4">
+            <% @user.skills.each do |skill| %>
+              <div class="badge badge-ghost ml-2 text-slate-500"><%= skill.name %></div>
+            <% end %>
+           </div> 
+            <%= form_with url: user_skills_path(@user), local: true, class: "flex items-center space-x-2 justify-center" do |f| %>
+              <div class="flex-grow mt-2">
+                <%= text_field_tag "skill[name]", @skill_list, placeholder: "例: Ruby, JavaScript, Rails", class:"input input-bordered input-sm w-full" %>
+              </div>
+              <div class="ml-auto">
+                <%= f.button type: 'submit', class: "btn-class" do %>
+                  <i class="fa-regular fa-pen-to-square "></i>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
-      <div class="mt-5 ml-5"> 
-        <%= render "users/user", user: @user %>
-      </div>
-      <div class="mt-5 ml-5 flex"> 
-        <p><%= link_to "#{@user.following.count} フォロー", following_user_path(@user) %></p>
-        <p><%= link_to "#{@user.followers.count} フォロワー", followers_user_path(@user) %></p>
-      </div>
-      <div class="mt-5 ml-5 mb-5">
-        <div>
-          <% @user.skills.each do |skill| %>
-            <div class="badge badge-ghost"><%= skill.name %></div>
+      <div>
+        <div class="mt-4">
+          <% linked_providers = current_user.identities.pluck(:provider) %>
+          <% if linked_providers.include?('github') %>
+            <div class="inline-flex h-10 items-center justify-center gap-2 w-full rounded  bg-white p-2 text-sm font-medium text-black">
+              <%= image_tag "github.svg", alt: "GitHub", class: "h-[18px] w-[18px]" %>
+              GitHub Link済み
+            </div>
+          <% else %>
+            <%= button_to omniauth_authorize_path(:user, :github), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
+              <%= image_tag "github.svg", alt: "GitHub", class: "h-[18px] w-[18px]" %>
+              Link to with GitHub
+            <% end %>
           <% end %>
         </div>
-        <div>
-          <%= form_with url: user_skills_path(@user), local: true do |f| %>
-            <%= label_tag "skill[name]", "スキルタグ" %>
-            <%= text_field_tag "skill[name]", @skill_list, placeholder: "例: Ruby, JavaScript", class: "form-control" %>
-            <%= f.submit "更新", class: "btn btn-outline-primary" %>
+        <div class="mt-1">
+          <% if linked_providers.include?('twitter') %>
+            <div class="inline-flex h-10 items-center justify-center gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black">
+              <%= image_tag "x.svg", alt: "Twitter", class: "h-[18px] w-[18px]" %>
+              Twitter Link済み
+            </div>
+          <% else %>
+            <%= button_to omniauth_authorize_path(:user, :twitter), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
+              <%= image_tag "x.svg", alt: "Twitter", class: "h-[18px] w-[18px]" %>
+              Link to with X
+            <% end %>
           <% end %>
+          <div>
+            <%= link_to "マイページに戻る", user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black mt-5"%>
+          </div>
         </div>
       </div>
     </div>
-    <div class="note_card">
+    <div class="note_card ml-4">
       <div class="grid">
         <% @items.each do |item| %>
           <%= render 'item', item: item, user_id: @user.id%>
@@ -36,17 +75,19 @@
       </div>
     </div>
   </div>
-      <div class="tabs mb-10 mr-32 ">
-        <div><%= render "form", user: @user, item: @item %></div>
-      </div>
+    <div class="tabs mb-10 mr-32 ">
+      <div><%= render "form", user: @user, item: @item %></div>
+    </div>
 </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const fileSelect = document.getElementById("fileSelect");
+    const fileElem = document.getElementById("fileElem");
 
-
-              <%= button_to omniauth_authorize_path(:user, :github), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
-                <%= image_tag "github.svg", alt: "GitHub", class: "h-[18px] w-[18px]" %>
-                Login/Sign up with GitHub
-              <% end %>
-              <%= button_to omniauth_authorize_path(:user, :twitter), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
-                <%= image_tag "x.svg", alt: "Twitter", class: "h-[18px] w-[18px]" %>
-                Login/Sign up  with X
-              <% end %>
+    fileSelect.addEventListener("click", (e) => {
+      if (fileElem) {
+        fileElem.click();
+      }
+    }, false);
+  });
+</script>

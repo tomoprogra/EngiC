@@ -7,11 +7,6 @@
       <p class="text-slate-500 text-sm mt-2 clamp-4">
         <%= user.introduction.present? ? simple_format(user.introduction, {}, wrapper_tag: "span") : "よろしくお願いします！" %>
       </p>
-      <% if controller_name == 'items' || controller_name == 'users'%>
-        <%= link_to edit_user_path(user) do %>
-          <i class= "fa-regular fa-pen-to-square mt-2"></i>
-        <% end %>
-      <% end %>
     </div>
   </div>
 <% end %>

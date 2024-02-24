@@ -10,7 +10,8 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :following, :followers
+      delete :destroy
+      get :show_follows
     end
     resource :skills, only: [:create, :destroy, :update]
     resource :mypage, only: [:show] do
@@ -28,13 +29,10 @@ Rails.application.routes.draw do
     patch "update_username", to: "users#update_username"
   end
 
+  get "privacy_policy", to: "tops#privacy_policy"
+  get "terms_of_use", to: "tops#terms_of_use"
+
   get "/:username", to: "users#resolve_username", as: :resolve_username
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
