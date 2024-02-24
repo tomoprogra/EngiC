@@ -4,4 +4,10 @@ class TopsController < ApplicationController
     @resource = User.new
     @resource_name = :user
   end
+
+  def privacy_policy
+  end
+
+  def terms_of_use
+  end
 end
