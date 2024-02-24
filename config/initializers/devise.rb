@@ -275,7 +275,7 @@ Devise.setup do |config|
   config.omniauth :twitter,
                   Settings.twitter[:twitter_api_key],
                   Settings.twitter[:twitter_api_secret],
-                  callback_url: "https://127.0.0.1:3000/users/auth/twitter/callback"
+                  callback_url: "https://engic.dev/users/auth/twitter/callback"
   config.omniauth :github,
                   Settings.github[:github_api_key],
                   Settings.github[:github_api_secret],
