@@ -17,6 +17,7 @@ class User < ApplicationRecord
   after_create :create_mypage
   mount_uploader :avatar, AvatarUploader
   validates :username, uniqueness: true, presence: true
+  validates :introduction, length: { maximum: 70 }
   # URLに使用できる形式であることのバリデーションも追加する
 
   def self.generate_unique_username
