@@ -61,6 +61,8 @@ gem "redcarpet"
 gem "rqrcode"
 gem "validate_url"
 gem "dotenv-rails"
+gem "aws-sdk-s3", require: false
+gem 'fog-aws'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "bullet"

@@ -9,6 +9,6 @@
   <% end %>
   <%= link_to 'アカウントを削除', user_path(current_user), data: {turbo_method: :delete, turbo_confirm: '本当にアカウントを削除してもよろしいですか？' }, class: "btn btn-outline btn-error mt-16" %>
   <div class="mt-10">
-    <%= link_to "マイページに戻る", user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black mt-5"%>
+    <%= link_to "マイページに戻る", user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center border gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black mt-5"%>
   </div>
 </div>

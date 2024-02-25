@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     unless @user.update(user_params)
       redirect_to user_mypage_items_path(@user), status: :unprocessable_entity
     end
+    # error
   end
 
   def destroy
