@@ -275,6 +275,7 @@ Devise.setup do |config|
   config.omniauth :twitter,
                   ENV["TWITTER_API_KEY"],
                   ENV["TWITTER_API_SECRET"],
+                  image_size: "original",
                   callback_url: "https://engic.dev/users/auth/twitter/callback"
 
   config.omniauth :github,
