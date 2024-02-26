@@ -11,6 +11,15 @@
     <meta property="og:title" content="エンジニア・エンジニアになりたい人とつながるアプリ EngiC." />
     <meta property="og:description" content="エンジニア・エンジニアになりたい人とつながるアプリ" />
     <meta property="og:image" content="<%= image_url "card.webp" %>" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N54L0MHLNX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-N54L0MHLNX');
+    </script>
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'custom' %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
