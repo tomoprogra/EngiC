@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <meta name="turbo-cache-control" content="no-cache">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:url" content="https://engic.dev/" />
+    <meta property="og:title" content="EngiC." />
+    <meta property="og:description" content="エンジニア・エンジニアになりたい人とつながるアプリ" />
+    <meta property="og:image" content="<%= image_url "twittercard.webp" %>" />
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'custom' %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
