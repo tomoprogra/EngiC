@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  include OmniauthCallbacksHelper
   protect_from_forgery except: [:github, :twitter]
 
   def twitter
@@ -9,18 +10,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def github
     authenticate_user_from_omniauth("github")
-
     access_token = request.env["omniauth.auth"]["credentials"]["token"]
-    # GitHubユーザー情報エンドポイント
-    url = "https://api.github.com/user"
-    # HTTPartyを使用してGETリクエスト
-    response = HTTParty.get(url,
-                            headers: {
-                              "Authorization" => "token #{access_token}",
-                              "User-Agent" => "engic.", # 実際のアプリ名に置き換えてください
-                            })
-    # レスポンスボディを解析（HTTPartyは自動的にJSONを解析してくれます）
-    user_info = response.parsed_response
+    user_info = fetch_github_user_info(access_token)
     # ユーザーアカウント名を取得
     username = user_info["login"]
     @user = current_user
@@ -32,45 +23,72 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       item.update!(githubname: username)
     else
       # 存在しなければ、新しいItemを作成
-      mypage.items.create!(githubname: username)
+      begin
+        mypage.items.create!(githubname: username)
+      rescue ActiveRecord::RecordInvalid
+        # Itemの作成に失敗した場合、エラーメッセージを設定
+      end
     end
   end
 
-  # def failure
-  #   flash[:alert] = "error"
-  #   redirect_to root_path
-  # end
+  def failure
+    flash[:alert] = omniauth_failure_message
+    redirect_to root_path
+  end
+
+  def authenticate_user_from_omniauth(provider)
+    auth = request.env["omniauth.auth"]
+
+    if user_signed_in?
+      link_oauth_account_to_current_user(auth, provider)
+    else
+      authenticate_new_or_unlogged_user(auth, provider)
+    end
+  end
 
   private
 
-    # def after_sign_in_path_for(resource)
-    #   if resource.username.blank?
-    #     edit_username_path
-    #   else
-    #     super
-    #   end
-    # end
+    def fetch_github_user_info(access_token)
+      url = "https://api.github.com/user"
+      response = HTTParty.get(url,
+                              headers: {
+                                "Authorization" => "token #{access_token}",
+                                "User-Agent" => "engic.",
+                              })
+      # レスポンスボディを解析（HTTPartyは自動的にJSONを解析してくれます）
+      response.parsed_response
+    end
 
-    def authenticate_user_from_omniauth(provider)
-      auth = request.env["omniauth.auth"]
+    def link_oauth_account_to_current_user(auth, provider)
+      current_user.link_oauth_account(auth)
+      set_flash_message_and_redirect(:notice, :success, provider)
+    rescue ActiveRecord::RecordInvalid => e
+      handle_oauth_error(provider, e)
+    end
 
-      # 既にログインしている場合、新たな認証情報を紐付ける
-      if user_signed_in?
-        current_user.link_oauth_account(auth)
+    def authenticate_new_or_unlogged_user(auth, provider)
+      user = User.from_omniauth(auth)
+
+      if user.persisted?
+        sign_in_and_redirect user, event: :authentication
         set_flash_message(:notice, :success, kind: provider.capitalize) if is_navigational_format?
-        redirect_to after_sign_in_path_for(current_user)
       else
-        # ユーザー情報を取得し、検索または作成
-        user = User.from_omniauth(auth)
-
-        if user.persisted?
-          sign_in_and_redirect user, event: :authentication
-          set_flash_message(:notice, :success, kind: provider.capitalize) if is_navigational_format?
-          session.delete("devise.#{provider}_data")
-        else
-          session["devise.#{provider}_data"] = request.env["omniauth.auth"].except("extra")
-          redirect_to root_path
-        end
+        prepare_for_new_user_registration(auth, provider)
       end
+    end
+
+    def set_flash_message_and_redirect(type, status, provider)
+      set_flash_message(type, status, kind: provider.capitalize) if is_navigational_format?
+      redirect_to after_sign_in_path_for(current_user)
+    end
+
+    def handle_oauth_error(provider, exception)
+      set_flash_message(:alert, :failure, kind: provider.capitalize, reason: exception.record.errors.full_messages.join(", ")) if is_navigational_format?
+      redirect_to after_sign_in_path_for(current_user)
+    end
+
+    def prepare_for_new_user_registration(auth, provider)
+      session["devise.#{provider}_data"] = auth.except("extra")
+      redirect_to root_path
     end
 end
