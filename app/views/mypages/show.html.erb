@@ -32,6 +32,9 @@
             <%= link_to qrcode_user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded  bg-white p-2 text-sm font-medium text-black mt-2" do%>
               <i class="fa-solid fa-qrcode"></i>QRコード
             <% end %>
+            <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(user_mypage_url(@user))}&text=#{CGI.escape((@user.name) +'のプロフィールを見てみよう！')}", target: "_blank", rel: "noopener", class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded  bg-white p-2 text-sm font-medium text-black mt-2" do %>
+              <%= image_tag "x.svg", alt: "xのリンク", class: "w-5 h-5" %>プロフィールを共有
+            <% end %>
           <% end %>
           </div>
         </div>
