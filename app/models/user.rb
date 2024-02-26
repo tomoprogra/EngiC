@@ -1,9 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:twitter, :github]
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:twitter, :github]
   has_one :mypage, dependent: :destroy
   has_many :identities, dependent: :destroy
   # ユーザーがフォローしている人
@@ -16,8 +14,13 @@ class User < ApplicationRecord
   has_many :skills, through: :skill_tags
   after_create :create_mypage
   mount_uploader :avatar, AvatarUploader
-  validates :username, uniqueness: true, presence: true
-  # URLに使用できる形式であることのバリデーションも追加する
+  VALID_USERNAMES = %w[admin root support help info mail contact user new edit index show create update delete error login logout signup users username
+                       terms_of_use privacy_policy].freeze
+  validates :username, presence: true, uniqueness: { case_sensitive: false },
+                       exclusion: { in: VALID_USERNAMES, message: "(アカウント名)で%<value>s は使用できません。" },
+                       length: { minimum: 2, maximum: 20 },
+                       format: { with: /\A[a-zA-Z0-9_]+\z/, message: "(アカウント名)は英数字とアンダースコアのみ使用できます。" }
+  validates :introduction, length: { maximum: 70 }
 
   def self.generate_unique_username
     loop do

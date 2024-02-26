@@ -82,7 +82,7 @@
   overflow: hidden;
 }
 .background {
-  background-color: rgb(243, 243, 243); /* 背景画像を設定 */
+  background-color: rgb(246, 246, 246); /* 背景画像を設定 */
 }
 
 .fade {
@@ -92,4 +92,22 @@
 }.fade.active {
 	opacity: 1;
 	transform: translateY(0px);
+}
+.name-column {
+  width: 20%;
+}
+
+.intro-column {
+  width: 40%;
+}
+
+.skill-column {
+  width: 30%;
+}
+
+.intro-column, .skill-column, .name-column{
+  overflow: hidden; /* 内容がはみ出たら隠す */
+  text-overflow: ellipsis; /* はみ出たテキストを省略記号で表示 */
+  white-space: nowrap; /* テキストを1行で表示 */
+  /* display: block; ブロックレベル要素として扱う */
 }

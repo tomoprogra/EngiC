@@ -10,8 +10,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    unless @user.update(user_params)
-      redirect_to user_mypage_items_path(@user), status: :unprocessable_entity
+    if @user.update(user_params)
+      redirect_to user_mypage_items_path(@user), notice: "ユーザー情報が更新されました。"
+    else
+      flash.now[:alert] = @user.errors.full_messages.to_sentence
+      render :edit, status: :unprocessable_entity # hotwierのエラーにする
     end
   end
 
@@ -30,9 +33,10 @@ class UsersController < ApplicationController
   def update_username
     @user = current_user
     if @user.update(user_params)
-      redirect_to root_path, notice: "Your username was successfully updated."
+      redirect_to user_mypage_items_path(@user), notice: "アカウント名が更新されました。"
     else
-      render :edit_username
+      flash.now[:alert] = @user.errors.full_messages.to_sentence
+      render :edit_username, status: :unprocessable_entity
     end
   end
 

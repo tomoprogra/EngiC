@@ -16,7 +16,7 @@ module TestApp
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
     config.i18n.default_locale = :ja
-    config.time_zone = 'Tokyo'
+    config.time_zone = "Tokyo"
     config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.{rb,yml}").to_s]
     config.autoload_paths += %W[#{config.root}/app/services]
     # Configuration for the application, engines, and railties goes here.

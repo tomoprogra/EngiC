@@ -75,6 +75,11 @@ ja:
     omniauth_callbacks:
       failure: "%{kind} アカウントによる認証に失敗しました。理由：（%{reason}）"
       success: "%{kind} アカウントによる認証に成功しました。"
+      unknown_error: "認証プロセスで未知のエラーが発生しました。"
+      errors:
+        invalid_credentials: "無効な資格情報です。"
+        timeout: "認証プロセスがタイムアウトしました。"
+        canceled: "認証がキャンセルされました。"
     passwords:
       edit:
         change_my_password: パスワードを変更する
