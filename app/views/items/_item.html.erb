@@ -7,16 +7,22 @@
     <% end %>
     <% if item.xname.present? %>
       <div class="relative h-full">
-        <div class="h-full flex items-center w-40">
-          <div class="flex-grow ml-2 overflow-hidden max-h-32">
-            <p class="text-slate-500 text-xs mb-2"><i class="fa-solid fa-location-dot mr-2"></i><%= item.location %></p>
-            <p class="text-slate-500 text-xs "><i class="fa-regular fa-message mr-2"></i><%= item.bio %></p>
+        <div class="flex h-full items-center w-9/12 md:w-40 ml-1">
+          <div class="flex-grow overflow-hidden h-full">
+            <div class="flex flex-col justify-center h-full">
+              <p class="text-slate-500 text-xxs md:text-xs mb-1 md:mb-2 overflow-hidden">
+                <i class="fa-solid fa-location-dot mr-1 md:mr-2"></i><%= item.location %>
+              </p>
+              <p class="text-slate-500 text-xxs md:text-xs overflow-hidden">
+                <i class="fa-regular fa-message mr-1 md:mr-2"></i><%= item.bio %>
+              </p>
+            </div>
           </div>
         </div>
-        <div class="absolute top-10 right-4">
+        <div class="absolute top-7 right-2 md:top-10 md:right-4">
           <%= link_to "https://twitter.com/#{item.xname}", target: "_blank", class: "button" do %>
             <div class="avatar">
-              <div class="w-12 rounded">
+              <div class="w-8 md:w-12 rounded">
                 <%= image_tag "x.svg", alt: "", class: "w-full" %>
               </div>
             </div>
@@ -25,16 +31,16 @@
       </div>
     <% end %>
     <% if item.zennname.present? %>
-      <div class="flex justify-center space-x-6">
-        <div class="mt-6">
-            <div class="mb-2"><%= markdown("![Followers](https://badgen.org/img/zenn/#{item.zennname}/followers?style=social)")%></div>
-            <div class="mb-2"><%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %></div>
-            <div class="mb-2"><%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %></div>
+      <div class="flex justify-center space-x-3 md:space-x-6">
+        <div class="mt-4 md:mt-7">
+            <div class="mb-2 w-20 md:w-full"><%= markdown("![Followers](https://badgen.org/img/zenn/#{item.zennname}/followers?style=social)")%></div>
+            <div class="mb-2 w-16 md:w-full"><%= markdown("![Likes](https://badgen.org/img/zenn/#{item.zennname}/likes?style=social)") %></div>
+            <div class="mb-2 w-16 md:w-full"><%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %></div>
         </div>
-        <div class="mt-10 ml-3">
+        <div class="mt-9 md:mt-10 md:ml-3">
           <%= link_to "https://zenn.dev/#{item.zennname}", target:"_blank", class:"button" do %>
             <div class="avatar">
-              <div class="w-12 rounded">
+              <div class="w-8 md:w-12 rounded">
                 <%= image_tag "zenn.svg", alt: "Zenn", class: "w-full" %>
               </div>
             </div>
@@ -44,10 +50,10 @@
     <% end %>
     <% if item.githubname.present? %>
       <div class="relative">
-        <div class="absolute z-10 top-10 right-4">
+        <div class="absolute z-10 top-6 right-2 md:top-10 md:right-4">
           <%= link_to "https://github.com/#{item.githubname}", target: "_blank", class: "button" do %>
             <div class="avatar">
-              <div class="w-16 rounded">
+              <div class="w-12 md:w-16 rounded">
                 <%= image_tag "github.svg", alt: "github", class: "w-full bg-white" %>
               </div>
             </div>
@@ -59,16 +65,16 @@
       </div>
     <% end %>
     <% if item.qiitaname.present? %>
-       <div class="flex justify-center space-x-6">
-        <div class="mt-7">
-          <div class="mb-2"><%= markdown("![Contributions](https://badgen.org/img/qiita/#{item.qiitaname}/contributions?style=social)") %></div>
-          <div class="mb-2"><%= markdown("![Followers](https://badgen.org/img/qiita/#{item.qiitaname}/followers?style=social)") %></div>
-          <div class="mb-2"><%= markdown("![Articles](https://badgen.org/img/qiita/#{item.qiitaname}/articles?style=social)") %></div>
+      <div class="flex justify-center space-x-1 md:space-x-6">
+        <div class="mt-4 md:mt-7">
+          <div class="mb-2 w-24 md:w-full"><%= markdown("![Contributions](https://badgen.org/img/qiita/#{item.qiitaname}/contributions?style=social)") %></div>
+          <div class="mb-2 w-20 md:w-full"><%= markdown("![Followers](https://badgen.org/img/qiita/#{item.qiitaname}/followers?style=social)") %></div>
+          <div class="mb-2 w-16 md:w-full"><%= markdown("![Articles](https://badgen.org/img/qiita/#{item.qiitaname}/articles?style=social)") %></div>
         </div>
-        <div class="mt-10 ml-3">
+        <div class="mt-9 md:mt-10 md:ml-3">
           <%= link_to "https://qiita.com/#{item.qiitaname}", target: "_blank", class: "button" do %>
             <div class="avatar">
-              <div class="w-12 rounded">
+              <div class="w-8 md:w-12 rounded">
                 <%= image_tag "qiita.webp", alt: "Qiita", class: "w-full" %>
               </div>
             </div>
@@ -80,17 +86,17 @@
       <div class="relative h-full">
         <div class="flex h-full items-center">
           <div class="flex-grow">
-            <div class="flex text-slate-500 text-xs ml-2 w-36">
+            <div class="flex text-slate-500 text-xxs md:text-xs ml-1 md:ml-2 w-24 md:w-36">
               <i class="fa-regular fa-comments mb-3"></i>
-              <p class="ml-2"><%= item.title %></p>
+              <p class="ml-1 md:ml-2"><%= item.title %></p>
             </div>
           </div>
-          <div class="avatar top-7 right-4 right-3 absolute w-16 h-16 rounded overflow-hidden">
+          <div class="avatar top-6 right-2 md:top-7 md:right-3 absolute w-9 h-9 md:w-16 md:h-16 rounded overflow-hidden">
               <%= image_tag(item.imageurl.present? ? item.imageurl.url : "image-default.svg", alt: "イメージ", style: "width: 100%; height: 100%; object-fit: contain;") %>
             </div>
           </div>
-        <div class="absolute bottom-2 left-2 w-52" >
-          <p class="text-slate-500 text-xs truncate">
+        <div class="absolute bottom-1 left-1 md:bottom-2 md:left-2 w-11/12" >
+          <p class="text-slate-500 text-xxxs md:text-xs truncate">
             <i class="fa-solid fa-link"></i>
             <%= link_to item.content, item.content, target: "_blank", rel: "noopener noreferrer", class: "hover:text-slate-600 underline" %>
           </p>
@@ -98,12 +104,12 @@
       </div>
     <% end %>
     <% if item.note_name.present? %>
-      <div class="flex justify-center space-x-8">
-        <div class="mt-8">
+      <div class="flex justify-center space-x-4 md:space-x-8">
+        <div class="mt-5 md:mt-8">
           <% if @note_count %>
-            <p class="text-slate-500 text-xs mb-2"><i class="fa-regular fa-note-sticky mr-2"></i>記事:<%= @note_count %></p>
-            <p class="text-slate-500 text-xs mb-2">フォロー:<%= @following_count %></p>
-            <p class="text-slate-500 text-xs">フォロワー: <%= @follower_count %></p>
+            <p class="text-slate-500 text-xxs mb-1 md:mb-2"><i class="fa-regular fa-note-sticky mr-2"></i>記事:<%= @note_count %></p>
+            <p class="text-slate-500 text-xxs mb-1 md:mb-2">フォロー:<%= @following_count %></p>
+            <p class="text-slate-500 text-xxs">フォロワー: <%= @follower_count %></p>
           <% else %>
             <p>Note Count is not available.</p>
           <% end %>
@@ -111,7 +117,7 @@
         <div class="mt-7 mr-4">
           <%= link_to "https://note.com/#{item.note_name}", target: "_blank", class: "button" do %>
             <div class="avatar">
-              <div class="w-16 rounded">
+              <div class="w-9 md:w-16 rounded">
                 <%= image_tag "note.webp", alt: "Note", class: "w-full" %>
               </div>
             </div>

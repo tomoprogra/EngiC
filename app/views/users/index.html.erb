@@ -13,9 +13,9 @@
               <div class="mt-1 md:mt-3">
                 <%= render "users/user_index", user: user %>
               </div>
-              <div class="mt-1 md:mt-3 md:mb-4 clamp-3">
+              <div class="mt-1 md:mt-3 md:mb-4 text-sm md:text-base clamp-3">
                 <% user.skills.each do |skill| %>
-                  <div class="badge badge-ghost ml-2 text-slate-500"><%= skill.name %></div>
+                  <div class="badge badge-xs md:badge-ghost ml-2 text-xs text-slate-500"><%= skill.name %></div>
                 <% end %>
               </div>
             </div>
