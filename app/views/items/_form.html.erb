@@ -1,4 +1,4 @@
-<div class="mx-5">
+<div>
   <div class="tabs border-b">
     <div class="tab" data-tab-target="#content1">記事</div>
     <div class="tab" data-tab-target="#content2">URLコンテンツ</div>
@@ -70,7 +70,7 @@
         <div class="mb-4">
            <label for="imagerul" class="fa-regular fa-image" aria-label="imageurl"></label>
           <%= form.file_field :imageurl, class: "file-input file-input-bordered file-input-xs w-full max-w-xs md:ml-2"%>
-          <%= form.button type: 'submit', class: 'btn-class md:ml-3' do %>
+          <%= form.button type: 'submit', class: 'btn-class mt-5 md:mt-0 md:ml-3' do %>
             <i class="fa-solid fa-plus"></i>
           <% end %>
         </div>
