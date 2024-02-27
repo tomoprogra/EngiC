@@ -46,9 +46,29 @@
   border-radius:2% 2% 50% 2% / 2% 2% 20% 2%;
   transform-origin: left bottom;
 }
-.note_card {
-  width: 750px;
+.mypage_note {
+  width: 230px;
+  height: 135px;
 }
+
+/* .note_card {
+  width: 750px;
+} */
+
+/* 画面の幅が600px未満の場合に適用されるスタイル */
+/* @media (max-width: 768px) {
+  note_card {
+    width: 250px;
+  }
+} */
+
+/* 画面の幅が600px以上の場合に適用されるスタイル */
+/* @media (min-width: 769px) {
+  note_card {
+    width: 750px;
+  }
+} */
+
 
 .tab-content {
   display: none;
@@ -110,4 +130,14 @@
   text-overflow: ellipsis; /* はみ出たテキストを省略記号で表示 */
   white-space: nowrap; /* テキストを1行で表示 */
   /* display: block; ブロックレベル要素として扱う */
+}
+
+@media (max-width: 767px) {
+  .item,
+  .item-content,
+  .mypage_note,
+  .tabs {
+    width: 320px;
+    float: none;
+  }
 }

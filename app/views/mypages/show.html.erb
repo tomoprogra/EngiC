@@ -1,6 +1,6 @@
-<div class="container mx-auto h-screen">
-  <div class="flex mt-3 ml-14">
-    <div class="w-80 my-auto ml-5 ">
+<div class="container mx-auto md:h-screen">
+  <div class="flex flex-col md:flex-row mt-3 ml-12 md:ml-14">
+    <div class="w-80 my-auto md:ml-5">
       <div class="bg-white rounded py-3">
         <div class="mx-4">
           <div class="avatar mt-4 ml-2">
@@ -26,13 +26,13 @@
         <div class="mt-4">
           <div>
             <% if @user.id == current_user.id %>
-            <%= link_to user_mypage_items_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded  bg-white p-2 text-sm font-medium text-black" do%>
+            <%= link_to user_mypage_items_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded-full  bg-white p-2 text-sm font-medium text-black" do%>
               <i class="fa-regular fa-pen-to-square "></i>編集
             <% end %>
-            <%= link_to qrcode_user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded  bg-white p-2 text-sm font-medium text-black mt-2" do%>
+            <%= link_to qrcode_user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded-full  bg-white p-2 text-sm font-medium text-black mt-2" do%>
               <i class="fa-solid fa-qrcode"></i>QRコード
             <% end %>
-            <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(user_mypage_url(@user))}&text=#{CGI.escape((@user.name) +'のプロフィールを見てみよう！')}", target: "_blank", rel: "noopener", class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded  bg-white p-2 text-sm font-medium text-black mt-2" do %>
+            <%= link_to "https://twitter.com/intent/tweet?url=#{CGI.escape(user_mypage_url(@user))}&text=#{CGI.escape((@user.name) +'のプロフィールを見てみよう！')}", target: "_blank", rel: "noopener", class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded-full  bg-white p-2 text-sm font-medium text-black mt-2" do %>
               <%= image_tag "x.svg", alt: "xのリンク", class: "w-5 h-5" %>プロフィールを共有
             <% end %>
           <% end %>
@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-    <div class="ml-4 note_card">
+    <div class="md:ml-4 sm:w-12/12 md:w-12/12 lg:w-11/12 xl:w-10/12 2xl:w-6/12 mb-8 md:mb-1 mt-1">
       <div class="flex flex-wrap gap-1">
         <% @items.each do |item| %>
           <%= render 'item', item: item, user_id: @user.id%>
