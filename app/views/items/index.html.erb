@@ -19,12 +19,12 @@
             <p class="text-xs md:text-sm">スキルタグ：</p>
           <div class="clamp-4">
             <% @user.skills.each do |skill| %>
-              <div class="badge badge-ghost ml-2 text-slate-500"><%= skill.name %></div>
+              <div class="badge badge-ghost ml-2 text-slate-500 bg-white"><%= skill.name %></div>
             <% end %>
            </div> 
             <%= form_with url: user_skills_path(@user), local: true, class: "flex items-center space-x-2 justify-center" do |f| %>
               <div class="flex-grow mt-2">
-                <%= text_field_tag "skill[name]", @skill_list, placeholder: "例: Ruby, JavaScript, Rails", class:"input input-bordered input-sm w-full" %>
+                <%= text_field_tag "skill[name]", @skill_list, placeholder: "例: Ruby, JavaScript, Rails", class:"input input-bordered input-sm w-full bg-white" %>
               </div>
               <div class="ml-auto">
                 <%= f.button type: 'submit', class: "btn-class" do %>

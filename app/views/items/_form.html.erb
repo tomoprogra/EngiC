@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="ml-3">
-          <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs" do |form| %>
+          <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs bg-white" do |form| %>
             <%= form.label :qiitaname, "@" %>
             <%= form.text_field :qiitaname, value: item.qiitaname, placeholder: "アカウント名", class:"text-base mt-1 bg-white" %>
             <%= form.button type: 'submit', class: 'btn-class' do %>
@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="ml-3">
-          <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs" do |form| %>
+          <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs bg-white" do |form| %>
             <%= form.label :zennname, "@"  %>
             <%= form.text_field :zennname, value: item.zennname, placeholder: "アカウント名" ,class:"text-base mt-1 bg-white"%>
             <%= form.button type: 'submit', class: 'btn-class' do %>
@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="ml-3">  
-          <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs" do |form| %>
+          <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs bg-white" do |form| %>
             <%= form.label :note_name, "@" %>
             <%= form.text_field :note_name, value: item.note_name, placeholder: "アカウント名" ,class:"text-base mt-1 bg-white"%>
             <%= form.button type: 'submit', class: 'btn-class' do %>

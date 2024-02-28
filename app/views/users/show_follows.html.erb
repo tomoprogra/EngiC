@@ -41,7 +41,7 @@
               </td>
               <td class="text-left p-1 text-sm md:text-base overflow-hidden user-skills"> 
                 <% user.skills.each do |skill| %>
-                <div class="badge badge-xs md:badge-ghost text-xxs"><%= skill.name %></div>
+                <div class="badge badge-xs bg-white md:badge-ghost text-xxs"><%= skill.name %></div>
                 <% end %>
               </td>
               <td class=" md:text-right md:pl-2 follow-button w-full">
@@ -87,7 +87,7 @@
               </td>
               <td class="text-left p-1 text-sm md:text-base"> 
                 <% user.skills.each do |skill| %>
-                <div class="badge badge-ghost"><%= skill.name %></div>
+                <div class="badge bg-white badge-ghost"><%= skill.name %></div>
               <% end %>
               </td>
               <td class="text-right pl-2">
