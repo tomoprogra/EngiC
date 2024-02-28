@@ -149,6 +149,19 @@ body {
     gap: 0.25rem;
 }
 }
+.location-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* 1行表示 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bio-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* 5行表示 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 
 
