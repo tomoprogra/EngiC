@@ -1,4 +1,5 @@
 class MypagesController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show]
   require "rqrcode"
   before_action :set_user, only: [:show, :qrcode]
   before_action :note_api, only: [:show]
@@ -7,7 +8,9 @@ class MypagesController < ApplicationController
     @items = @user.mypage.items.order(:position)
     @skill_list = @user.skills.map(&:name).join(", ")
     @user = User.find(params[:user_id])
-    @relationship = current_user.active_relationships.find_by(followed_id: @user.id)
+    if current_user
+      @relationship = current_user.active_relationships.find_by(followed_id: @user.id)
+    end
   end
 
   def qrcode

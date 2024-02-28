@@ -6,7 +6,7 @@ class SkillsController < ApplicationController
     if @user.save
       @user.save_tags(skill_list)
     else
-      flash[:alert] = "error"
+      flash[:alert] = "スキルを設定できませんでした。"
     end
     redirect_to user_mypage_items_path(@user)
   end
@@ -21,11 +21,10 @@ class SkillsController < ApplicationController
     skill_list = params[:skill][:name].split(",").map(&:strip)
     if @user.update(skill_params)
       @user.save_tags(skill_list)
-      redirect_to user_mypage_items_path(@user), notice: "Skills were successfully updated."
     else
-      flash[:alert] = "error"
-      redirect_to user_mypage_items_path(@user)
+      flash[:alert] = "スキルを更新できませんでした。"
     end
+    redirect_to user_mypage_items_path(@user)
   end
 
   private

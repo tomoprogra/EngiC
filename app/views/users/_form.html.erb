@@ -1,8 +1,8 @@
 <%= turbo_frame_tag user do %>
   <%= form_with(model: user, class:"flex justify-center ")  do |form| %>
     <div>
-      <%= form.text_field :name, placeholder: "名前", class: "input input-bordered input-sm w-full max-w-xs" %>
-      <%= form.text_area :introduction, placeholder: "自己紹介", class:"textarea textarea-bordered textarea-sm w-full max-w-xs mt-1", rows: 2 %>
+      <%= form.text_field :name, placeholder: "名前", class: "input input-bordered input-sm w-full max-w-xs bg-white" %>
+      <%= form.text_area :introduction, placeholder: "自己紹介", class:"textarea textarea-bordered textarea-sm w-full max-w-xs mt-1 bg-white", rows: 2 %>
     </div>
     <div class="flex ml-1">
     <%= form.button type: 'submit', class: "btn-class" do %>

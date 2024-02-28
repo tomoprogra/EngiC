@@ -1,10 +1,10 @@
 <%= turbo_frame_tag user do %>
   <div class="ml-1 border-b">
-    <div class="font-medium clamp-1">
+    <div class="font-medium text-xs md:text-sm clamp-1">
       <p><%= link_to user.name, user_mypage_path(user), data: { turbo: false } %></p>
     </div>
     <div class="flex justify-between">
-      <p class="text-slate-500 text-sm mt-2 clamp-4">
+      <p class="text-slate-500 text-xs md:text-sm mt-2 clamp-4">
         <%= user.introduction.present? ? simple_format(user.introduction, {}, wrapper_tag: "span") : "よろしくお願いします！" %>
       </p>
     </div>

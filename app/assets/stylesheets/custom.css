@@ -1,7 +1,6 @@
-.text{
-  color: red;
+body {
+  color: black; /* デフォルトのテキストカラーを変更 */
 }
-
 .actions {
   margin: 5px;
 }
@@ -46,8 +45,9 @@
   border-radius:2% 2% 50% 2% / 2% 2% 20% 2%;
   transform-origin: left bottom;
 }
-.note_card {
-  width: 750px;
+.mypage_note {
+  width: 230px;
+  height: 135px;
 }
 
 .tab-content {
@@ -60,8 +60,7 @@
   border-bottom: 2px solid rgb(196, 196, 249); 
 }
 .tabs {
-  width: 750px;
-  float: right;
+  width: 600px;
 }
 .clamp-4 {
   display: -webkit-box;
@@ -104,10 +103,67 @@
 .skill-column {
   width: 30%;
 }
-
-.intro-column, .skill-column, .name-column{
-  overflow: hidden; /* 内容がはみ出たら隠す */
-  text-overflow: ellipsis; /* はみ出たテキストを省略記号で表示 */
-  white-space: nowrap; /* テキストを1行で表示 */
-  /* display: block; ブロックレベル要素として扱う */
+.follow-button {
+  width: 20%;
 }
+
+.top-skills {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem; /* Tailwind の gap-4 はデフォルトで1rem */
+  place-items: center;
+  width: 36rem; /* Tailwind の w-144 は144/4 = 36rem */
+  padding: 1.25rem; /* Tailwind の p-5 は1.25rem */
+  border-radius: 0.5rem; /* Tailwind の rounded-lg は0.5rem */
+  font-size: 3.75rem; /* Tailwind の text-6xl は3.75rem */
+}
+
+@media (max-width: 767px) {
+  .item,
+  .item-content,
+  .mypage_note {
+    width: 160px;
+    height: 92px;
+  }
+  .mypage_notes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.25rem;
+    overflow: auto;
+  }
+  .tabs{
+    width: 320px;
+  }
+  .top-skills{
+    width: 20rem;
+  }
+  .item {
+  margin: 4px;
+  }
+}
+
+@media (min-width: 769px) {
+  .mypage_notes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.25rem;
+}
+}
+.location-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* 1行表示 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bio-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* 5行表示 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+
+
+

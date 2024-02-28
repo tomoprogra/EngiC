@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :correct_user
   before_action :set_user, only: [:index, :destroy, :create]
   before_action :note_api, only: [:index]
 
@@ -11,12 +12,10 @@ class ItemsController < ApplicationController
 
   def create
     @item = @user.mypage.items.build(item_params)
-    if @item.save
-      redirect_to user_mypage_items_path(@user)
-    else
+    unless @item.save
       flash[:alert] = @item.errors.full_messages.to_sentence
-      redirect_to user_mypage_items_path(@user), status: :unprocessable_entity
     end
+    redirect_to user_mypage_items_path(@user)
   end
 
   def destroy
@@ -53,5 +52,13 @@ class ItemsController < ApplicationController
 
     def set_user
       @user = current_user
+    end
+
+    def correct_user
+      @user = User.find(params[:user_id])
+      unless @user == current_user
+        flash[:alert] = "アクセス権限がありません。"
+        redirect_to(root_url)
+      end
     end
 end

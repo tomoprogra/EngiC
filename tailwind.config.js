@@ -14,6 +14,13 @@ module.exports = {
       width: {
         '144': '36rem', 
       },
+      fontSize: {
+        'xxs': '9px', 
+        'xxxs': '7px', 
+      },
     }
-  }
+  },
+  daisyui: {
+    themes: false,
+  },
 }

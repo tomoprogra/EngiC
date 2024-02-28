@@ -1,20 +1,17 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show_follows]
   before_action :set_user, only: [:update, :edit, :destroy]
-  before_action :authenticate_user!
 
   def edit
   end
 
   def index
-    @users = User.includes([:skills]).all
+    @users = User.includes([:skills]).page(params[:page]).per(20)
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to user_mypage_items_path(@user), notice: "ユーザー情報が更新されました。"
-    else
-      flash.now[:alert] = @user.errors.full_messages.to_sentence
-      render :edit, status: :unprocessable_entity # hotwierのエラーにする
+    unless @user.update(user_params)
+      flash.now.alert = @user.errors.full_messages.to_sentence
     end
   end
 
@@ -45,14 +42,15 @@ class UsersController < ApplicationController
     if user
       redirect_to user_mypage_path(user_id: user.id)
     else
+      flash[:alert] = "ページが見つかりませんでした。"
       redirect_to root_path
     end
   end
 
   def show_follows
     @user = User.find(params[:id])
-    @following = @user.following
-    @followers = @user.followers
+    @following = @user.following.page(params[:page]).per(16)
+    @followers = @user.followers.page(params[:page]).per(16)
   end
 
   private
