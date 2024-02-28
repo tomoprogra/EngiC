@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.includes([:skills]).all
+    @users = User.includes([:skills]).page(params[:page]).per(20)
   end
 
   def update
