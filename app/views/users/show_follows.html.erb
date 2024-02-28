@@ -38,9 +38,9 @@
           </div>
         <% end %>
       </div>
-    </div>
-    <div class="my-6">
-      <%= paginate @following %>
+      <div class="my-6">
+        <%= paginate @following %>
+      </div>
     </div>
     <div id="followers" class="tab-content">
       <div class="mx-2 mt-5" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
@@ -73,9 +73,9 @@
           </div>
         <% end %>
       </div>
-    </div>
-    <div class="my-6">
-      <%= paginate @followers %>
+      <div class="my-6">
+        <%= paginate @followers %>
+      </div>
     </div>
     <div class="w-80 mt-auto mb-12">
       <%= link_to '戻る', request.referer.present? ? request.referer : root_path, class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded-full bg-white p-2 text-sm font-medium text-black mt-10" %>
