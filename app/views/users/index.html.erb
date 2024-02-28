@@ -1,5 +1,22 @@
 <div class="container md:w-4/5 w-11/12 mx-auto h-screen" >
   <div class="flex flex-col justify-center items-center relative">
+    <div class="join my-10">
+      <div>
+        <div>
+          <input class="input input-bordered join-item bg-white" placeholder="近日公開予定"/>
+        </div>
+      </div>
+      <select class="select select-bordered join-item bg-white">
+        <option disabled selected>スキルタグで検索</option>
+        <option>Ruby</option>
+        <option>Rails</option>
+        <option>React</option>
+      </select>
+      <div class="indicator">
+        <span class="indicator-item badge badge-secondary">comming soon</span> 
+        <button class="btn join-item bg-white">Search</button>
+      </div>
+    </div>
     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
       <% @users.each do |user| %>
         <div class="h-64 md:w-80 md:h-96 overflow-hidden bg-white rounded relative">
