@@ -11,8 +11,7 @@ class UsersController < ApplicationController
 
   def update
     unless @user.update(user_params)
-      flash.now[:alert] = @user.errors.full_messages.to_sentence
-      render :edit, status: :unprocessable_entity # hotwierのエラーにする
+      flash.now.alert = @user.errors.full_messages.to_sentence
     end
   end
 
