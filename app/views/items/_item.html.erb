@@ -32,11 +32,11 @@
         </div>
       <% end %>
       <% if item.zennname.present? %>
-        <div class="flex justify-center space-x-4 md:space-x-6">
+        <div class="flex justify-center space-x-3 md:space-x-6">
           <div class="mt-4 md:mt-7">
               <div class="mb-2 w-20 md:w-full"><%= markdown("![Followers](https://badgen.org/img/zenn/#{item.zennname}/followers?style=social)")%></div>
-              <div class="mb-2 w-20 md:w-full"><%= markdown("![Likes](https://badgen.org/img/zenn/#{item.zennname}/likes?style=social)") %></div>
-              <div class="mb-2 w-20 md:w-full"><%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %></div>
+              <div class="mb-2 w-16 md:w-full"><%= markdown("![Likes](https://badgen.org/img/zenn/#{item.zennname}/likes?style=social)") %></div>
+              <div class="mb-2 w-16 md:w-full"><%= markdown("![Articles](https://badgen.org/img/zenn/#{item.zennname}/articles?style=social)") %></div>
           </div>
           <div class="mt-9 md:mt-10 md:ml-3">
             <%= link_to "https://zenn.dev/#{item.zennname}", target:"_blank", class:"button" do %>
@@ -66,11 +66,11 @@
         </div>
       <% end %>
       <% if item.qiitaname.present? %>
-        <div class="flex justify-center space-x-3 md:space-x-6">
+        <div class="flex justify-center space-x-2 md:space-x-6">
           <div class="mt-4 md:mt-7">
             <div class="mb-2 w-24 md:w-full"><%= markdown("![Contributions](https://badgen.org/img/qiita/#{item.qiitaname}/contributions?style=social)") %></div>
-            <div class="mb-2 w-24 md:w-full"><%= markdown("![Followers](https://badgen.org/img/qiita/#{item.qiitaname}/followers?style=social)") %></div>
-            <div class="mb-2 w-20 md:w-full"><%= markdown("![Articles](https://badgen.org/img/qiita/#{item.qiitaname}/articles?style=social)") %></div>
+            <div class="mb-2 w-20 md:w-full"><%= markdown("![Followers](https://badgen.org/img/qiita/#{item.qiitaname}/followers?style=social)") %></div>
+            <div class="mb-2 w-16 md:w-full"><%= markdown("![Articles](https://badgen.org/img/qiita/#{item.qiitaname}/articles?style=social)") %></div>
           </div>
           <div class="mt-9 md:mt-10 md:ml-3">
             <%= link_to "https://qiita.com/#{item.qiitaname}", target: "_blank", class: "button" do %>

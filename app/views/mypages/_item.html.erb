@@ -60,7 +60,7 @@
       </div>
     <% end %>
     <% if item.qiitaname.present? %>
-      <div class="flex justify-center space-x-1 md:space-x-6">
+      <div class="flex justify-center space-x-2 md:space-x-6">
         <div class="mt-4 md:mt-7">
           <div class="mb-2 w-24 md:w-full"><%= markdown("![Contributions](https://badgen.org/img/qiita/#{item.qiitaname}/contributions?style=social)") %></div>
           <div class="mb-2 w-20 md:w-full"><%= markdown("![Followers](https://badgen.org/img/qiita/#{item.qiitaname}/followers?style=social)") %></div>
@@ -102,9 +102,9 @@
       <div class="flex justify-center space-x-4 md:space-x-8">
         <div class="mt-5 md:mt-8">
           <% if @note_count %>
-            <p class="text-slate-500 text-xxs md:text-xs mb-1 md:mb-2"><i class="fa-regular fa-note-sticky mr-2"></i>記事:<%= @note_count %></p>
-            <p class="text-slate-500 text-xxs md:text-xs mb-1 md:mb-2">フォロー:<%= @following_count %></p>
-            <p class="text-slate-500 text-xxs md:text-xs">フォロワー: <%= @follower_count %></p>
+            <p class="text-slate-500 text-xs md:text-xs mb-1 md:mb-2"><i class="fa-regular fa-note-sticky mr-2"></i>記事:<%= @note_count %></p>
+            <p class="text-slate-500 text-xs md:text-xs mb-1 md:mb-2">フォロー:<%= @following_count %></p>
+            <p class="text-slate-500 text-xs md:text-xs">フォロワー: <%= @follower_count %></p>
           <% else %>
             <p class="text-xs md:text-xs">Note Count is not available.</p>
           <% end %>
