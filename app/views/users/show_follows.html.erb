@@ -10,7 +10,7 @@
     <div id="following" class="tab-content">
       <div class="mx-2 mt-5" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
         <% @following.each do |user| %>
-          <div class="h-72 md:w-80 md:h-96 overflow-hidden bg-white rounded relative">
+          <div class="w-48 h-72 md:w-80 md:h-96 overflow-hidden bg-white rounded relative w-full">
             <div class="py-1 md:py-3 ">
               <div class="mx-1 md:mx-4">
                 <div class="avatar mt-1 ml-1 md:mt-4 md:ml-2">
@@ -45,7 +45,7 @@
     <div id="followers" class="tab-content">
       <div class="mx-2 mt-5" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
         <% @followers.each do |user| %>
-          <div class="h-72 md:w-80 md:h-96 overflow-hidden bg-white rounded relative">
+          <div class="w-48 h-72 md:w-80 md:h-96 overflow-hidden bg-white rounded relative w-full">
             <div class="py-1 md:py-3 ">
               <div class="mx-1 md:mx-4">
                 <div class="avatar mt-1 ml-1 md:mt-4 md:ml-2">
