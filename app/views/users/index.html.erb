@@ -1,5 +1,5 @@
-<div class="container md:w-4/5 mx-auto h-screen" >
-  <div class="flex flex-col justify-center items-center relative">
+<div class="container md:w-4/5 mx-auto min-h-screen" >
+  <div class="flex flex-col justify-center items-center relative h-full">
     <div class="join my-10 mx-auto w-full max-w-md">
       <div>
         <div>
@@ -50,7 +50,7 @@
     <div class="my-6">
       <%= paginate @users %>
     </div>
-    <div class="w-80 my-auto">
+    <div class="w-80 mt-auto mb-12">
       <%= link_to "マイページに戻る", user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded-full bg-white p-2 text-sm font-medium text-black mt-10"%>
     </div>
   </div>
