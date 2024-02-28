@@ -1,20 +1,20 @@
-<div class="container md:w-4/5 w-11/12 mx-auto h-screen" >
+<div class="container md:w-4/5 mx-auto h-screen" >
   <div class="flex flex-col justify-center items-center relative">
-    <div class="join my-10">
+    <div class="join my-10 mx-auto w-full max-w-md">
       <div>
         <div>
-          <input class="input input-bordered join-item bg-white" placeholder="近日公開予定"/>
+          <input class="input input-bordered join-item bg-white w-full" placeholder="近日公開予定"/>
+        <span class="indicator-item badge badge-secondary">comming soon</span> 
         </div>
       </div>
-      <select class="select select-bordered join-item bg-white">
+      <select class="select select-bordered join-item bg-white w-full">
         <option disabled selected>スキルタグで検索</option>
         <option>Ruby</option>
         <option>Rails</option>
         <option>React</option>
       </select>
       <div class="indicator">
-        <span class="indicator-item badge badge-secondary">comming soon</span> 
-        <button class="btn join-item bg-white">Search</button>
+        <button class="btn join-item bg-white w-full">Search</button>
       </div>
     </div>
     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
@@ -32,7 +32,7 @@
               </div>
               <div class="mt-1 md:mt-3 md:mb-4 text-sm md:text-base clamp-3">
                 <% user.skills.each do |skill| %>
-                  <div class="badge badge-xs md:badge-ghost ml-2 text-xs text-slate-500"><%= skill.name %></div>
+                  <div class="badge badge-xs bg-white md:badge-ghost ml-2 text-xs text-slate-500"><%= skill.name %></div>
                 <% end %>
               </div>
             </div>
