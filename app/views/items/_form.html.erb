@@ -2,7 +2,7 @@
   <div class="tabs border-b">
     <div class="tab" data-tab-target="#content1">記事</div>
     <div class="tab" data-tab-target="#content2">URLコンテンツ</div>
-    <div class="tab" data-tab-target="#content3">実装予定</div>
+    <div class="tab" data-tab-target="#content3">近日公開予定</div>
   </div>
   <div id="content1" class="tab-content">
     <div class="mt-8 md:mt-16 ml-3">
@@ -15,7 +15,7 @@
         <div class="ml-3">
           <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs" do |form| %>
             <%= form.label :qiitaname, "@" %>
-            <%= form.text_field :qiitaname, value: item.qiitaname, placeholder: "アカウント名", class:"text-sm mt-1" %>
+            <%= form.text_field :qiitaname, value: item.qiitaname, placeholder: "アカウント名", class:"text-base mt-1 bg-white" %>
             <%= form.button type: 'submit', class: 'btn-class' do %>
               <i class="fa-solid fa-plus"></i>
             <% end %>
@@ -31,7 +31,7 @@
         <div class="ml-3">
           <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs" do |form| %>
             <%= form.label :zennname, "@"  %>
-            <%= form.text_field :zennname, value: item.zennname, placeholder: "アカウント名" ,class:"text-sm mt-1"%>
+            <%= form.text_field :zennname, value: item.zennname, placeholder: "アカウント名" ,class:"text-base mt-1 bg-white"%>
             <%= form.button type: 'submit', class: 'btn-class' do %>
               <i class="fa-solid fa-plus"></i>
             <% end %>
@@ -47,7 +47,7 @@
         <div class="ml-3">  
           <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs" do |form| %>
             <%= form.label :note_name, "@" %>
-            <%= form.text_field :note_name, value: item.note_name, placeholder: "アカウント名" ,class:"text-sm mt-1"%>
+            <%= form.text_field :note_name, value: item.note_name, placeholder: "アカウント名" ,class:"text-base mt-1 bg-white"%>
             <%= form.button type: 'submit', class: 'btn-class' do %>
               <i class="fa-solid fa-plus"></i>
             <% end %>
@@ -61,15 +61,15 @@
       <%= form_with model: [@user, @user.mypage, item], html: { multipart: true }, local: false, data: { turbo_frame: "item" } do |form| %>
         <div class="mb-4">
           <label for="title" class="fa-regular fa-comments" aria-label="title"></label>
-          <%= form.text_field :title, placeholder: "コメント", class: "input input-bordered input-sm w-full max-w-xs md:ml-2" %>
+          <%= form.text_field :title, placeholder: "コメント", class: "input input-bordered input-sm w-full max-w-xs md:ml-2 bg-white" %>
         </div>
         <div class="mb-4">
           <label for="content" class="fa-solid fa-link" aria-label="content"></label>
-          <%= form.url_field :content, placeholder: "https://example.com", class: "input input-bordered input-sm w-full max-w-xs md:ml-2", required: true %>
+          <%= form.url_field :content, placeholder: "https://example.com", class: "input input-bordered input-sm w-full max-w-xs md:ml-2 bg-white", required: true %>
         </div>
         <div class="mb-4">
            <label for="imagerul" class="fa-regular fa-image" aria-label="imageurl"></label>
-          <%= form.file_field :imageurl, class: "file-input file-input-bordered file-input-xs w-full max-w-xs md:ml-2"%>
+          <%= form.file_field :imageurl, class: "file-input file-input-bordered file-input-xs w-full max-w-xs md:ml-2 bg-white"%>
           <%= form.button type: 'submit', class: 'btn-class mt-5 md:mt-0 md:ml-3' do %>
             <i class="fa-solid fa-plus"></i>
           <% end %>
@@ -77,7 +77,7 @@
       <% end %>
     </div>
   </div>
-  <div id="content3" class="tab-content">実装中</div>
+  <div id="content3" class="tab-content">近日公開予定</div>
   </div>
 </div>
 <script>

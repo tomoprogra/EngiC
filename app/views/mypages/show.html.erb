@@ -25,7 +25,7 @@
       <div>
         <div class="mt-4">
           <div>
-            <% if @user.id == current_user.id %>
+            <% if current_user && @user.id == current_user.id %>
             <%= link_to user_mypage_items_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded-full  bg-white p-2 text-sm font-medium text-black" do%>
               <i class="fa-regular fa-pen-to-square "></i>編集
             <% end %>
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="mt-1">
-          <% if current_user != @user %>
+          <% if current_user && current_user != @user %>
             <%= render 'users/follow_buttons', { user: @user, relationship: @relationship } %>
           <% end %>
         </div>
@@ -53,11 +53,11 @@
       </div>
     </div>
   </div>
-    <% if current_user != @user %>
-<div class="flex justify-center">
-  <div class="mb-5 w-80 flex justify-center">
-      <%= link_to 'ユーザー一覧に戻る', users_path(@user), class:"inline-flex h-10 items-center justify-center w-full rounded bg-white p-2 text-sm font-medium text-black mt-5" %>
-  </div>
-</div>
-    <% end %>
+  <% if current_user && current_user != @user %>
+    <div class="flex justify-center">
+      <div class="mb-5 w-80 flex justify-center">
+        <%= link_to 'ユーザー一覧に戻る', users_path(@user), class:"inline-flex h-10 items-center justify-center w-full rounded bg-white p-2 text-sm font-medium text-black mt-5" %>
+      </div>
+    </div>
+  <% end %>
 </div>

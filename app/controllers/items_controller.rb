@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :correct_user
   before_action :set_user, only: [:index, :destroy, :create]
   before_action :note_api, only: [:index]
 
@@ -53,5 +54,13 @@ class ItemsController < ApplicationController
 
     def set_user
       @user = current_user
+    end
+
+    def correct_user
+      @user = User.find(params[:user_id])
+      unless @user == current_user
+        flash[:alert] = "アクセス権限がありません。"
+        redirect_to(root_url)
+      end
     end
 end

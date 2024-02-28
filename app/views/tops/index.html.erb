@@ -4,7 +4,7 @@
 			<%= image_tag "top.svg", alt:"", class:"object-contain h-72 sm:h-80 lg:h-144 xl:h-112 2xl:h-128 3xl:h-144"%>
 		</div>
 		<div class="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
-			<span class="text-2xl">プロフィールでエンジニアとつながる</span>
+			<span class="text-2xl">プロフィールで<br>エンジニアとつながる</span>
 			  <h1 class="text-5xl font-bold leadi sm:text-6xl">EngiC.
 			  <p class="mt-6 mb-8 text-lg sm:mb-12">Engineer Conector</p>
 			  </h1>
@@ -18,26 +18,37 @@
       <div class="fade">
         <div class="flex justify-center items-center mt-20" >
           <%= image_tag "profile.svg",class:"object-contain h-32 sm:h-40 lg:h-48 xl:h-64 2xl:h-52" %>
-          <p class="mt-6 text-lg">エンジニアのプロフィールが作れる</p>
+          <p class="mt-6 text-base">エンジニア・エンジニア志望の人<br>専用のプロフィールが作れる!</p>
         </div>
       </div>
       <div class="fade">
         <div><p class="flex justify-center items-center text-md">連携先</p></div>
         <div class="flex justify-center items-center ">
-          <i class="devicon-github-original-wordmark colored text-6xl"></i>
-          <i class="devicon-twitter-original colored text-6xl ml-4"></i>
-          <%= image_tag "qiita.webp", class:"h-16 ml-4" %>
-          <%= image_tag "zenn.svg", class:"h-16 ml-4" %>
-          <%= image_tag "note.webp", class:"h-10 md:h-16" %>
+          <i class="devicon-github-original-wordmark colored text-4xl md:text-6xl"></i>
+          <i class="devicon-twitter-original colored text-4xl md:text-6xl ml-4"></i>
+          <%= image_tag "qiita.webp", class:"h-12 md:h-16 ml-4" %>
+          <%= image_tag "zenn.svg", class:"h-12 md:h-16 ml-4" %>
+          <%= image_tag "note.webp", class:"h-8 md:h-10 md:h-16" %>
         </div>
       </div>
-      <div class="fade flex justify-center items-center mt-28" >
-        <%= image_tag "search.svg",class:"object-contain h-32 sm:h-40 lg:h-52 xl:h-72 2xl:h-52" %>
-        <p class="mt-6 text-lg">スキルで探せる</p>
+      <div class="fade flex justify-center items-center">
+        <div class="mockup-phone border-primary" style="transform: scale(0.8);">
+          <div class="camera"></div>
+          <div class="display">
+            <div class="artboard artboard-demo phone-1"><%= image_tag(image_url("moc.webp")) %></div>
+          </div>
+        </div>
+      </div> 
+      <div class="fade flex justify-center items-center mt-5" >
+        <%= image_tag "search.svg",class:"object-contain h-40 sm:h-40 lg:h-52 xl:h-72 2xl:h-52" %>
+        <div>
+          <p class="mt-10 text-base">スキルで探してつながる</p>
+          <p class="text-sm">自分の興味のある分野で探そう！</p>
+        </div>
       </div>
       <div class="fade" >
         <div class="flex justify-center items-center">
-          <div class="grid grid-cols-4 gap-4 place-items-center w-144 p-5 rounded-lg text-6xl">
+          <div class="top-skills">
             <i class="devicon-javascript-plain"></i>
             <i class="devicon-nextjs-original-wordmark"></i>
             <i class="devicon-react-original-wordmark"></i>
@@ -55,53 +66,18 @@
       <div class="fade">
         <div class="flex justify-center items-center mt-28" >
           <%= image_tag "qr_code.svg",class:"object-contain h-32 sm:h-40 lg:h-48 xl:h-64 2xl:h-52" %>
-          <p class="mt-6 mb-8 text-lg sm:mb-12">QRコードで見つける</p>
+          <div>
+            <p class="mt-6 text-base md:text-lg sm:mb-12">QRコードで見つけられる！</p>
+            <p class="text-sm md:text-base">イベントやオフ会でプロフィール交換</p>
+          </div>
         </div>
       </div>
-      <div class="fade justify-center items-cente flex my-20 px-10">
-        <div class="btns px-8 py-3 text-lg font-semibold bg-white px-20 rounded cursor-pointer" onclick="my_modal_1.showModal()">Engic.を始める</div>
+      <div class="fade flex justify-center items-center my-20">
+        <div class="btns px-8 py-3 text-lg flex justify-center items-center font-semibold bg-white rounded cursor-pointer" onclick="my_modal_1.showModal()">さあ、Engic.をはじめよう！</div>
       </div>
     </div> 
   </div> 
 </section>
-<dialog id="my_modal_1" class="modal">
-  <div id="login-popup" tabindex="-1"
-    class="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden bg-black/50">
-    <div class="relative w-full max-w-md max-h-screen h-auto p-4 overflow-y-auto">
-      <div class="relative rounded-lg shadow bg-white">
-        <div class="modal-action">
-          <form method="dialog">
-            <button type="btns"
-                class="absolute top-3 right-2.5 p-1.5 text-gray-400 bg-transparent rounded-lg hover:bg-gray-200 hover:text-gray-900 inline-flex items-center popup-close">
-                <%= image_tag "xmark-solid.svg", aria_hidden: true, class: "w-5 h-5", fill: "#c6c7c7" %>
-                <span class="sr-only">Close</span>
-            </button>
-          </form>
-        </div>
-        <div class="p-5">
-          <div class="text-center">
-              <p class="text-2xl font-semibold leading-5 text-slate-900 mb-3">
-                  Engic.をはじめよう
-              </p>
-              <p class="text-sm leading-4 text-slate-600 mt-2">
-                  アカウントがない場合は作成されます
-              </p>
-          </div>
-          <div class="flex flex-col gap-2 mt-7">
-              <%= button_to omniauth_authorize_path(:user, :github), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
-                <%= image_tag "github.svg", alt: "GitHub", class: "h-[18px] w-[18px]" %>
-                Login/Sign up with GitHub
-              <% end %>
-              <%= button_to omniauth_authorize_path(:user, :twitter), method: :post, class: "inline-flex h-10 items-center justify-center gap-2 w-full rounded border border-slate-300 bg-white p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60", data: { turbo: false } do %>
-                <%= image_tag "x.svg", alt: "Twitter", class: "h-[18px] w-[18px]" %>
-                Login/Sign up with X
-              <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</dialog>
 
 <script type="text/javascript">
 document.addEventListener('turbo:load', function() {
@@ -120,3 +96,5 @@ document.addEventListener('turbo:load', function() {
   }
 });
 </script>
+
+

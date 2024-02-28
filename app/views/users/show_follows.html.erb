@@ -45,7 +45,7 @@
                 <% end %>
               </td>
               <td class=" md:text-right md:pl-2 follow-button w-full">
-                <% unless user == current_user %>
+                <% if current_user && current_user != user %>
                   <%= render 'users/follow_buttons', { user: user, relationship: current_user.active_relationships.find_by(followed_id: user.id) } %>
                 <% end %>
               </td>
@@ -91,11 +91,9 @@
               <% end %>
               </td>
               <td class="text-right pl-2">
-                <% unless user == current_user %>
-                <% if current_user != user %>
+                <% if current_user && current_user != user %>
                   <%= render 'users/follow_buttons', { user: user, relationship: current_user.active_relationships.find_by(followed_id: user.id) } %>
                 <% end %>
-              <% end %>
               </td>
             </tr>
           <% end %>
