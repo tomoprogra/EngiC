@@ -1,6 +1,6 @@
 <div class="container mx-auto flex flex-col justify-center h-screen items-center mt-10">
-  <h2>アカウント名を変更できます</h2>
-  <h2>現在マイページ:https://engic.dev/<%="#{@user.username}"%></h2>
+  <h2>アカウント名を変更</h2>
+  <h2>現在マイページ<br>https://engic.dev/<%="#{@user.username}"%></h2>
   <%= form_with(model: @user, url: user_update_username_path, html: { class: "w-full max-w-sm" }) do |f| %>
     <div class="flex items-center border-b border-slate-400 py-2">
       <%= f.text_field :username, class:"appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none", placeholder:"アカウント名" %>
@@ -9,6 +9,6 @@
   <% end %>
   <%= link_to 'アカウントを削除', user_path(current_user), data: {turbo_method: :delete, turbo_confirm: '本当にアカウントを削除してもよろしいですか？' }, class: "btn btn-outline btn-error mt-16" %>
   <div class="mt-10">
-    <%= link_to "マイページに戻る", user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center border gap-2 w-full rounded bg-white p-2 text-sm font-medium text-black mt-5"%>
+    <%= link_to "マイページに戻る", user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded-full bg-white p-2 text-sm font-medium text-black mt-5"%>
   </div>
 </div>
