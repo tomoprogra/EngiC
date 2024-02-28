@@ -1,6 +1,6 @@
-<div class="container mx-auto h-screen">
+<div class="container mx-auto flex flex-col min-h-screen">
   <div class="flex flex-col md:flex-row mt-3 items-center md:items-start">
-    <div class="w-80 my-auto md:ml-5 ">
+    <div class="w-80 md:ml-5 ">
       <div class="bg-white rounded py-3">
         <div class="mx-4">
           <div class="avatar mt-4 ml-2">
@@ -23,7 +23,7 @@
         </div>
       </div>
       <div>
-        <div class="mt-4">
+        <div class="mt-4 md:mb-10">
           <div>
             <% if current_user && @user.id == current_user.id %>
             <%= link_to user_mypage_items_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded-full  bg-white p-2 text-sm font-medium text-black" do%>
@@ -38,14 +38,14 @@
           <% end %>
           </div>
         </div>
-        <div class="mt-1">
+        <div class="my-3">
           <% if current_user && current_user != @user %>
             <%= render 'users/follow_buttons', { user: @user, relationship: @relationship } %>
           <% end %>
         </div>
       </div>
     </div>
-    <div class="mt-2 md:mb-1 md:mt-1 mx-auto">
+    <div class="mt-2 mb-5 md:mb-1 md:mt-1 md:ml-3 ">
       <div class="mypage_notes">
         <% @items.each do |item| %>
           <%= render 'item', item: item, user_id: @user.id%>
@@ -56,7 +56,7 @@
   <% if current_user && current_user != @user %>
     <div class="flex justify-center">
       <div class="mb-5 w-80 flex justify-center">
-        <%= link_to 'ユーザー一覧に戻る', users_path(@user), class:"inline-flex h-10 items-center justify-center w-full rounded bg-white p-2 text-sm font-medium text-black mt-5" %>
+        <%= link_to 'ユーザー一覧に戻る', users_path(@user), class:"inline-flex h-10 items-center justify-center w-full rounded-full bg-white p-2 text-sm font-medium text-black mt-5" %>
       </div>
     </div>
   <% end %>

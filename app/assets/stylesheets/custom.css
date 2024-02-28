@@ -50,21 +50,6 @@ body {
   height: 135px;
 }
 
-/* .note_card {
-  width: 750px;
-} */
-
-/* 画面の幅が600px未満の場合に適用されるスタイル */
-/* @media (max-width: 768px) {
-  note_card {
-    width: 250px;
-  }
-} */
-
-/* 画面の幅が600px以上の場合に適用されるスタイル */
-
-
-
 .tab-content {
   display: none;
 }
@@ -108,7 +93,7 @@ body {
 	transform: translateY(0px);
 }
 .name-column {
-  width: 10%;
+  width: 20%;
 }
 
 .intro-column {
@@ -116,41 +101,10 @@ body {
 }
 
 .skill-column {
-  width: 25%;
+  width: 30%;
 }
 .follow-button {
-  width: 25%;
-}
-
-.intro-column, .skill-column, .name-column{
-  overflow: hidden; /* 内容がはみ出たら隠す */
-  text-overflow: ellipsis; /* はみ出たテキストを省略記号で表示 */
-  white-space: nowrap; /* テキストを1行で表示 */
-  /* display: block; ブロックレベル要素として扱う */
-}
-
-.user-row {
-  height: 90px;
-}
-
-.user-name{
-  height: 100%;
-  overflow: hidden;
-  width: 100%;
-}
-.user-skills{
-  height: 100%;
-  overflow: hidden;
-}
-
-.user-intro {
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* 表示する行数を2行に制限 */
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 100%; /* 親要素（.user-row）の高さに合わせる */
-  width: 100%;
+  width: 20%;
 }
 
 .top-skills {
@@ -175,12 +129,16 @@ body {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.25rem;
+    overflow: auto;
   }
   .tabs{
     width: 320px;
   }
   .top-skills{
     width: 20rem;
+  }
+  .item {
+  margin: 4px;
   }
 }
 

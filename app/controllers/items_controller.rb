@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
       redirect_to user_mypage_items_path(@user)
     else
       flash[:alert] = @item.errors.full_messages.to_sentence
-      redirect_to user_mypage_items_path(@user), status: :unprocessable_entity
+      redirect_to user_mypage_items_path(@user)
     end
   end
 

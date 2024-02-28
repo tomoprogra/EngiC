@@ -58,7 +58,7 @@
       <%= form_with model: [@user, @user.mypage, item], html: { multipart: true }, local: false, data: { turbo_frame: "item" } do |form| %>
         <div class="mb-4">
           <label for="title" class="fa-regular fa-comments" aria-label="title"></label>
-          <%= form.text_field :title, placeholder: "コメント", class: "input input-bordered input-sm w-full max-w-xs md:ml-2 bg-white" %>
+          <%= form.text_field :title, placeholder: "コメント※40字以内", class: "input input-bordered input-sm w-full max-w-xs md:ml-2 bg-white" %>
         </div>
         <div class="mb-4">
           <label for="content" class="fa-solid fa-link" aria-label="content"></label>

@@ -1,4 +1,4 @@
-<div class="container mx-auto">
+<div class="container mx-auto h-min-screen">
   <div class="flex flex-col md:flex-row mt-3 ">
     <div class="w-80 my-auto md:ml-5 mx-auto">
       <div class="overflow-hidden bg-white rounded py-3 relative" style="max-height:480px;">
@@ -24,7 +24,7 @@
            </div> 
             <%= form_with url: user_skills_path(@user), local: true, class: "flex items-center space-x-2 justify-center" do |f| %>
               <div class="flex-grow mt-2">
-                <%= text_field_tag "skill[name]", @skill_list, placeholder: "例: Ruby, JavaScript, Rails", class:"input input-bordered input-sm w-full bg-white" %>
+                <%= text_field_tag "skill[name]", @skill_list, placeholder: "半角,で区切るとタグになります",  class:"input input-bordered input-sm w-full bg-white" %>
               </div>
               <div class="ml-auto">
                 <%= f.button type: 'submit', class: "btn-class" do %>
@@ -65,7 +65,7 @@
         </div>
       </div>
     </div>
-    <div class="md:ml-4 sm:w-12/12 md:w-12/12 lg:w-11/12 xl:w-10/12 2xl:w-6/12 mb-8 md:mb-1 mt-8 md:mt-1 mx-6 md:mx-0">
+    <div class="md:ml-4 sm:w-12/12 md:w-11/12 lg:w-11/12 xl:w-10/12 2xl:w-6/12 mb-8 md:mb-1 mt-8 md:mt-1 mx-5 md:mx-0">
       <div class="grid">
         <% @items.each do |item| %>
           <%= render 'item', item: item, user_id: @user.id%>
