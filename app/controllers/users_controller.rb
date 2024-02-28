@@ -49,8 +49,8 @@ class UsersController < ApplicationController
 
   def show_follows
     @user = User.find(params[:id])
-    @following = @user.following.page(params[:page]).per(16)
-    @followers = @user.followers.page(params[:page]).per(16)
+    @following = @user.following.includes(:skills).page(params[:page]).per(16)
+    @followers = @user.followers.includes(:skills).page(params[:page]).per(16)
   end
 
   private
