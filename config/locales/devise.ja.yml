@@ -80,6 +80,8 @@ ja:
         invalid_credentials: "無効な資格情報です。"
         timeout: "認証プロセスがタイムアウトしました。"
         canceled: "認証がキャンセルされました。"
+        csrf_detected: "CSRF 検出により認証に失敗しました。"
+        403_forbidden: "アクセスが禁止されています。"
     passwords:
       edit:
         change_my_password: パスワードを変更する

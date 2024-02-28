@@ -1,3 +1,6 @@
+body {
+  color: black; /* デフォルトのテキストカラーを変更 */
+}
 .actions {
   margin: 5px;
 }
@@ -140,8 +143,6 @@
   overflow: hidden;
 }
 
-
-
 .user-intro {
   display: -webkit-box;
   -webkit-line-clamp: 3; /* 表示する行数を2行に制限 */
@@ -150,6 +151,17 @@
   text-overflow: ellipsis;
   height: 100%; /* 親要素（.user-row）の高さに合わせる */
   width: 100%;
+}
+
+.top-skills {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem; /* Tailwind の gap-4 はデフォルトで1rem */
+  place-items: center;
+  width: 36rem; /* Tailwind の w-144 は144/4 = 36rem */
+  padding: 1.25rem; /* Tailwind の p-5 は1.25rem */
+  border-radius: 0.5rem; /* Tailwind の rounded-lg は0.5rem */
+  font-size: 3.75rem; /* Tailwind の text-6xl は3.75rem */
 }
 
 @media (max-width: 767px) {
@@ -167,6 +179,9 @@
   .tabs{
     width: 320px;
   }
+  .top-skills{
+    width: 20rem;
+  }
 }
 
 @media (min-width: 769px) {
@@ -176,5 +191,8 @@
     gap: 0.25rem;
 }
 }
+
+
+
 
 

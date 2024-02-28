@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :authenticate_user!
   include OmniauthCallbacksHelper
   protect_from_forgery except: [:github, :twitter]
 

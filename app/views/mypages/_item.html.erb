@@ -102,11 +102,11 @@
       <div class="flex justify-center space-x-4 md:space-x-8">
         <div class="mt-5 md:mt-8">
           <% if @note_count %>
-            <p class="text-slate-500 text-xxs mb-1 md:mb-2"><i class="fa-regular fa-note-sticky mr-2"></i>記事:<%= @note_count %></p>
-            <p class="text-slate-500 text-xxs mb-1 md:mb-2">フォロー:<%= @following_count %></p>
-            <p class="text-slate-500 text-xxs">フォロワー: <%= @follower_count %></p>
+            <p class="text-slate-500 text-xxs md:text-xs mb-1 md:mb-2"><i class="fa-regular fa-note-sticky mr-2"></i>記事:<%= @note_count %></p>
+            <p class="text-slate-500 text-xxs md:text-xs mb-1 md:mb-2">フォロー:<%= @following_count %></p>
+            <p class="text-slate-500 text-xxs md:text-xs">フォロワー: <%= @follower_count %></p>
           <% else %>
-            <p>Note Count is not available.</p>
+            <p class="text-xxs md:text-xs">Note Count is not available.</p>
           <% end %>
         </div>
         <div class="mt-7 mr-4">
