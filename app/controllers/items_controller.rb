@@ -12,12 +12,10 @@ class ItemsController < ApplicationController
 
   def create
     @item = @user.mypage.items.build(item_params)
-    if @item.save
-      redirect_to user_mypage_items_path(@user)
-    else
+    unless @item.save
       flash[:alert] = @item.errors.full_messages.to_sentence
-      redirect_to user_mypage_items_path(@user)
     end
+    redirect_to user_mypage_items_path(@user)
   end
 
   def destroy
