@@ -11,7 +11,7 @@ if [ "$RAILS_ENV" = "production" ]; then
   bundle exec rails assets:clobber
   bundle exec rails assets:precompile
   bundle exec rails db:migrate
-  # bundle exec rails db:seed
+  bundle exec rails db:seed
 fi
 
 exec "$@"
