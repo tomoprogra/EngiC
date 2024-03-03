@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   resources :users do
     member do
       delete :destroy
-      get :show_follows
+      get :show_following
+      get :show_followers
     end
     resource :skills, only: [:create, :destroy, :update]
     resource :mypage, only: [:show] do

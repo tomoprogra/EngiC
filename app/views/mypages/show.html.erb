@@ -9,8 +9,8 @@
             </div>
           </div>
           <div class="mt-5 flex items-center border-b space-x-4 ml-2 text-slate-500 text-sm"> 
-            <p><%= link_to "#{@user.following.count} フォロー", show_follows_user_path(@user, tab: 'following') %></p>
-            <p><%= link_to "#{@user.followers.count} フォロワー", show_follows_user_path(@user, tab: 'followers') %></p>
+            <p><%= link_to "#{@user.following.count} フォロー", show_following_user_path(@user) %></p>
+            <p><%= link_to "#{@user.followers.count} フォロワー", show_followers_user_path(@user) %></p>
           </div>
           <div class="mt-5">
             <%= render "users/user", user: @user %>

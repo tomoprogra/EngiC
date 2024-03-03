@@ -2,7 +2,7 @@
   <% if item.persisted? %>
     <div class="item-content relative w-full h-full">
       <% if item.xname.nil? && item.githubname.nil? %>
-        <%= link_to user_mypage_item_path(current_user, item), data: { turbo_method: :delete, turbo_confirm: "削除してよろしいですか？" }, local: true, class:"absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2" do%>
+        <%= link_to user_mypage_item_path(current_user, item), data: { turbo_method: :delete, turbo_confirm: "削除してよろしいですか？" }, class:"absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2" do%>
           <i class="fa-regular fa-circle-xmark"></i>
         <% end %>
       <% end %>
