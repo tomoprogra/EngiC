@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:show_follows, :resolve_username]
+  skip_before_action :authenticate_user!, only: [:show_following, :show_followers, :resolve_username]
   before_action :set_user, only: [:update, :edit, :destroy]
 
   def edit
@@ -47,9 +47,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def show_follows
+  def show_following
     @user = User.find(params[:id])
     @following = @user.following.includes(:skills).page(params[:page]).per(16)
+  end
+
+  def show_followers
+    @user = User.find(params[:id])
     @followers = @user.followers.includes(:skills).page(params[:page]).per(16)
   end
 

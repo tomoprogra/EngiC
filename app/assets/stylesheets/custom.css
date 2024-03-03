@@ -57,7 +57,7 @@ body {
   display: block;
 }
 .tab.active {
-  border-bottom: 2px solid rgb(196, 196, 249); 
+  border-bottom: 2px solid rgb(110, 110, 247); 
 }
 .tabs {
   width: 600px;
