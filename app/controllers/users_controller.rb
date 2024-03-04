@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:show_following, :show_followers, :resolve_username]
+  skip_before_action :authenticate_user!, only: [:resolve_username]
   before_action :set_user, only: [:update, :edit, :destroy]
 
   def edit
