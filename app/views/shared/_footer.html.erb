@@ -1,9 +1,10 @@
-<footer class="footer footer-center p-10 bg-blue-500 text-white text-base-content rounded">
-  <nav class="grid grid-flow-col gap-4 ">
-    <%= link_to "お問い合わせ", "https://forms.gle/gTFe6KHimEfN7c5d8" %>
-    <%= link_to "利用規約", terms_of_use_path, class:"link link-hover"%>
+<footer class="footer footer-center p-10 bg-blue-500 text-white md:text-base text-sm rounded">
+  <nav class="grid grid-flow-col gap-4">
+    <%= link_to "お問い合わせ", "https://forms.gle/gTFe6KHimEfN7c5d8"%>
+    <%= link_to "利用規約", terms_of_use_path, class:"link link-hover "%>
     <%= link_to "プライバシーポリシー", privacy_policy_path, class:"link link-hover"%>
   </nav> 
+  <div><%= link_to "リリースノート", release_note_path, class:"link link-hover"%></div>
   <aside>
     <p>Copyright © 2024 - All right reserved by EngiC.</p>
   </aside>
