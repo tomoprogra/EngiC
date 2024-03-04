@@ -16,7 +16,7 @@
             <%= render "users/user", user: @user %>
           </div>
           <div class="mt-5 mb-4 ">
-            <p class="text-xs md:text-sm">スキルタグ：</p>
+            <p class="text-xs md:text-sm">スキルタグ： Ruby,python,React,etc...</p>
           <div class="clamp-4">
             <% @user.skills.each do |skill| %>
               <div class="badge badge-ghost ml-2 text-slate-500 bg-white"><%= skill.name %></div>

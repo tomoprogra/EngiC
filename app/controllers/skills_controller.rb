@@ -6,6 +6,7 @@ class SkillsController < ApplicationController
     if @user.save
       @user.save_tags(skill_list)
     else
+      Rails.logger.info(@user.errors.full_messages)
       flash[:alert] = "スキルを設定できませんでした。"
     end
     redirect_to user_mypage_items_path(@user)

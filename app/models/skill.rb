@@ -4,4 +4,5 @@ class Skill < ApplicationRecord
   has_many :users, through: :skill_tags
 
   validates :name, uniqueness: true, presence: true
+  validates :name, length: { maximum: 20 }
 end
