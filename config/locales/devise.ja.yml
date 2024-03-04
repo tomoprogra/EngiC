@@ -82,6 +82,7 @@ ja:
         canceled: "認証がキャンセルされました。"
         csrf_detected: "CSRF 検出により認証に失敗しました。"
         403_forbidden: "アクセスが禁止されています。"
+        session_expired: "セッションが期限切れです。もう一度お試しください。"
     passwords:
       edit:
         change_my_password: パスワードを変更する
