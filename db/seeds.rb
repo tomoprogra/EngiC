@@ -17,12 +17,12 @@ names = [
 
 20.times do |n|
   User.create!(
-    email: "user#{n}@example.com",
+    email: "user#{n}_#{Time.now.to_i}@example.com",
     password: "password",
     password_confirmation: "password",
-    uid: "#{n}#{rand(1000..9999)}",
-    provider: "twitter",
-    username: "user_#{n}", # バリデーション要件を満たすユーザーネーム
-    name: names[n], # 日本人の名前を割り当て
+    uid: "#{n}_#{Time.now.to_i}",
+    provider: 'twitter',
+    username: "user_#{n}_#{Time.now.to_i}"  # ユーザーネームにも時刻を追加
   )
 end
+
