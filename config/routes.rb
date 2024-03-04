@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   get "privacy_policy", to: "tops#privacy_policy"
   get "terms_of_use", to: "tops#terms_of_use"
+  get "release_note", to: "tops#release_note"
 
   get "/:username", to: "users#resolve_username", as: :resolve_username
 

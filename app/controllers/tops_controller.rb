@@ -11,4 +11,7 @@ class TopsController < ApplicationController
 
   def terms_of_use
   end
+
+  def release_note
+  end
 end
