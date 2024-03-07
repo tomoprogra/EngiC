@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
   # 有効なファクトリを持つこと
@@ -27,7 +27,7 @@ RSpec.describe User, type: :model do
     expect(user.errors[:email]).to include("を入力してください")
   end
 
-    # 重複したユーザー名なら無効な状態であること
+  # 重複したユーザー名なら無効な状態であること
   it "is invalid with a duplicate username" do
     FactoryBot.create(:user, username: "tomo")
     user = FactoryBot.build(:user, username: "tomo")
@@ -35,7 +35,7 @@ RSpec.describe User, type: :model do
     expect(user.errors[:username]).to include("はすでに存在します")
   end
 
-    # 重複したメールアドレスなら無効な状態であること
+  # 重複したメールアドレスなら無効な状態であること
   it "is invalid with a duplicate email" do
     FactoryBot.create(:user, email: "aaron@example.com")
     user = FactoryBot.build(:user, email: "aaron@example.com")
