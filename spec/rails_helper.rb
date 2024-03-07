@@ -73,4 +73,5 @@ RSpec.configure do |config|
       Bullet.end_request if Bullet.enable?
     end
   end
+  config.include FactoryBot::Syntax::Methods
 end
