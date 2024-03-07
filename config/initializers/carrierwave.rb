@@ -3,13 +3,18 @@ require "carrierwave/storage/file"
 require "carrierwave/storage/fog"
 
 CarrierWave.configure do |config|
-  config.storage :fog
-  config.fog_directory = "engiv.dev"
-  config.fog_credentials = {
-    provider: "AWS",
-    aws_access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-    aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
-    region: "ap-northeast-1",
-    path_style: true,
-  }
+  if Rails.env.test?
+    config.storage = :file
+    config.enable_processing = false
+  else
+    config.storage :fog
+    config.fog_directory = "engiv.dev"
+    config.fog_credentials = {
+      provider: "AWS",
+      aws_access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+      aws_secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
+      region: "ap-northeast-1",
+      path_style: true,
+    }
+  end
 end
