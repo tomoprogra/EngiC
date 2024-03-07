@@ -20,7 +20,7 @@ class User < ApplicationRecord
                        exclusion: { in: VALID_USERNAMES, message: "(アカウント名)で%<value>s は使用できません。" }, length: { minimum: 2, maximum: 20 },
                        format: { with: /\A[a-zA-Z0-9_]+\z/, message: "(アカウント名)は英数字とアンダースコアのみ使用できます。" }
   validates :introduction, length: { maximum: 60 }
-
+  
   def self.generate_unique_username
     loop do
       random_username = "user_#{SecureRandom.hex(4)}"
