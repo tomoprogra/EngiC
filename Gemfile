@@ -68,6 +68,7 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "bullet"
   gem "debug", platforms: %i[mri windows]
+  gem "factory_bot_rails"
   gem "pry-byebug"
   gem "pry-doc"
   gem "pry-rails"
@@ -92,4 +93,5 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "webdrivers"
 end
