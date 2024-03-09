@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:resolve_username]
   before_action :set_user, only: [:update, :edit, :destroy]
 
-  def edit
-  end
+  def edit; end
 
   def index
     @users = User.includes([:skills]).page(params[:page]).per(20)

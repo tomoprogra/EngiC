@@ -177,7 +177,7 @@ Style/EmptyElse:
   EnforcedStyle: empty
 
 Style/EmptyMethod:
-  EnforcedStyle: expanded
+  EnforcedStyle: compact
 
 Style/FormatString:
   EnforcedStyle: percent

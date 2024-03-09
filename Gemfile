@@ -69,6 +69,7 @@ group :development, :test do
   gem "bullet"
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails"
+  gem "launchy"
   gem "pry-byebug"
   gem "pry-doc"
   gem "pry-rails"
@@ -92,6 +93,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
+  gem "database_cleaner-active_record"
   gem "selenium-webdriver"
   gem "webdrivers"
 end
