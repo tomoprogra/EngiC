@@ -69,6 +69,7 @@ group :development, :test do
   gem "bullet"
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails"
+  gem "launchy"
   gem "pry-byebug"
   gem "pry-doc"
   gem "pry-rails"
@@ -94,4 +95,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'database_cleaner-active_record'
 end
