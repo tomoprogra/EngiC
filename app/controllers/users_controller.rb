@@ -1,12 +1,24 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:resolve_username]
   before_action :set_user, only: [:update, :edit, :destroy]
+  helper_method :associated_skills_for_select
 
   def edit; end
 
   def index
-    @users = User.includes([:skills]).page(params[:page]).per(20)
+    adjust_search_parameters_for_case_insensitivity(params[:q])
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true).preload(:skills).page(params[:page]).per(20)
+    @skills = associated_skills_for_select
   end
+
+  def search
+    @users = User.select('DISTINCT name')
+             .where('LOWER(name) LIKE ?', "%#{params[:q].downcase}%")
+             .limit(5)
+    render partial: 'users/search', locals: { users: @users }
+  end
+  
 
   def update
     unless @user.update(user_params)
@@ -56,6 +68,11 @@ class UsersController < ApplicationController
     @followers = @user.followers.includes(:skills).page(params[:page]).per(16)
   end
 
+  def associated_skills_for_select
+    Skill.joins(:users).distinct.pluck(:name)
+  end
+  
+
   private
 
     def set_user
@@ -64,5 +81,16 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:username, :name, :introduction)
+    end
+
+    def associated_skills_for_select
+      Skill.joins(:users).distinct.pluck('LOWER(skills.name)').uniq
+    end
+   
+    def adjust_search_parameters_for_case_insensitivity(search_params)
+      if search_params && search_params[:skills_name_eq].present?
+        search_params[:skills_name_eq] = search_params[:skills_name_eq].downcase
+        search_params[:skills_name_cont] = search_params.delete(:skills_name_eq)
+      end
     end
 end

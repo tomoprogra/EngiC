@@ -1,22 +1,25 @@
 <div class="container md:w-4/5 mx-auto min-h-screen" >
   <div class="flex flex-col justify-center items-center relative h-full">
-    <div class="join my-10 mx-auto w-full max-w-md">
+    <div class="flex justify-center items-center join my-10 mx-auto w-full max-w-md">
       <div>
-        <div>
-          <input class="input input-bordered join-item bg-white w-full" placeholder="近日公開予定"/>
-        <span class="indicator-item badge badge-secondary">comming soon</span> 
-        </div>
-      </div>
-      <select class="select select-bordered join-item bg-white w-full">
-        <option disabled selected>スキルタグで検索</option>
-        <option>Ruby</option>
-        <option>Rails</option>
-        <option>React</option>
-      </select>
-      <div class="indicator">
-        <button class="btn join-item bg-white w-full">Search</button>
+        <%= search_form_for @q, url: users_path, data: { turbo_frame: "users_list" }, class: "flex flex-row items-end my-10 mx-auto w-full max-w-md" do |f| %>
+          <div data-controller="autocomplete" data-autocomplete-url-value="/users/search" role="combobox" class="relative">
+            <%= f.text_field :name_cont, data: { autocomplete_target: "input" }, class: "input input-bordered join-item bg-white w-full", placeholder: "ユーザー名" %>
+            <ul data-autocomplete-target="results" class="absolute z-30 w-full bg-white shadow-md rounded mt-1"></ul>
+          </div>
+          <div>
+            <%= f.select :skills_name_eq, 
+                        options_for_select(associated_skills_for_select.map { |name| [name, name] }, selected: params.dig(:q, :skills_name_eq)),
+                        { include_blank: 'スキルタグ' },
+                        { class: "select select-bordered join-item bg-white w-full" } %>
+          </div>
+          <div class="indicator">
+            <%= f.submit "Search", class: "btn join-item bg-white w-full" %>
+          </div>
+        <% end %>
       </div>
     </div>
+    <turbo-frame id="users_list">
     <div class="mx-2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
       <% @users.each do |user| %>
         <div class="w-44 h-72 md:w-80 md:h-96 overflow-hidden bg-white rounded relative">
@@ -50,9 +53,9 @@
     <div class="my-6">
       <%= paginate @users %>
     </div>
+    </turbo-frame>
     <div class="w-80 mt-auto mb-12">
       <%= link_to "マイページに戻る", user_mypage_path(current_user), class:"inline-flex h-10 items-center justify-center gap-2 w-full rounded-full bg-white p-2 text-sm font-medium text-black mt-10"%>
     </div>
   </div>
 </div>
-

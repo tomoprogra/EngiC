@@ -28,6 +28,14 @@ class User < ApplicationRecord
     end
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["avatar", "bio", "created_at", "email", "encrypted_password", "id", "id_value", "introduction", "name", "provider", "remember_created_at", "reset_password_sent_at", "reset_password_token", "uid", "updated_at", "username"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["active_relationships", "followers", "following", "identities", "mypage", "passive_relationships", "skill_tags", "skills"]
+  end
+  
   def self.dummy_email(auth)
     "#{auth.uid}@#{auth.provider}.com"
   end
