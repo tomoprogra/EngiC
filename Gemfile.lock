@@ -121,6 +121,7 @@ GEM
       image_processing (~> 1.1)
       marcel (~> 1.0.0)
       ssrf_filter (~> 1.0)
+    childprocess (5.0.0)
     chunky_png (1.4.0)
     coderay (1.1.3)
     concurrent-ruby (1.2.3)
@@ -128,6 +129,10 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
+    database_cleaner-active_record (2.1.0)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.3.4)
     debug (1.9.1)
       irb (~> 1.10)
@@ -213,6 +218,9 @@ GEM
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
     language_server-protocol (3.17.0.3)
+    launchy (3.0.0)
+      addressable (~> 2.8)
+      childprocess (~> 5.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -354,6 +362,10 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.1.0)
+    ransack (4.1.1)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rdoc (6.6.2)
       psych (>= 4.0.0)
     redcarpet (3.6.0)
@@ -486,6 +498,7 @@ DEPENDENCIES
   capybara
   carrierwave
   cssbundling-rails
+  database_cleaner-active_record
   debug
   devise
   devise-i18n
@@ -496,6 +509,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   kaminari
+  launchy
   mini_magick
   omniauth
   omniauth-facebook
@@ -509,6 +523,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.1.3)
   rails-i18n
+  ransack
   redcarpet
   rqrcode
   rspec-rails

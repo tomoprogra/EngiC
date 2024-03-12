@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get :show_following
       get :show_followers
     end
+    get :search, on: :collection
     resource :skills, only: [:create, :destroy, :update]
     resource :mypage, only: [:show] do
       collection do

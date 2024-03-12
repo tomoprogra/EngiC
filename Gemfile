@@ -61,6 +61,7 @@ gem "omniauth-facebook"
 gem "omniauth-github"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-twitter"
+gem "ransack"
 gem "redcarpet"
 gem "rqrcode"
 gem "validate_url"
@@ -69,6 +70,7 @@ group :development, :test do
   gem "bullet"
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails"
+  gem "launchy"
   gem "pry-byebug"
   gem "pry-doc"
   gem "pry-rails"
@@ -92,6 +94,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
+  gem "database_cleaner-active_record"
   gem "selenium-webdriver"
   gem "webdrivers"
 end

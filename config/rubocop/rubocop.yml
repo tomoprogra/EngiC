@@ -110,6 +110,9 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 8
 
+Metrics/ClassLength:
+  Max: 110
+
 #################### Naming ################################
 
 Naming/PredicateName:
@@ -177,7 +180,7 @@ Style/EmptyElse:
   EnforcedStyle: empty
 
 Style/EmptyMethod:
-  EnforcedStyle: expanded
+  EnforcedStyle: compact
 
 Style/FormatString:
   EnforcedStyle: percent

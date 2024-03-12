@@ -162,7 +162,10 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
+[data-autocomplete-target="results"] {
+  position: absolute;
+  z-index: 5000; /* 更に大きな値に設定 */
+}
 
 
 

@@ -6,12 +6,9 @@ class TopsController < ApplicationController
     @resource_name = :user
   end
 
-  def privacy_policy
-  end
+  def privacy_policy; end
 
-  def terms_of_use
-  end
+  def terms_of_use; end
 
-  def release_note
-  end
+  def release_note; end
 end

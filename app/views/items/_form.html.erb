@@ -12,8 +12,8 @@
             <%= image_tag "qiita.webp", class: "w-1/12" %>
           </div>
         </div>
-        <div class="ml-3">
-          <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: "input input-bordered input-sm w-full max-w-xs bg-white" do |form| %>
+        <div class="qiitaname ml-3">
+          <%= form_with model: [user.mypage, item], url: user_mypage_items_path(user),local: true, data: { turbo_frame: "item" }, class: " input input-bordered input-sm w-full max-w-xs bg-white" do |form| %>
             <%= form.text_field :qiitaname, value: item.qiitaname, placeholder: "@以下アカウント名", class:"text-sm mt-1 bg-white",required: true %>
             <%= form.button type: 'submit', class: 'btn-class' do %>
               <i class="fa-solid fa-plus"></i>
