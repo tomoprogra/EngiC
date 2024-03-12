@@ -13,12 +13,11 @@ class UsersController < ApplicationController
   end
 
   def search
-    @users = User.select('DISTINCT name')
-             .where('LOWER(name) LIKE ?', "%#{params[:q].downcase}%")
-             .limit(5)
-    render partial: 'users/search', locals: { users: @users }
+    @users = User.select("DISTINCT name").
+               where("LOWER(name) LIKE ?", "%#{params[:q].downcase}%").
+               limit(5)
+    render partial: "users/search", locals: { users: @users }
   end
-  
 
   def update
     unless @user.update(user_params)
@@ -68,11 +67,6 @@ class UsersController < ApplicationController
     @followers = @user.followers.includes(:skills).page(params[:page]).per(16)
   end
 
-  def associated_skills_for_select
-    Skill.joins(:users).distinct.pluck(:name)
-  end
-  
-
   private
 
     def set_user
@@ -84,9 +78,9 @@ class UsersController < ApplicationController
     end
 
     def associated_skills_for_select
-      Skill.joins(:users).distinct.pluck('LOWER(skills.name)').uniq
+      Skill.joins(:users).distinct.pluck("LOWER(skills.name)").uniq
     end
-   
+
     def adjust_search_parameters_for_case_insensitivity(search_params)
       if search_params && search_params[:skills_name_eq].present?
         search_params[:skills_name_eq] = search_params[:skills_name_eq].downcase
