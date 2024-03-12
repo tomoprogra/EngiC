@@ -1,13 +1,9 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:twitter, :github]
   has_one :mypage, dependent: :destroy
   has_many :identities, dependent: :destroy
-  # ユーザーがフォローしている人
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy, inverse_of: :follower
   has_many :following, through: :active_relationships, source: :followed
-  # ユーザーをフォローしている人
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy, inverse_of: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :skill_tags, dependent: :destroy
@@ -16,9 +12,8 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   VALID_USERNAMES = %w[admin root support help info mail contact user new edit index show create update delete error login logout signup users username
                        terms_of_use privacy_policy].freeze
-  validates :username, presence: true, uniqueness: { case_sensitive: false },
-                       exclusion: { in: VALID_USERNAMES, message: "(アカウント名)で%<value>s は使用できません。" }, length: { minimum: 2, maximum: 20 },
-                       format: { with: /\A[a-zA-Z0-9_]+\z/, message: "(アカウント名)は英数字とアンダースコアのみ使用できます。" }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }, exclusion: { in: VALID_USERNAMES, message: "(アカウント名)で%<value>s は使用できません。" },
+                       length: { minimum: 2, maximum: 20 }, format: { with: /\A[a-zA-Z0-9_]+\z/, message: "(アカウント名)は英数字とアンダースコアのみ使用できます。" }
   validates :introduction, length: { maximum: 60 }
 
   def self.generate_unique_username
@@ -26,6 +21,15 @@ class User < ApplicationRecord
       random_username = "user_#{SecureRandom.hex(4)}"
       break random_username unless User.exists?(username: random_username)
     end
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["avatar", "bio", "created_at", "email", "encrypted_password", "id", "id_value", "introduction", "name", "provider", "remember_created_at",
+     "reset_password_sent_at", "reset_password_token", "uid", "updated_at", "username"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["active_relationships", "followers", "following", "identities", "mypage", "passive_relationships", "skill_tags", "skills"]
   end
 
   def self.dummy_email(auth)
