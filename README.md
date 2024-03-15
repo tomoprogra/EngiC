@@ -67,7 +67,7 @@ X(twitter)での拡散や、ボタン一つで名刺をXのツイートに画像
 |CI/CD|Github Action|
 |インフラ|render,S3（画像保存）|
 |API|Github API, X API, NoteAPI|
-|主要gem|imageMagick(画像編集webpに変換),rqrcode(QRコード読み取り、生成),httparty,redcarpet,bullet|
+|主要gem|imageMagick(画像編集webpに変換),rqrcode(QRコード読み取り、生成)|
 |主要gem|httparty,redcarpet,bullet|
 |ライブラリ|muuri.js(カード順番変更)|
 
