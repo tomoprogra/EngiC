@@ -57,16 +57,16 @@ X(twitter)での拡散や、ボタン一つで名刺をXのツイートに画像
 
 |カテゴリ|使用技術|
 |:---:|:---:|
-|フロントエンド|Tailwindcss,Hotwire|
+|フロントエンド|Tailwindcss,Hotwire,javascript|
 |バックエンド|Ruby,Rails|
+|コード解析/フォーマッター|Rubocop|
+|テストフレームワーク|Rspec|
 |データベース|postgresQL|
 |認証|devise omniauth|
 |環境構築|Docker,Docker-compose|
 |CI/CD|Github Action|
-|インフラ|render|
-|API|Github API|
-|その他|S3（画像保存）|
-|その他|imageMagick(画像編集webpに変換),rqrcode(QRコード読み取り、生成)|
-|その他|muuri.js(カード順番変更)|
+|インフラ|render,S3（画像保存）|
+|API|Github API, X API, NoteAPI|
+|その他|imageMagick(画像編集webpに変換),rqrcode(QRコード読み取り、生成),httparty,redcarpet,bullet|
+|ライブラリ|muuri.js(カード順番変更)|
 
-- ER図、画面製図修正中
