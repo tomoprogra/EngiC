@@ -53,7 +53,7 @@ X(twitter)での拡散や、ボタン一つで名刺をXのツイートに画像
 * デザインテンプレートを増やす
 * スキルでユーザー検索機能
 
-## ■ 機能の実装方針予定
+## ■ 使用技術一覧
 
 |カテゴリ|使用技術|
 |:---:|:---:|
@@ -67,7 +67,7 @@ X(twitter)での拡散や、ボタン一つで名刺をXのツイートに画像
 |CI/CD|Github Action|
 |インフラ|render,S3（画像保存）|
 |API|Github API, X API, NoteAPI|
-|主要gem|imageMagick(画像編集webpに変換),rqrcode(QRコード読み取り、生成)|
+|主要gem|imageMagick(画像編集webpに変換),rqrcode(QRコード生成)|
 |主要gem|httparty,redcarpet,bullet|
 |ライブラリ|muuri.js(カード順番変更)|
 
