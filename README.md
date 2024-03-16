@@ -59,3 +59,5 @@ https://twitter.com/anyonewww01
 |主要gem|httparty,redcarpet,bullet|
 |ライブラリ|muuri.js(カード順番変更)|
 
+## ■ ER図
+https://i.gyazo.com/fa6c5fea3abec6b54934f656d48e90b7.png
