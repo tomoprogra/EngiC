@@ -24,7 +24,7 @@
            </div> 
             <%= form_with url: user_skills_path(@user), local: true, class: "flex items-center space-x-2 justify-center" do |f| %>
               <div class="flex-grow mt-2">
-                <%= text_field_tag "skill[name]", @skill_list, placeholder: "半角,で区切るとタグになります",  class:"input input-bordered input-sm w-full bg-white" %>
+                <%= text_field_tag "skill[name]", @skill_list, placeholder: ",で区切るとタグになります",  class:"input input-bordered input-sm w-full bg-white" %>
               </div>
               <div class="ml-auto">
                 <%= f.button type: 'submit', class: "btn-class" do %>

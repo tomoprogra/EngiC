@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def update_username
     @user = current_user
     if @user.update(user_params)
-      redirect_to user_mypage_items_path(@user), notice: "アカウント名が更新されました。"
+      redirect_to user_edit_username_path(current_user), notice: "アカウント名が更新されました。"
     else
       flash.now[:alert] = @user.errors.full_messages.to_sentence
       render :edit_username, status: :unprocessable_entity

@@ -2,7 +2,7 @@ class SkillsController < ApplicationController
   before_action :set_user, only: [:create, :destroy, :update]
 
   def create
-    skill_list = params[:skill][:name].split(",").map(&:strip)
+    skill_list = params[:skill][:name].split(/[,、]/).map(&:strip)
     if @user.save
       @user.save_tags(skill_list)
     else
