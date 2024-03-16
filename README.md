@@ -1,4 +1,4 @@
-# [EngiC.(エンジニアコネクター)]
+# EngiC.(エンジニアコネクター)
 
 ## ■サービス概要
 - エンジニアとして使える技術や、得意分野などをアピールできるデジタルプロフィールを簡単に作成できます。
@@ -60,4 +60,4 @@ https://twitter.com/anyonewww01
 |ライブラリ|muuri.js(カード順番変更)|
 
 ## ■ ER図
-https://i.gyazo.com/fa6c5fea3abec6b54934f656d48e90b7.png
+　![](https://i.gyazo.com/fa6c5fea3abec6b54934f656d48e90b7.png)
