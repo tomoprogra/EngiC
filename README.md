@@ -46,7 +46,7 @@ https://twitter.com/anyonewww01
 |カテゴリ|使用技術|
 |:---:|:---:|
 |フロントエンド|Tailwindcss,Hotwire,javascript|
-|バックエンド|Ruby,Rails|
+|バックエンド|Ruby3.2.2,Rails7.1.3|
 |コード解析/フォーマッター|Rubocop|
 |テストフレームワーク|Rspec|
 |データベース|postgresQL|
