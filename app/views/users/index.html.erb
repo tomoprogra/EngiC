@@ -5,7 +5,7 @@
         <%= search_form_for @q, url: users_path, data: { turbo_frame: "users_list" }, class: "flex flex-row items-end my-10 mx-auto w-full max-w-md" do |f| %>
           <div data-controller="autocomplete" data-autocomplete-url-value="/users/search" role="combobox" class="relative">
             <%= f.text_field :name_cont, data: { autocomplete_target: "input" }, class: "input input-bordered join-item bg-white w-full", placeholder: "ユーザー名" %>
-            <ul data-autocomplete-target="results" class="absolute z-30 w-full bg-white shadow-md rounded mt-1"></ul>
+            <ul data-autocomplete-target="results" class="absolute z-30 w-full bg-white shadow-md rounded mt-1 truncate"></ul>
           </div>
           <div>
             <%= f.select :skills_name_eq, 
@@ -50,7 +50,7 @@
         </div>
       <% end %>
     </div>
-    <div class="my-6">
+    <div class="my-6 flex justify-center">
       <%= paginate @users %>
     </div>
     </turbo-frame>
