@@ -3,9 +3,9 @@
     <div>
       <p class="font-bold text-sm md:text-base ml-2 mt-2"><%= @user.name %></p>
     </div>
-    <div class="tabs2 border-b">
-      <%= link_to "フォロー", show_following_user_path(@user), class: "tab" %>
-      <%= link_to "フォロワー", show_followers_user_path(@user), class: "tab border-b-2 border-b-blue-500" %>
+    <div class="tabs2 border-b space-x-6">
+      <%= link_to "フォロー", show_following_user_path(@user), class: "tab2 text-sm text-slate-500" %>
+      <%= link_to "フォロワー", show_followers_user_path(@user), class: "tab2 text-sm text-slate-500 border-b-2 border-b-blue-500" %>
     </div>
     <div>
       <div class="mx-2 mt-5" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
