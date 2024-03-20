@@ -12,7 +12,9 @@ module.exports = {
         '144': '36rem', 
       },
       width: {
-        '144': '36rem', 
+        '144': '36rem',
+        '13' :  '3.25rem',
+        '17' :  '4.25rem',
       },
       fontSize: {
         'xxs': '9px', 
