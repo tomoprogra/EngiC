@@ -23,6 +23,6 @@ module.exports = {
     }
   },
   daisyui: {
-    themes: false,
+    darkTheme: false,
   },
 }
